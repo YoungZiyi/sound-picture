@@ -1,6 +1,9 @@
-import socket
+#!/usr/bin/env python 
+
 import time
-socket.setdefaulttimeout(3)
+
+#from socket import *
+#setdefaulttimeout(3)
 
 SERVER_HOST = '127.0.0.1'
 SERVER_PORT = 10002
@@ -10,6 +13,14 @@ CLIENT_PORT = 10003
 
 JBT0_IP = "10.0.0.100"
 ICT_IP = "10.0.0.101"
+HCJ_IP = "10.0.0.102"
+JBT1_IP = "10.0.0.103"
+FT_IP = "10.0.0.104"
+YZ_IP = "10.0.0.105"
+NGSBJ_IP = "10.0.0.106"
+OKSBJ_IP = "10.0.0.107"
+
+
 
 IST_HANDSHAKE = "51 c0 00 11"
 "51 0x xx crc"
@@ -100,7 +111,7 @@ class Device:
 	def __init__(self, name, ip):
 		self.name = name
 		self.ip = ip
-		self.status = AVAILABLE;
+		self.status = STATUS_AVAILABLE;
 
 def Connect(first, second):
 	if(first):
