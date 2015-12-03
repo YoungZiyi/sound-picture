@@ -11,14 +11,6 @@ CLIENT_HOST = '127.0.0.1'
 CLIENT_PORT = 10003
 
 
-JBT0_IP = "10.0.0.100"
-ICT_IP = "10.0.0.101"
-HCJ_IP = "10.0.0.102"
-JBT1_IP = "10.0.0.103"
-FT_IP = "10.0.0.104"
-YZ_IP = "10.0.0.105"
-NGSBJ_IP = "10.0.0.106"
-OKSBJ_IP = "10.0.0.107"
 
 
 
@@ -72,7 +64,7 @@ EVENT_COMMON_SENDITEM_FINISHED = "52 c4 06 1c"
 EVENT_COMMON_BUSY = "52 c4 07 1d"
 
 STATUS_AVAILABLE = 0;
-STATUS_WAITING_FOR_NEXT_DEVICE_TO_BE_AVAILABLE= 2;# 改为 STATUS_WAITING ?
+STATUS_WAITING_FOR_NEXT_DEVICE_TO_BE_AVAILABLE= 2; #STATUS_WAITING?
 STATUS_BUSY = 3;
 STATUS_BROKEN = 4;
 STATUS_RECVING = 5;
@@ -80,32 +72,14 @@ STATUS_SENDING = 6;
 
 
 
-def sendToPeer(ip, port, content):
-	try:
-		theSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		theSocket.connect((ip, port))
-		theSocket.sendall(content)
-		print "DEBUG send:\t", content
-		time.sleep(1)
-	except Exception, e:
-		print e," in sendToPeer"
-
-def listenOn(ip, port):
-	listenSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	listenSocket.bind((ip, port))
-	listenSocket.listen(1)
-	return listenSocket
-
-def recvFromPeer(listenSocket):
-	response = None
-	try:
-		conn, addr = listenSocket.accept()	
-		print 'DEBUG\tconnected by:', addr
-		response = conn.recv(2048)
-		print 'DEBUG\trecv:', response
-	except Exception, e:
-		print e," in recvFromPeer"
-	return response
+JBT0_IP = "10.0.0.100"
+ICT_IP = "10.0.0.101"
+HCJ_IP = "10.0.0.102"
+JBT1_IP = "10.0.0.103"
+FT_IP = "10.0.0.104"
+YZ_IP = "10.0.0.105"
+NGSBJ_IP = "10.0.0.106"
+OKSBJ_IP = "10.0.0.107"
 
 class Device:
 	def __init__(self, name, ip):
@@ -118,3 +92,27 @@ def Connect(first, second):
 		first.next = second;
 	if(second != None):
 		second.previous = first;
+		
+device_jbt0 = Device("Jiebotai0", JBT0_IP)
+device_ict = Device("ict", ICT_IP)
+device_hcj = Device("hcj", HCJ_IP)
+device_jbt1 = Device("jbt1", JBT1_IP)
+device_ft = Device("ft", FT_IP)
+device_yz = Device("yz", YZ_IP)
+device_ngsbj = Device("ngsbj", NGSBJ_IP)
+device_oksbj = Device("oksbj", OKSBJ_IP)
+
+IP_Device_Map={}
+IP_Device_Map[JBT0_IP] = device_jbt0
+IP_Device_Map[ICT_IP] = device_ict
+IP_Device_Map[HCJ_IP] = device_hcj
+IP_Device_Map[FT_IP] = device_ft
+IP_Device_Map[YZ_IP] = device_yz
+IP_Device_Map[NGSBJ_IP] = device_ngsbj
+IP_Device_Map[OKSBJ_IP] = device_oksbj
+
+def getDeviceByIP(ip):
+	print "IP is %s"%ip
+	if(not ip in IP_Device_Map):
+		return None
+	return IP_Device_Map[ip]
