@@ -51,21 +51,84 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 			#				收到服务器指令（设备当前状态查询 51 c4 00 15）->表示服务器主动发送查询协议码->发送 ？
 			#				后激光感应器停止发聩->表示送板完成->发送（送板完成 52 c4 06 1c/52 c1 f2 05 ？）->服务器记录设备状态为 STATUS_AVAILABLE
 
+			# 服务器工作流程：
+			# 	被动：
+			# 		1.收到设备发来的指令
+			# 		2.识别设备？
+			# 		3.根据逻辑反馈给设备
+			# 	主动：
+			# 		1.发送指令到指定设备
+			# 		2.接收设备反馈
+			# 		
+
 			# 握手反馈
 			if (event == EVENT_SHAKEHANDS_RES):
-				# 当前设备握手正常，处于正常/空闲
-				# 设置状态为STATUS_AVAILABLE
-				current_device.status = STATUS_AVAILABLE
+				# 当前设备握手正常
+				current_device.status = AVAILABLE
 			# 调宽反馈
 			elif (event == EVENT_SETWIDTH_RES):
-				# 当前设备调宽正常，回归正常/空闲
-				# 设置状态为STATUS_AVAILABLE
-				current_device.status = STATUS_AVAILABLE
+				# 当前设备调宽正常
+				current_device.status = AVAILABLE
 			# 复位后返回当前状态
-			elif (event == EVENT_RESET_STATUS_RES):
-				# 当前设备复位正常，回归正常/空闲
-				# 设置状态为STATUS_AVAILABLE
-				current_device.status = STATUS_AVAILABLE
+			elif (event == STATUS_AVAILABLE):
+				# 当前设备空闲
+				current_device.status = AVAILABLE
+			elif (event == STATUS_GETITEM_FINISHED):
+				# 当前设备接板完成（忙碌）
+				current_device.status = WAITING
+			elif (event == STATUS_TESTING):
+				# 当前设备测试中
+				current_device.status = TESTING
+			elif (event == STATUS_BROKEN):
+				# 当前设备处于故障状态
+				current_device.status = BROKEN
+			elif (event == STATUS_READYFOR_SENDITEM):
+				# 当前设备测试完成准备送板
+				current_device.status = WAITING
+			elif (event == STATUS_SENDITEM_FINISHED):
+				# 当前设备送板完成
+				current_device.status = AVAILABLE
+			elif (event == STATUS_BUSY):
+				# 当前设备忙碌
+				current_device.status = BUSY
+			# 空闲/正常
+			elif (event == EVENT_AVAILABLE):
+				# 当前设备空闲/正常
+				current_device.status = AVAILABLE
+			# 接板完成
+			elif (event == EVENT_GETITEM_FINISHED):
+				# 如果是接驳台，那就看系一个设备的状态，如果下一个设备的状态为AVAILABLE，就给当前设备发一个设备向前送板指令
+				# 如果是ICT/FT测试设备，就将当前设备状态设为TESTING（不对！如果是测试设备，那设备开始测试的时候会发一条测试中的指令！）
+				# 那么要是是测试设备发送该指令作何处理呢？首先，测试设备接板完成后到测试中间会有一段间隙（必然），这段间隙中的设备状态应当设为忙碌，然后设备会自动开始测试，一旦开始测试，设备就会发送测试中指令给服务器，我们再将它的状态设为TESTING，直到它测试完成发其他指令
+				# 暂存机有单独的接板完成指令
+				# 移载不需要发接板完成指令
+				# 结论：识别设备，做出相应的反馈
+				# 问题：如何识别设备
+				if (current_device == 接驳台):
+					if (next_device.stauts == AVAILABLE):
+						sendToPeer(current_device, DEVICE_SENDITEM)
+					else:
+						current_device.status = WAITING
+				elif (current_device == ICT测试):
+					current_device.status = BUSY
+			# 送板完成
+			elif (event == EVENT_SENDITEM_FINISHED):
+				# 当前设备送板完成
+				# 这个没什么好说的，直接将当前设备状态设为空闲
+				current_device.status = AVAILABLE
+			# 缓存机接板完成/空闲
+			elif (event == EVENT_HUANCUNJI_GETITEM_FINISHED):
+				# 缓存机接板完成/空闲？难道说缓存机接板完成立即变成空闲状态？
+				# 缓存机还有好多疑问，按顺序来应该走ICT，先空着这里
+			# 准备好接OK板
+			elif (event == EVENT_READYFOR_GETITEM_OK):
+			# 准备好接NG板
+			elif (event == EVENT_READYFOR_GETITEM_NG):
+			# 缓存机接板忙
+			elif (event == EVENT_HUANCUNJI_BUSY):
+				# 怎么样才会触发缓存机发送该指令？
+
+
 			# 空闲/正常 or 送板完成 or 准备好接(OK/NG)板
 			elif(event == EVENT_AVAILABLE or event == EVENT_COMMON_AVAILABLE or event == EVENT_COMMON_SENDITEM_FINISHED or event == EVENT_SENDITEM_FINISHED or event == EVENT_READYFOR_GETITEM_OK or event == EVENT_READYFOR_GETITEM_NG):
 				current_device.status = STATUS_AVAILABLE;
