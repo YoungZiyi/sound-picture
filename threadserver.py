@@ -103,7 +103,7 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 				# 暂存机有单独的接板完成指令
 				# 移载不需要发接板完成指令
 				# 结论：识别设备，做出相应的反馈
-				# 问题：如何识别设备
+				# 问题：如何识别设备（根据ip地址）
 				if (current_device == 接驳台):
 					if (next_device.stauts == AVAILABLE):
 						sendToPeer(current_device, DEVICE_SENDITEM)
@@ -127,8 +127,68 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 			# 缓存机接板忙
 			elif (event == EVENT_HUANCUNJI_BUSY):
 				# 怎么样才会触发缓存机发送该指令？
+			# 缓存机故障
+			elif (event == EVENT_HUANCUNJI_GETITEM_ERROR):
+				# 缓存机故障
+				current_device.status = BROKEN
+			# 已到达中间准备好接板
+			elif (event == EVENT_READYFOR_GETITEM_MIDDLE):
+				# 这个指令时谁发的？移载？移载中间也可以接板？
+				# 先不管它，根据协议乱来吧
+				# 既然移载已经到达中间准备好接板了，首先给当前设备设个AVAILABLE状态
+				curretn_device.status = AVAILABLE
+			# 已到达左端准备好接板
+			elif (event == EVENT_READYFOR_GETITEM_LEFT):
+				# 同上
+				current_device.status = AVAILABLE
+			# 已到达右端准备好接板
+			elif (event == EVENT_READYFOR_GETITEM_RIGHT):
+				# 同上
+				current_device.status = AVAILABLE
+			# 测试中
+			elif (event == EVENT_TESTING):
+				# ICT/FT开始测试工作
+				# 那么给它们设为TESTING状态
+				current_device.status = TESTING
+			# 测试OK，准备送板
+			elif (event == EVENT_READYFOR_SENDITEM_OK):
+				# 准备送OK板
+				# 要明确通知下一个设备接OK板，并将当前和下一个设备状态设为BUSY
+				if (next_device.status == AVAILABLE):
+					sendToPeer(current_device, DEVICE_SENDITEM)
+					current_device.status = BUSY
+					if (next_device == 缓存机):
+						sendToPeer(next_device, HUANCUNJI_GETITEM_OK)
+					if (next_device == 移载):
+						sendToPeer(next_device, YIZAI_GETITEM_RIGHT)
+					next_device.status = BUSY
+			# 测试NG，准备送板
+			elif (event == EVENT_READYFOR_SENDITEM_OK):
+				# 准备送NG板
+				# 要明确通知下一个设备接NG板，并将当前和下一个设备状态设为BUSY
+				if (next_device.status == AVAILABLE):
+					sendToPeer(current_device, DEVICE_SENDITEM)
+					current_device.status = BUSY
+					if (next_device == 缓存机):
+						sendToPeer(next_device, HUANCUNJI_GETITEM_NG)
+					if (next_device == 移载):
+						sendToPeer(next_device, YIZAI_GETITEM_RIGHT)
+					next_device.status = BUSY
+			# 准备送板（无测试）
+			elif (event == EVENT_READYFOR_SENDITEM):
+				# 无测试怎么通知后一个设备接板？
+			# 机台异常报警
+			elif (event == EVENT_DEVICE_WARNING_1):
+			# 机台异常报警
+			elif (event == EVENT_DEVICE_WARNING_2):
+			# 机台异常报警
+			elif (event == EVENT_DEVICE_WARNING_3):
+			# 机台异常报警
+			elif (event == EVENT_DEVICE_WARNING_4):
+			# 缓存机未准备好
+			elif (event == EVENT_HUANCUNJI_NOTREADY):
 
-
+			"""
 			# 空闲/正常 or 送板完成 or 准备好接(OK/NG)板
 			elif(event == EVENT_AVAILABLE or event == EVENT_COMMON_AVAILABLE or event == EVENT_COMMON_SENDITEM_FINISHED or event == EVENT_SENDITEM_FINISHED or event == EVENT_READYFOR_GETITEM_OK or event == EVENT_READYFOR_GETITEM_NG):
 				current_device.status = STATUS_AVAILABLE;
@@ -196,6 +256,8 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 					response = "YIZAI_Move_RIGHT"
 			elif ("SBJ_PrepareGetItemFinish" in event):
 				response = "YIZAI_GiveItem"
+			"""
+
 			else:
 				response = "UNKNOWN MESSAGE: "
 				response += event
