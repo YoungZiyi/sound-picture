@@ -64,12 +64,17 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 			# 握手反馈
 			if (event == EVENT_SHAKEHANDS_RES):
 				# 当前设备握手正常
+				# 无论什么设备反馈该指令，都表示该设备正常，但是是否表示该设备处于空闲状态？
 				current_device.status = AVAILABLE
 			# 调宽反馈
 			elif (event == EVENT_SETWIDTH_RES):
 				# 当前设备调宽正常
+				# 哪些设备可以进行导轨宽度调节？导轨宽度调节是服务器主动发出，那么逻辑处理应该是在客户端那边，当设备处于什么状态时才可以进行导轨宽度调节？
 				current_device.status = AVAILABLE
 			# 复位后返回当前状态
+			# 客户端根据设备在服务器这边记录的状态进行反馈，如果是这样有必要查吗？服务器
+			# AVAILABLE => STATUS_AVAILABLE
+			# 
 			elif (event == STATUS_AVAILABLE):
 				# 当前设备空闲
 				current_device.status = AVAILABLE
@@ -94,14 +99,15 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 			# 空闲/正常
 			elif (event == EVENT_AVAILABLE):
 				# 当前设备空闲/正常
+				# 无论什么设备返回该指令表示该设备处于空闲/正常状态，将其状态设为AVAILABLE
 				current_device.status = AVAILABLE
 			# 接板完成
 			elif (event == EVENT_GETITEM_FINISHED):
 				# 如果是接驳台，那就看系一个设备的状态，如果下一个设备的状态为AVAILABLE，就给当前设备发一个设备向前送板指令
 				# 如果是ICT/FT测试设备，就将当前设备状态设为TESTING（不对！如果是测试设备，那设备开始测试的时候会发一条测试中的指令！）
-				# 那么要是是测试设备发送该指令作何处理呢？首先，测试设备接板完成后到测试中间会有一段间隙（必然），这段间隙中的设备状态应当设为忙碌，然后设备会自动开始测试，一旦开始测试，设备就会发送测试中指令给服务器，我们再将它的状态设为TESTING，直到它测试完成发其他指令
-				# 暂存机有单独的接板完成指令
-				# 移载不需要发接板完成指令
+				# 		那么要是是测试设备发送该指令作何处理呢？首先，测试设备接板完成后到测试中间会有一段间隙（必然），这段间隙中的设备状态应当设为忙碌，然后设备会自动开始测试，一旦开始测试，设备就会发送测试中指令给服务器，我们再将它的状态设为TESTING，直到它测试完成发其他指令
+				# 缓存机有单独的接板完成指令
+				# 如果是移载
 				# 结论：识别设备，做出相应的反馈
 				# 问题：如何识别设备（根据ip地址）
 				if (current_device == 接驳台):
