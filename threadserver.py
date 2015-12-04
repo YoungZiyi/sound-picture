@@ -6,6 +6,9 @@ import socket
 import time
 from bxtcommon import *
 import string
+from struct import pack, unpack
+from array import array
+
 
 class MyRequestHandler(SocketServer.BaseRequestHandler): 
 	def handle(self):
@@ -17,9 +20,13 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 			client_port = client_address[1]
 			
 			if(client_ip == "127.0.0.1"):
-				#TODO The localhost client is debugging, Use the identifier in the msg header
-				pass
-			print "recv [%s] from [%s] \t"% (client_ip, event)
+				#The localhost client is debugging, 
+				#Use the ip address specified in the msg header
+				ip_in_bytes = event[:4]
+				ip_in_str = socket.inet_ntoa(ip_in_bytes)
+				client_ip = ip_in_str
+				event = event[4:]
+			print "recv [%s] from [%s] \t"% (event, client_ip)
 			
 			#Get the device object to this IP address
 			current_device = getDeviceByIP(client_ip)
@@ -34,47 +41,17 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 				print "Command [reset] is received"
 				self.server.shutdown()
 				break
-			# 工作原理：
-			# 设备根据各种 感应器/测试元件 反馈的信号向服务器发送相关协议码（主动）
-			# 服务器根据设备发来的信号根据业务逻辑反馈相关的协议码（被动）
-			# 服务器发送查询设备状态协议码（主动）
-			# 设备根据服务器发送的协议码做出相应的动作或反馈（被动）
 
-			# 接驳台0：	初始化状态为 空闲/正常->服务器记录设备状态为 STATUS_AVAILABLE
-			#				收到服务器指令（设备当前状态查询 51 c4 00 15）->表示服务器主动发送查询协议码->发送（空闲/准备好接板52 c4 01 17）
-			#				前激光感应器反馈信号->表示正在接板->发送 ？->（此处应记录设备状态为 STATUS_RECVING）
-			#				收到服务器指令（设备当前状态查询 51 c4 00 15）->表示服务器主动发送查询协议码->发送 ？
-			#				前激光感应器停止反馈->表示接板完成->发送（接板完成 52 c4 02 18/52 c1 f1 04 ？）->服务器记录设备状态为 STATUS_WAITING_FOR_NEXT_DEVICE_TO_BE_AVAILABLE
-			#				收到服务器指令（设备当前状态查询 51 c4 00 15）->表示服务器主动发送查询协议码->发送（准备好了送板52 c4 05 1b）
-			#				收到服务器指令（设备向前送板 51 c1 00 12）->表示服务器命令设备开始送板
-			#				后激光感应器反馈信号->表示正在送板->发送 ？->（此处应记录设备状态为 STATUS_SENDING）
-			#				收到服务器指令（设备当前状态查询 51 c4 00 15）->表示服务器主动发送查询协议码->发送 ？
-			#				后激光感应器停止发聩->表示送板完成->发送（送板完成 52 c4 06 1c/52 c1 f2 05 ？）->服务器记录设备状态为 STATUS_AVAILABLE
-
-			# 服务器工作流程：
-			# 	被动：
-			# 		1.收到设备发来的指令
-			# 		2.识别设备？
-			# 		3.根据逻辑反馈给设备
-			# 	主动：
-			# 		1.发送指令到指定设备
-			# 		2.接收设备反馈
-			# 		
 
 			# 握手反馈
 			if (event == EVENT_SHAKEHANDS_RES):
 				# 当前设备握手正常
-				# 无论什么设备反馈该指令，都表示该设备正常，但是是否表示该设备处于空闲状态？
-				current_device.status = AVAILABLE
-			# 调宽反馈
+				# 调宽反馈
+				pass
 			elif (event == EVENT_SETWIDTH_RES):
 				# 当前设备调宽正常
-				# 哪些设备可以进行导轨宽度调节？导轨宽度调节是服务器主动发出，那么逻辑处理应该是在客户端那边，当设备处于什么状态时才可以进行导轨宽度调节？
-				current_device.status = AVAILABLE
-			# 复位后返回当前状态
-			# 客户端根据设备在服务器这边记录的状态进行反馈，如果是这样有必要查吗？服务器
-			# AVAILABLE => STATUS_AVAILABLE
-			# 
+				# 复位后返回当前状态
+				pass
 			elif (event == STATUS_AVAILABLE):
 				# 当前设备空闲
 				current_device.status = AVAILABLE
@@ -99,7 +76,6 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 			# 空闲/正常
 			elif (event == EVENT_AVAILABLE):
 				# 当前设备空闲/正常
-				# 无论什么设备返回该指令表示该设备处于空闲/正常状态，将其状态设为AVAILABLE
 				current_device.status = AVAILABLE
 			# 接板完成
 			elif (event == EVENT_GETITEM_FINISHED):
@@ -110,28 +86,33 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 				# 如果是移载
 				# 结论：识别设备，做出相应的反馈
 				# 问题：如何识别设备（根据ip地址）
-				if (current_device == 接驳台):
+				if (current_device == device_jbt0 or current_device == device_jbt1):
+					current_device.status = WAITING
 					if (next_device.stauts == AVAILABLE):
-						sendToPeer(current_device, DEVICE_SENDITEM)
+						response = DEVICE_SENDITEM
 					else:
 						current_device.status = WAITING
-				elif (current_device == ICT测试):
-					current_device.status = BUSY
+				elif (current_device == device_ict):
+					current_device.status = TESTING
 			# 送板完成
 			elif (event == EVENT_SENDITEM_FINISHED):
 				# 当前设备送板完成
-				# 这个没什么好说的，直接将当前设备状态设为空闲
-				current_device.status = AVAILABLE
+				if (current_device == device_jbt0 or current_device == device_jbt1):
+					current_device.status = AVAILABLE
 			# 缓存机接板完成/空闲
 			elif (event == EVENT_HUANCUNJI_GETITEM_FINISHED):
 				# 缓存机接板完成/空闲？难道说缓存机接板完成立即变成空闲状态？
 				# 缓存机还有好多疑问，按顺序来应该走ICT，先空着这里
-			# 准备好接OK板
+				# 准备好接OK板
+				pass
 			elif (event == EVENT_READYFOR_GETITEM_OK):
+				pass
 			# 准备好接NG板
 			elif (event == EVENT_READYFOR_GETITEM_NG):
+				pass
 			# 缓存机接板忙
 			elif (event == EVENT_HUANCUNJI_BUSY):
+				pass
 				# 怎么样才会触发缓存机发送该指令？
 			# 缓存机故障
 			elif (event == EVENT_HUANCUNJI_GETITEM_ERROR):
@@ -163,9 +144,9 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 				if (next_device.status == AVAILABLE):
 					sendToPeer(current_device, DEVICE_SENDITEM)
 					current_device.status = BUSY
-					if (next_device == 缓存机):
+					if (next_device == device_hcj):
 						sendToPeer(next_device, HUANCUNJI_GETITEM_OK)
-					if (next_device == 移载):
+					if (next_device == device_yz):
 						sendToPeer(next_device, YIZAI_GETITEM_RIGHT)
 					next_device.status = BUSY
 			# 测试NG，准备送板
@@ -175,95 +156,30 @@ class MyRequestHandler(SocketServer.BaseRequestHandler):
 				if (next_device.status == AVAILABLE):
 					sendToPeer(current_device, DEVICE_SENDITEM)
 					current_device.status = BUSY
-					if (next_device == 缓存机):
+					if (next_device == device_hcj):
 						sendToPeer(next_device, HUANCUNJI_GETITEM_NG)
-					if (next_device == 移载):
+					if (next_device == device_yz):
 						sendToPeer(next_device, YIZAI_GETITEM_RIGHT)
 					next_device.status = BUSY
 			# 准备送板（无测试）
 			elif (event == EVENT_READYFOR_SENDITEM):
+				pass
 				# 无测试怎么通知后一个设备接板？
 			# 机台异常报警
 			elif (event == EVENT_DEVICE_WARNING_1):
+				pass
 			# 机台异常报警
 			elif (event == EVENT_DEVICE_WARNING_2):
+				pass
 			# 机台异常报警
 			elif (event == EVENT_DEVICE_WARNING_3):
+				pass
 			# 机台异常报警
 			elif (event == EVENT_DEVICE_WARNING_4):
+				pass
 			# 缓存机未准备好
 			elif (event == EVENT_HUANCUNJI_NOTREADY):
-
-			"""
-			# 空闲/正常 or 送板完成 or 准备好接(OK/NG)板
-			elif(event == EVENT_AVAILABLE or event == EVENT_COMMON_AVAILABLE or event == EVENT_COMMON_SENDITEM_FINISHED or event == EVENT_SENDITEM_FINISHED or event == EVENT_READYFOR_GETITEM_OK or event == EVENT_READYFOR_GETITEM_NG):
-				current_device.status = STATUS_AVAILABLE;
-				previous_device = current_device.previous;
-				if(previous_device.status == STATUS_WAITING_FOR_NEXT_DEVICE_TO_BE_AVAILABLE):
-					sendToPeer(previous_device, IST_SENDITEM)
-					previous_device.status = STATUS_SENDING
-					current_device.status = STATUS_RECVING
-			# 接板完成
-			elif (event == EVENT_GETITEM_FINISHED):
-				current_device.status = STATUS_BUSY
-			# 缓存机接板完成
-			elif (event == EVENT_HUANCUNJI_GETITEM_FINISHED):
-				current_device.status = STATUS_BUSY
-			# 缓存机接板忙
-			elif (event == EVENT_HUANCUNJI_BUSY):
-				current_device.status = STATUS_BUSY
-				previous_device = current_device.previous
-				previous_device.status = STATUS_WAITING_FOR_NEXT_DEVICE_TO_BE_AVAILABLE
-			# 缓存机接板故障
-			elif (event == EVENT_HUANCUNJI_GETITEM_ERROR):
-				current_device.status = STATUS_BROKEN
-				previous_device = current_device.previous
-				previous_device.status = STATUS_WAITING_FOR_NEXT_DEVICE_TO_BE_AVAILABLE
-			# 已到达中间准备好接板
-			elif (event == EVENT_READYFOR_GETITEM_MIDDLE):
-				current_device.status = STATUS_AVAILABLE
-			# 已到达左端准备好接板
-			# 已到达右端准备好接板
-			# 测试中
-
-			
-			# 测试OK，准备送板
-			elif (event == EVENT_READYFOR_SENDITEM_OK):
-				next_device = current_device.next
-				if(next_device.status == STATUS_AVAILABLE):
-					sendToPeer(current_device, HUANCUNJI_GETITEM_OK)
-				else:
-					current_device.status = STATUS_WAITING_FOR_NEXT_DEVICE_TO_BE_AVAILABLE
-			# 测试NG，准备送板
-			elif (event == EVENT_READYFOR_SENDITEM_NG):
-				next_device = current_device.next
-				if(next_device.status == STATUS_AVAILABLE):
-					sendToPeer(current_device, HUANCUNJI_GETITEM_NG)
-				else:
-					current_device.status = STATUS_WAITING_FOR_NEXT_DEVICE_TO_BE_AVAILABLE
-			# 准备送板
-			elif (event == EVENT_COMMON_READYFOR_SENDITEM):
-				next_device = current_device.next
-				if(next_device.status == STATUS_AVAILABLE):
-					sendToPeer(current_device, IST_SENDITEM)
-					current_device.status = STATUS_SENDING
-					next_device.status = STATUS_RECVING
-				else:
-					current_device.status = STATUS_WAITING_FOR_NEXT_DEVICE_TO_BE_AVAILABLE
-			elif event == "YIZAI_PrepareGetItemFinish":
-				response = "FT01_GiveItem"
-			elif event == "FT01_GiveItemFinish":
-				item = ft01.popItem()
-				yizai.pushItem(item)
-				#Here we should check if thers is a item with the ft01
-				if(item.status == "OK"):
-					response = "YIZAI_Move_LEFT"
-				else:
-					response = "YIZAI_Move_RIGHT"
-			elif ("SBJ_PrepareGetItemFinish" in event):
-				response = "YIZAI_GiveItem"
-			"""
-
+				pass
 			else:
 				response = "UNKNOWN MESSAGE: "
 				response += event

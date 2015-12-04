@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python 
 
 import time
@@ -90,7 +91,7 @@ class Device:
 def Connect(first, second):
 	if(first):
 		first.next = second;
-	if(second != None):
+	if(second):
 		second.previous = first;
 		
 device_jbt0 = Device("Jiebotai0", JBT0_IP)
