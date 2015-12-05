@@ -17,14 +17,14 @@ while(1):
     if not data: 
     	print "No data to send"
         break 
-    ip = "10.0.0.100"
-    ip_in_int = unpack("!I", socket.inet_aton(ip))[0];
-    ip_in_str = pack("!i",ip_in_int)
-    print type(ip_in_str)
-    data = ip_in_str+data
+    #ip = "10.0.0.100"
+    #ip_in_int = unpack("!I", socket.inet_aton(ip))[0];
+    #ip_in_str = pack("!i",ip_in_int)
+    #print type(ip_in_str)
+    #data = ip_in_str+data
     tcpCliSock.send(data)
-    recved = tcpCliSock.recv(BUFSIZ) 
-    print recved.strip()
+    #recved = tcpCliSock.recv(BUFSIZ)
+    #print recved.strip()
 
 print "Exiting..."
 tcpCliSock.close()
