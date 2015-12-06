@@ -11,12 +11,12 @@ from Message import *
 from Device import *
 from BxtException import *
 from MessageHandler import *
-import RunnningMode
+import RunningMode
+import binascii
 
-if __name__ == "__main__":
-	signal.signal(signal.SIGINT, RunningMode.signal_handler)
-	main()
-	
+
+
+
 def main():
 	listenSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	listenSock.bind(("", SERVER_PORT))
@@ -27,8 +27,17 @@ def main():
 	readlist = [listenSock]
 	exceptionlist = [listenSock]
 	while not RunningMode.flag_exit:
-		(sread, swrite, sexc) =  select.select(readlist, [], [], 1); 
+		(sread, swrite, sexc) =  select.select(readlist, [], [], RunningMode.checkInterval); 
 		#TODO 此处可以加上定时任务.
+		checkTime = time.time()
+		for device in IP_Device_Map.values():
+			if(checkTime - device.status_start_time > RunningMode.timeoutTime):
+				#该设备维持一个状态超过了15s
+				if(device.status in [S_RECVING]):
+					print "WARN: reset [%s] " % device.name
+					print device
+					device.SendInstruction(INSTRUCTION_DEVICE_RESET)
+					device.Reset()
 		
 		for sock in sread:
 			try:
@@ -41,42 +50,64 @@ def main():
 					client_port = address[1]
 					#马上发送一个复位指令
 					newsock.send(INSTRUCTION_DEVICE_RESET)
+					
 					#此处假定一次能收到整个包, 基本是成立的
-					buff = newsock.recv(4)
-					#如果处于debugging模式，则socket客户端会发送一个IP地址， 以替换127.0.0.1
+					recv_buff = newsock.recv(RunningMode.recv_buff_size)
+	
+					#如果处于debugging模式，则socket客户端头部会发送一个IP地址， 以替换127.0.0.1
 					if(RunningMode.debugging):
-						hex_msg = ':'.join(x.encode('hex') for x in buff)
-						print hex_msg
-						client_ip = socket.inet_ntoa(buff)
+						client_ip = socket.inet_ntoa(recv_buff[:4])
+						recv_buff = recv_buff[4:]
+						print "Now client_ip is ", client_ip, " and recv_buff is ", ' '.join(x.encode('hex') for x in recv_buff)
+					
+					#包不合法, 扔弃, 但是不断开TCP连接
+					if(not verifyPacket(recv_buff)):
+						print "WARN: Invalid Packet from [%s]" % (client_ip)
+						continue
 					current_device = getDeviceByIP(client_ip)
 					if(not current_device):
 						print "No valid device to this address [%s]"%client_ip
 						newsock.close()
 						continue
 					else:
+						#手工处理初始化状态
 						current_device.sock = newsock
+						current_device.ChangeStatusTo(S_IDLE)
+						#select监听这个socket
 						readlist.append(newsock)
 						exceptionlist.append(newsock)
 						print "Accept socket for device ", current_device.name
 				else:
 					#业务socket发送的消息
-					device = getDeviceBySocket(sock)
-					if(not device):
+					current_device = getDeviceBySocket(sock)
+					if(not current_device):
 						raise ExceptionMessageFromUnknonwSource(sock.getpeername())
-					recv_msg = sock.recv(8)
-					if recv_msg == "":
-						print "Client %s closed the connection" % (device.name)
+					recv_buff = sock.recv(8)
+					if recv_buff == "":
+						print "Client %s closed the connection" % (current_device.name)
 						current_device.sock = None
-						
 						readlist.remove(sock)
 						exceptionlist.remove(sock)
 						sock.close()
-					else:
-						hex_msg = ' '.join(x.encode('hex') for x in recv_msg)
-						print "Client %s sent: [%s] "% (device.name, hex_msg)
-						handle_msg(device, hex_msg)
-			except Exception as e:
-				print e
+						continue
+					
+					#如果处于debugging模式，则socket客户端头部会发送一个IP地址， 以替换127.0.0.1
+					if(RunningMode.debugging):
+						client_ip = socket.inet_ntoa(recv_buff[:4])
+						recv_buff = recv_buff[4:]
+						
+					#包不合法, 扔弃, 但是不断开TCP连接
+					if(not verifyPacket(recv_buff)):
+						print "WARN: Invalid Packet from [%s:%s]" % (current_device.name, client_ip)
+						continue
+					
+					hex_msg = ' '.join(x.encode('hex') for x in recv_buff)
+					print "Client %s sent: [%s] "% (current_device.name, hex_msg)
+					
+					#真正的业务处理在这里
+					handle_msg(current_device, hex_msg)
+			except BxtException:
+				continue
 
 		for sock in sexc:
 			try:
@@ -90,9 +121,18 @@ def main():
 					sock.close()
 					readlist.remove(sock)
 					exceptionlist.remove(sock)
-			except Exception as e:
-				print e
-			
-
+			except BxtException:
+				continue
 
 				
+
+	
+if __name__ == "__main__":
+	
+	signal.signal(signal.SIGINT, RunningMode.signal_handler)
+	main()
+
+
+
+
+	

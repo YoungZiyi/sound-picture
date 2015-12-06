@@ -5,7 +5,8 @@ from struct import pack, unpack
 import socket
 import signal
 from Message import *
-
+import binascii
+import time
 
 socket.setdefaulttimeout(3)
 
@@ -16,34 +17,55 @@ def signal_handler(signum, frame):
 	print "receive a signal %d, exit_flag = %d"%(signum, is_exit)
 signal.signal(signal.SIGINT, signal_handler)
 
-BUFSIZ = 1024
+BUFSIZ = 16
 ADDR = (SERVER_HOST, SERVER_PORT) 
 
+print "Connecting..."
 tcpCliSock = socket.socket(AF_INET, SOCK_STREAM)
 tcpCliSock.connect(ADDR)
-print "Connecting..."
 
 
 print "Recving..."
 recved = tcpCliSock.recv(BUFSIZ)
 print "Recv ", recved.strip()
 	
+
+'''
 data = raw_input('> ')
 if not data:
 	print "No data to send"
 	exit(-1)
-ip_in_int = unpack("!I", socket.inet_aton(data))[0];
-ip_in_str = pack("!i",ip_in_int)
-hex_msg = ':'.join(x.encode('hex') for x in ip_in_str)
-print hex_msg
-tcpCliSock.send(ip_in_str)
-	
+'''
+data = "10.0.0.100"
+ip_in_str = socket.inet_aton(data)
+ip_in_int = unpack("!I", ip_in_str)[0];
+ip_in_binary_str = pack("!i",ip_in_int)
+
+msg = ip_in_binary_str + binascii.unhexlify(RemoveBlankInMiddle(EVENT_AVAILABLE))
+print "Msg is ", binascii.hexlify(msg)
+tcpCliSock.send(msg)
+
+time.sleep(1)
+msg = ip_in_binary_str + binascii.unhexlify(RemoveBlankInMiddle(EVENT_GETITEM_FINISHED))
+print "Msg is ", binascii.hexlify(msg)
+tcpCliSock.send(msg)
+time.sleep(1)
+
+msg = ip_in_binary_str + binascii.unhexlify(RemoveBlankInMiddle(EVENT_READYFOR_SENDITEM))
+print "Msg is ", binascii.hexlify(msg)
+tcpCliSock.send(msg)
+time.sleep(1)
+
 while(not exit_flag):
+
 	data = raw_input('> ')
 	if not data:
 		print "No data to send"
 		break
-	tcpCliSock.send(data)
+
+	msg = ip_in_binary_str + binascii.unhexlify(RemoveBlankInMiddle(data))
+	print "Msg is ", binascii.hexlify(msg)
+	tcpCliSock.send(msg)
 
 print "Exiting..."
 tcpCliSock.close()

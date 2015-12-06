@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python 
 
-class ExceptionUnsupportedMsg(Exception):
+class BxtException(Exception):
 	pass
-class ExceptionItemStatusUnknown(Exception):
+
+class ExceptionUnsupportedMsg(BxtException):
 	pass
-class ExceptionCommunication(Exception):
+class ExceptionItemStatusUnknown(BxtException):
+	pass
+class ExceptionCommunication(BxtException):
+	pass
+class ExceptionMessageFromUnknonwSource(BxtException):
 	pass

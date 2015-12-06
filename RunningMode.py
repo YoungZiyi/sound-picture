@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python 
 
+checkInterval	=	1
+timeoutTime		=	15
+
+recv_buff_size = 8
+
 debugging = True
 
 flag_exit = False
