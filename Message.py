@@ -58,15 +58,6 @@ STATUS_READYFOR_SENDITEM = "52 c4 05 1b"	# 测试完成准备送板/准备好了
 STATUS_SENDITEM_FINISHED = "52 c4 06 1c"	# 送板完成（空闲状态） AVAILABLE
 STATUS_BUSY = "52 c4 07 1d"					# 忙碌 BUSY
 
-# status in server
-S_AVAILABLE = 0			# 空闲
-S_WAITING = 1			# 测试/接板 完成，等待下一个设备空闲
-S_TESTING = 2			# 测试中
-S_BROKEN = 3			# 故障状态
-S_BUSY = 4				# 忙碌
-S_SENDING = 5 			#送板中
-S_MOVING	=	6		#移栽机在移动中
-S_WITH_ITEM	=	7		#设备上有板子
 
 ERRCODE_STATUS_OF_ITEM_IN_PREVIOUS_DEVICE_IS_UNKNOWN		=	100
 ERRCODE_DEVICE_IS_WITHOUT_SOCKET_WHILE_SENDING_INSTRUCTION	=	101
