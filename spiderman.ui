@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1079</width>
-    <height>597</height>
+    <width>1299</width>
+    <height>658</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QTextBrowser" name="huanCun">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>410</x>
       <y>150</y>
       <width>100</width>
       <height>65</height>
@@ -55,7 +55,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextBrowser" name="jieBoTai1">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>600</x>
       <y>150</y>
       <width>100</width>
       <height>65</height>
@@ -93,7 +93,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextBrowser" name="FT">
     <property name="geometry">
      <rect>
-      <x>640</x>
+      <x>790</x>
       <y>150</y>
       <width>100</width>
       <height>65</height>
@@ -131,7 +131,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextBrowser" name="yiZai">
     <property name="geometry">
      <rect>
-      <x>770</x>
+      <x>970</x>
       <y>20</y>
       <width>100</width>
       <height>195</height>
@@ -174,7 +174,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextBrowser" name="ICT">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>220</x>
       <y>150</y>
       <width>100</width>
       <height>65</height>
@@ -212,7 +212,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextBrowser" name="NG">
     <property name="geometry">
      <rect>
-      <x>920</x>
+      <x>1150</x>
       <y>20</y>
       <width>100</width>
       <height>65</height>
@@ -250,7 +250,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextBrowser" name="OK">
     <property name="geometry">
      <rect>
-      <x>920</x>
+      <x>1150</x>
       <y>150</y>
       <width>100</width>
       <height>65</height>
@@ -328,104 +328,104 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;接驳台0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT01_TestFinish_OK">
+   <widget class="QPushButton" name="FT_EVENT_SHAKEHANDS_RES">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>800</x>
       <y>220</y>
       <width>81</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>测试OK</string>
+     <string>握手(反馈)</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT01_TestFinish_NG">
+   <widget class="QPushButton" name="FT_EVENT_AVAILABLE">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>800</x>
       <y>250</y>
       <width>81</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>测试NG</string>
+     <string>空闲/正常</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT01_GiveItemFinish">
+   <widget class="QPushButton" name="FT_EVENT_GETITEM_FINISHED">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>800</x>
       <y>280</y>
       <width>81</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>送板完成</string>
+     <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT01_Error_Nobatterry">
+   <widget class="QPushButton" name="FT_EVENT_TESTING">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>800</x>
       <y>310</y>
       <width>81</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>机台异常</string>
+     <string>测试中</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="YIZAI_BadEvent">
+   <widget class="QPushButton" name="UNKNOW">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>280</y>
-      <width>101</width>
-      <height>21</height>
+      <x>100</x>
+      <y>570</y>
+      <width>92</width>
+      <height>23</height>
      </rect>
     </property>
     <property name="text">
      <string>无法识别的命令</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="YIZAI_PrepareGetItemFinish">
+   <widget class="QPushButton" name="YIZAI_EVENT_SETWIDTH_RES">
     <property name="geometry">
      <rect>
-      <x>780</x>
+      <x>980</x>
       <y>250</y>
       <width>81</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>准备接板完成</string>
+     <string>调宽反馈</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="YIZAI_MoveFinish">
+   <widget class="QPushButton" name="YIZAI_EVENT_SHAKEHANDS_RES">
     <property name="geometry">
      <rect>
-      <x>780</x>
+      <x>980</x>
       <y>220</y>
       <width>81</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>到达目的地</string>
+     <string>握手(反馈)</string>
     </property>
    </widget>
    <widget class="QLabel" name="instruction">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>500</y>
-      <width>341</width>
-      <height>41</height>
+      <x>20</x>
+      <y>540</y>
+      <width>251</width>
+      <height>23</height>
      </rect>
     </property>
     <property name="text">
@@ -435,8 +435,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="reset">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>490</y>
+      <x>20</x>
+      <y>570</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -445,37 +445,24 @@ p, li { white-space: pre-wrap; }
      <string>reset</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="START">
+   <widget class="QPushButton" name="ICT_EVENT_SHAKEHANDS_RES">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>开机</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ICT_Ready">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
+      <x>230</x>
       <y>220</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>正常/空闲</string>
+     <string>握手(反馈)</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ICT_TestFinish_OK">
+   <widget class="QPushButton" name="ICT_EVENT_READYFOR_SENDITEM_OK">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>310</y>
+      <x>190</x>
+      <y>340</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -484,427 +471,50 @@ p, li { white-space: pre-wrap; }
      <string>测试OK</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ICT_GetItemFinish">
+   <widget class="QPushButton" name="ICT_EVENT_GETITEM_FINISHED">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>250</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>接板完成</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ICT_Warning">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>340</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>故障报警</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ICT_ReadyToSendItem">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>370</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>准备送板</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ICT_Busy">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>430</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>忙碌</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ICT_SendItemFinish">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>400</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>送板完成</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="huancunji_Ready">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>220</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>正常/空闲</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="huancunji_Busy">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>430</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>忙碌</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="huancunji_ReadyToSendItem">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>370</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>准备送板</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="huancunji_Warning">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>340</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>故障报警</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="huancunji_SendItemFinish">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>400</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>送板完成</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="huancunji_GetItemFinish">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>250</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>接板完成</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="jiebotai1_Ready">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>220</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>正常/空闲</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="jiebotai1_Busy">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>430</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>忙碌</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="jiebotai1_ReadyToSendItem">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>370</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>准备送板</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="jiebotai1_SendItemFinish">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>400</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>送板完成</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="jiebotai1_GetItemFinish">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>250</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>接板完成</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ICT_TestFinish_NG">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>310</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>测试NG</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="jiebotai0_Ready">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>220</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>正常/空闲</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="jiebotai0_Busy">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>430</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>忙碌</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="jiebotai0_ReadyToSendItem">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>370</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>准备送板</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="jiebotai0_SendItemFinish">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>400</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>送板完成</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="jiebotai0_GetItemFinish">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>250</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>接板完成</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="OKshouban_Ready">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>220</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>正常/空闲</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="OKshouban_Busy">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>430</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>忙碌</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="OKshouban_Warning">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>340</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>故障报警</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="OKshouban_SendItemFinish">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>400</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>送板完成</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="NGshouban_SendItemFinish">
-    <property name="geometry">
-     <rect>
-      <x>970</x>
-      <y>90</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>送板完成</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="NGshouban_Busy">
-    <property name="geometry">
-     <rect>
-      <x>970</x>
-      <y>120</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>忙碌</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="NGshouban_Ready">
-    <property name="geometry">
-     <rect>
-      <x>890</x>
-      <y>90</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>正常/空闲</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="NGshouban_Warning">
-    <property name="geometry">
-     <rect>
-      <x>890</x>
-      <y>120</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>故障报警</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ICT_Testing">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
+      <x>230</x>
       <y>280</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>测试中</string>
+     <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="all_ShakeHands">
+   <widget class="QPushButton" name="huancunji_EVENT_SHAKEHANDS_RES">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>490</y>
+      <x>420</x>
+      <y>220</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>握手</string>
+     <string>握手(反馈)</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="huancunji_EVENT_DEVICE_WARNING_1">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>520</y>
+      <x>420</x>
+      <y>430</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_EVENT_SETWIDTH_RES">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>250</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -913,13 +523,1248 @@ p, li { white-space: pre-wrap; }
      <string>调宽反馈</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="ICT_EVENT_READYFOR_SENDITEM_NG">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>340</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试NG</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_EVENT_SHAKEHANDS_RES">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>220</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>握手(反馈)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_EVENT_DEVICE_WARNING_1">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>370</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_EVENT_SETWIDTH_RES">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>250</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>调宽反馈</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OKshouban_EVENT_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>220</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>正常/空闲</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OKshouban_EVENT_DEVICE_WARNING_1">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>280</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NGshouban_EVENT_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>90</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>正常/空闲</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NGshouban_EVENT_DEVICE_WARNING_1">
+    <property name="geometry">
+     <rect>
+      <x>1200</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_EVENT_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>250</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/正常</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_EVENT_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>280</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/正常</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_EVENT_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>310</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_EVENT_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>340</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_EVENT_TESTING">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>310</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试中</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_EVENT_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>400</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_EVENT_DEVICE_WARNING_1">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>430</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_EVENT_READYFOR_SENDITEM">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>370</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备送板(无测试)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_EVENT_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>280</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/正常</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_EVENT_HUANCUNJI_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>340</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>缓存机接板完成/空闲</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_EVENT_READYFOR_GETITEM_OK">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>310</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备好接OK板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_EVENT_READYFOR_GETITEM_NG">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>310</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备好接NG板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_EVENT_HUANCUNJI_NOTREADY">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>370</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>缓存机未准备好</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_EVENT_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>400</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_EVENT_SHAKEHANDS_RES">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>220</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>握手(反馈)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_EVENT_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>280</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/正常</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_EVENT_DEVICE_WARNING_1">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>370</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_EVENT_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>340</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_EVENT_SETWIDTH_RES">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>250</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>调宽反馈</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_EVENT_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>310</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_EVENT_READYFOR_SENDITEM_OK">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>340</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试OK</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_EVENT_READYFOR_SENDITEM_NG">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>340</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试NG</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_EVENT_READYFOR_SENDITEM">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>370</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备送板(无测试)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_EVENT_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>400</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_EVENT_DEVICE_WARNING_1">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>430</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_EVENT_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>280</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/正常</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_EVENT_READYFOR_GETITEM_RIGHT">
+    <property name="geometry">
+     <rect>
+      <x>960</x>
+      <y>310</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>已到达右端准备好接板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_EVENT_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>340</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_EVENT_DEVICE_WARNING_1">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>370</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OKshouban_EVENT_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>250</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NGshouban_EVENT_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_STATUS_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/准备好接板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_STATUS_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_STATUS_TESTING">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试中</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_STATUS_BROKEN">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_STATUS_READYFOR_SENDITEM">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>90</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备好了送板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_STATUS_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai0_STATUS_BUSY">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>忙碌</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_STATUS_BUSY">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>忙碌</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_STATUS_TESTING">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试中</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_STATUS_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_STATUS_BROKEN">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>90</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_STATUS_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>30</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/准备好接板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_STATUS_READYFOR_SENDITEM">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>90</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备好了送板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ICT_STATUS_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_STATUS_BUSY">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>忙碌</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_STATUS_TESTING">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试中</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_STATUS_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_STATUS_BROKEN">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>90</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_STATUS_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>30</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/准备好接板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_STATUS_READYFOR_SENDITEM">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>90</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备好了送板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="huancunji_STATUS_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_STATUS_BROKEN">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>90</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_STATUS_READYFOR_SENDITEM">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>90</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备好了送板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_STATUS_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>30</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/准备好接板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_STATUS_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_STATUS_BUSY">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>忙碌</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_STATUS_TESTING">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试中</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jiebotai1_STATUS_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_STATUS_BROKEN">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>90</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_STATUS_READYFOR_SENDITEM">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>90</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备好了送板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_STATUS_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>30</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/准备好接板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_STATUS_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_STATUS_BUSY">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>忙碌</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_STATUS_TESTING">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试中</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FT_STATUS_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_STATUS_BROKEN">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>490</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_STATUS_READYFOR_SENDITEM">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>490</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备好了送板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_STATUS_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>970</x>
+      <y>430</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/准备好接板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_STATUS_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>520</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_STATUS_BUSY">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>520</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>忙碌</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_STATUS_TESTING">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>460</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试中</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YIZAI_STATUS_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>460</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OKshouban_STATUS_BROKEN">
+    <property name="geometry">
+     <rect>
+      <x>1130</x>
+      <y>490</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OKshouban_STATUS_READYFOR_SENDITEM">
+    <property name="geometry">
+     <rect>
+      <x>1210</x>
+      <y>490</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备好了送板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OKshouban_STATUS_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>430</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/准备好接板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OKshouban_STATUS_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>1130</x>
+      <y>520</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OKshouban_STATUS_BUSY">
+    <property name="geometry">
+     <rect>
+      <x>1210</x>
+      <y>520</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>忙碌</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OKshouban_STATUS_TESTING">
+    <property name="geometry">
+     <rect>
+      <x>1210</x>
+      <y>460</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试中</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OKshouban_STATUS_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>1130</x>
+      <y>460</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NGshouban_STATUS_BROKEN">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>370</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>故障报警</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NGshouban_STATUS_GETITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>340</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NGshouban_STATUS_SENDITEM_FINISHED">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>400</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送板完成</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NGshouban_STATUS_TESTING">
+    <property name="geometry">
+     <rect>
+      <x>1200</x>
+      <y>340</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>测试中</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NGshouban_STATUS_READYFOR_SENDITEM">
+    <property name="geometry">
+     <rect>
+      <x>1200</x>
+      <y>370</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>准备好了送板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NGshouban_STATUS_AVAILABLE">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>310</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>空闲/准备好接板</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NGshouban_STATUS_BUSY">
+    <property name="geometry">
+     <rect>
+      <x>1200</x>
+      <y>400</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>忙碌</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1079</width>
+     <width>1299</width>
      <height>23</height>
     </rect>
    </property>
@@ -927,15 +1772,21 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>菜单</string>
     </property>
+    <addaction name="START_2"/>
    </widget>
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="START_2">
+   <property name="text">
+    <string>开机</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>FT01_TestFinish_OK</sender>
+   <sender>FT_EVENT_SHAKEHANDS_RES</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -951,7 +1802,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>FT01_TestFinish_NG</sender>
+   <sender>FT_EVENT_AVAILABLE</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -967,7 +1818,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>FT01_GiveItemFinish</sender>
+   <sender>FT_EVENT_GETITEM_FINISHED</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -983,7 +1834,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>FT01_Error_Nobatterry</sender>
+   <sender>FT_EVENT_TESTING</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -999,7 +1850,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>YIZAI_MoveFinish</sender>
+   <sender>YIZAI_EVENT_SHAKEHANDS_RES</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1015,7 +1866,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>YIZAI_PrepareGetItemFinish</sender>
+   <sender>YIZAI_EVENT_SETWIDTH_RES</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1031,7 +1882,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>YIZAI_BadEvent</sender>
+   <sender>UNKNOW</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1047,23 +1898,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>START</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>77</x>
-     <y>36</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>103</x>
-     <y>36</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>jiebotai0_Ready</sender>
+   <sender>jiebotai0_EVENT_SHAKEHANDS_RES</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1079,7 +1914,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>jiebotai0_GetItemFinish</sender>
+   <sender>jiebotai0_EVENT_SETWIDTH_RES</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1095,7 +1930,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>jiebotai0_ReadyToSendItem</sender>
+   <sender>jiebotai0_EVENT_DEVICE_WARNING_1</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1107,38 +1942,6 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>35</x>
      <y>366</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>jiebotai0_SendItemFinish</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>54</x>
-     <y>426</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>34</x>
-     <y>396</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>jiebotai0_Busy</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>55</x>
-     <y>458</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>34</x>
-     <y>427</y>
     </hint>
    </hints>
   </connection>
@@ -1159,7 +1962,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>ICT_Ready</sender>
+   <sender>ICT_EVENT_SHAKEHANDS_RES</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1175,7 +1978,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>ICT_GetItemFinish</sender>
+   <sender>ICT_EVENT_GETITEM_FINISHED</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1191,7 +1994,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>ICT_TestFinish_OK</sender>
+   <sender>ICT_EVENT_READYFOR_SENDITEM_OK</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1207,7 +2010,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>ICT_TestFinish_NG</sender>
+   <sender>ICT_EVENT_READYFOR_SENDITEM_NG</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1223,71 +2026,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>ICT_Warning</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>205</x>
-     <y>370</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>187</x>
-     <y>337</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ICT_ReadyToSendItem</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>207</x>
-     <y>397</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>189</x>
-     <y>366</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ICT_SendItemFinish</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>209</x>
-     <y>427</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>186</x>
-     <y>396</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ICT_Busy</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>208</x>
-     <y>460</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>184</x>
-     <y>426</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>huancunji_Ready</sender>
+   <sender>huancunji_EVENT_SHAKEHANDS_RES</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1303,7 +2042,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>huancunji_GetItemFinish</sender>
+   <sender>huancunji_EVENT_SETWIDTH_RES</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1319,7 +2058,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>huancunji_Warning</sender>
+   <sender>huancunji_EVENT_DEVICE_WARNING_1</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1335,119 +2074,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>huancunji_ReadyToSendItem</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>352</x>
-     <y>396</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>335</x>
-     <y>369</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>huancunji_SendItemFinish</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>360</x>
-     <y>430</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>337</x>
-     <y>398</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>huancunji_Busy</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>354</x>
-     <y>456</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>335</x>
-     <y>426</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>jiebotai1_Ready</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>507</x>
-     <y>247</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>487</x>
-     <y>245</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>jiebotai1_ReadyToSendItem</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>504</x>
-     <y>399</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>487</x>
-     <y>367</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>jiebotai1_SendItemFinish</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>507</x>
-     <y>429</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>487</x>
-     <y>396</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>jiebotai1_Busy</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>508</x>
-     <y>459</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>485</x>
-     <y>428</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>NGshouban_Ready</sender>
+   <sender>NGshouban_EVENT_AVAILABLE</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1463,7 +2090,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>NGshouban_Warning</sender>
+   <sender>NGshouban_EVENT_DEVICE_WARNING_1</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1479,39 +2106,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>NGshouban_SendItemFinish</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1033</x>
-     <y>123</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1057</x>
-     <y>116</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>NGshouban_Busy</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1037</x>
-     <y>148</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1059</x>
-     <y>146</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>OKshouban_Ready</sender>
+   <sender>OKshouban_EVENT_AVAILABLE</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1527,55 +2122,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>OKshouban_Warning</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>938</x>
-     <y>369</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>917</x>
-     <y>337</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>OKshouban_SendItemFinish</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>940</x>
-     <y>429</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>919</x>
-     <y>397</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>OKshouban_Busy</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>942</x>
-     <y>464</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>918</x>
-     <y>430</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ICT_Testing</sender>
+   <sender>ICT_EVENT_AVAILABLE</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
@@ -1591,34 +2138,18 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>jiebotai1_GetItemFinish</sender>
+   <sender>OKshouban_EVENT_DEVICE_WARNING_1</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>502</x>
-     <y>275</y>
+     <x>938</x>
+     <y>369</y>
     </hint>
     <hint type="destinationlabel">
-     <x>485</x>
-     <y>279</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>all_ShakeHands</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>send_msg_to_server()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>154</x>
-     <y>522</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>205</x>
-     <y>534</y>
+     <x>917</x>
+     <y>337</y>
     </hint>
    </hints>
   </connection>
