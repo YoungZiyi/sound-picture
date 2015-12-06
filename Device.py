@@ -4,28 +4,28 @@ import time
 from Message import *
 
 #最低8bit标识设备的状态
-S_IDLE			=	0x00	# 空闲
-S_MOVING		=	0x01	# 移栽机在移动中
-S_RECVING		=	0x02 	# 送板中
-S_WITH_ITEM		=	0x03	# 设备上有板子
-S_TESTING		=	0x04	# 测试中
-S_WAITING		=	0x05	# 测试/接板 完成，等待下一个设备空闲以便送版
-S_SENDING		=	0x06	# 送板中
-S_BROKEN		=	0x08	# 故障状态
-S_RESETTING		=	0x09	# 重启中
-S_MASK			=	0x0F	# Mask
-#第九位bit标识设备是否超时
-S_NOT_TIMEOUT	=	0x00	# 未超时状态
-S_TIMEOUT		=	0x10	# 超时状态
-#第10位bit标识所携带的Item的测试结果是否NG
-S_ITEM_NG		=	0x20	# 所携带的Item的测试结果是NG的
-S_ITEM_OK		=	0x00	# 所携带的Item的测试结果是OK的
+S_IDLE			=	0x0000	# 空闲
+S_MOVING		=	0x0001	# 移栽机在移动中
+S_RECVING		=	0x0002 	# 接板中
+S_WITH_ITEM		=	0x0003	# 设备上有板子
+S_TESTING		=	0x0004	# 测试中
+S_WAITING		=	0x0005	# 测试/接板 完成，等待下一个设备空闲以便送版
+S_SENDING		=	0x0006	# 送板中
+S_BROKEN		=	0x0007	# 故障状态
+S_RESETTING		=	0x0008	# 重启中
+S_MASK			=	0x000F	# Mask
 #最后一个标识代码逻辑有问题
-S_UNKNOWN		=	0xFF	# 未知状态
+S_UNKNOWN		=	0xFFFF	# 未知状态
+
+#所携带的板子的状态
+ITEM_STATUS_OKAY		=	0
+ITEM_STATUS_NG			=	1
+ITEM_STATUS_UNKNOWN		=	2
+#ITEM_STATUS_NO_ITEM		=	3
 
 def matchStatus(statusA, statusB):
-	if(statusB <= 0xFF):
-		return (statusA & 0xFF) == statusB
+	if(statusB <= S_MASK):
+		return (statusA & S_MASK) == statusB
 	return (statusA & statusB) != 0
 
 JBT0_IP = "10.0.0.100"
@@ -44,16 +44,22 @@ class Device:
 		self.sock = None
 		self.status = S_AVAILABLE
 		self.status_start_time = time.time()
-		self.item_status = ITEM_STATUS_NOT_KNOWN
+		self.item_status = ITEM_STATUS_UNKNOWN
 
-	def ChangStatusTo(status):
-		self.status =status
+	def ChangeStatusTo(self, status):
+		self.status = status
 		self.status_start_time = time.time()
-		
-	def SendInstruction(instruction):
+
+	# ng is a bool value
+	def ChangeItemStatusTo(self, status):
+		self.item_status = status
+
+	def SendInstruction(self, instruction):
 		if(not self.sock):
 			raise ExceptionCommunication(self.name+" No sock")
 		self.sock.send(instruction)
+		if(instruction == INSTRUCTION_DEVICE_SENDITEM):
+			self.status = S_SENDING
 	
 #这里开始我们定义所有机器, 并放到IP_Device_Map中
 device_jbt0 = Device("Jiebotai0", JBT0_IP)
