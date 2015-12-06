@@ -3,6 +3,31 @@
 import time
 from Message import *
 
+#最低8bit标识设备的状态
+S_IDLE			=	0x00	# 空闲
+S_MOVING		=	0x01	# 移栽机在移动中
+S_RECVING		=	0x02 	# 送板中
+S_WITH_ITEM		=	0x03	# 设备上有板子
+S_TESTING		=	0x04	# 测试中
+S_WAITING		=	0x05	# 测试/接板 完成，等待下一个设备空闲以便送版
+S_SENDING		=	0x06	# 送板中
+S_BROKEN		=	0x08	# 故障状态
+S_RESETTING		=	0x09	# 重启中
+S_MASK			=	0x0F	# Mask
+#第九位bit标识设备是否超时
+S_NOT_TIMEOUT	=	0x00	# 未超时状态
+S_TIMEOUT		=	0x10	# 超时状态
+#第10位bit标识所携带的Item的测试结果是否NG
+S_ITEM_NG		=	0x20	# 所携带的Item的测试结果是NG的
+S_ITEM_OK		=	0x00	# 所携带的Item的测试结果是OK的
+#最后一个标识代码逻辑有问题
+S_UNKNOWN		=	0xFF	# 未知状态
+
+def matchStatus(statusA, statusB):
+	if(statusB <= 0xFF):
+		return (statusA & 0xFF) == statusB
+	return (statusA & statusB) != 0
+
 JBT0_IP = "10.0.0.100"
 ICT_IP = "10.0.0.101"
 HCJ_IP = "10.0.0.102"
