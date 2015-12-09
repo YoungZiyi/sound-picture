@@ -86,7 +86,37 @@ def handle_msg(current_device, event):
 			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
 	elif (current_device == device_hcj):
 		#TODO  缓存机的流程还没写
-		pass
+		if (event == EVENT_AVAILABLE):
+			# 空闲
+			current_device.ChangeStatusTo(S_IDLE)
+		elif (event == EVENT_READYFOR_GETITEM_OK):
+			# 准备好接OK板
+			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
+			current_device.item_status == ITEM_STATUS_OK
+			previous_device.SendInstructionSendItem()
+			current_device.ChangeStatusTo(S_RECVING)
+		elif (event == EVENT_READYFOR_GETITEM_NG):
+			# 准备好接NG板
+			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
+			current_device.item_status == ITEM_STATUS_NG
+			previous_device.SendInstructionSendItem()
+			current_device.ChangeStatusTo(S_RECVING)
+		elif (event == EVENT_HUANCUNJI_GETITEM_FINISHED):
+			# 接板完成
+			current_device.ChangeStatusTo(S_WITH_ITEM)
+			if (current_device.item_status == ITEM_STATUS_OK):
+				# 如果是OK板
+				current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+				if (next_device.status in [S_IDLE, S_READY_TO_RECV_ITEM]):
+					# 如果下一个设备初处于空闲或准备收板
+					current_device.SendInstructionSendItem()
+					current_device.ChangeStatusTo(S_SENDING)
+			elif (current_device.item_status == ITEM_STATUS_NG):
+				# 如果是NG板
+				current_device.ChangeStatusTo(S_IDLE)
+		elif (event == EVENT_SENDITEM_FINISHED):
+			# 送板完成
+			current_device.ChangeStatusTo(S_IDLE)
 	elif (current_device == device_yz):
 		#移栽机的流程
 		if(event in [EVENT_AVAILABLE, RES_STATUS_AVAILABLE]):
