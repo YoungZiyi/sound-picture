@@ -15,6 +15,9 @@ logging.error("error")
 logging.critical("critical")
 '''
 
+def writeDebug(msg):
+	logging.debug(msg)
+
 def writeInfo(msg):
 	logging.info(msg)
 

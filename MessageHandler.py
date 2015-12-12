@@ -6,6 +6,7 @@ import pdb
 from Message import *
 from Device import *
 from BxtException import *
+from BxtLogger import *
 
 def handle_msg(current_device, event):
 	#TODO
@@ -24,17 +25,28 @@ def handle_msg(current_device, event):
 	if (current_device == device_jbt0):
 		# Handle message sent from Jiebotai0
 		if (event == EVENT_AVAILABLE):
+			writeInfo("[%s]EVENT->EVENT_AVAILABLE"%current_device.name)
 			current_device.ChangeStatusTo(S_IDLE)
+			writeInfo("[%s]STATUS->S_IDLE"%current_device.name)
 		elif (event == EVENT_GETITEM_FINISHED):
+			writeInfo("[%s]EVENT->EVENT_GETITEM_FINISHED"%current_device.name)
 			current_device.ChangeStatusTo(S_WITH_ITEM)
+			writeInfo("[%s]STATUS->S_WITH_ITEM"%current_device.name)
 		elif (event == EVENT_READYFOR_SENDITEM):
+			writeInfo("[%s]EVENT->EVENT_READYFOR_SENDITEM"%current_device.name)
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			writeInfo("[%s]STATUS->S_READY_TO_SEND_ITEM"%current_device.name)
 			if (next_device.status == S_IDLE):
+				writeInfo("[%s]STATUS->S_IDLE"%next_device.name)
 				current_device.SendInstructionSendItem()
+				writeInfo("[%s]INSTRUCTION->SendInstructionSendItem"%current_device.name)
 		elif (event == EVENT_SENDITEM_FINISHED):
+			writeInfo("[%s]EVENT->EVENT_SENDITEM_FINISHED"%current_device.name)
 			current_device.ChangeStatusTo(S_IDLE)
+			writeInfo("[%s]STATUS->S_IDLE"%current_device.name)
 		else:
-			print "Event [%s] is not recognized for device [%s]" % [event, current_device.name]
+			#print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
+			writeInfo("Event [%s] is not recognized for device [%s]" % (event, current_device.name))
 	elif (current_device in [device_ict, device_ft]):
 		if (event == EVENT_ASK_FOR_ITEM):
 			#测试机自己有Cache, 可能在任何一个状态中, 主动问板子
