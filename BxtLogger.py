@@ -1,9 +1,9 @@
 import logging
 import time
 
-Format = "%(asctime)s: %(message)s"
-DateFmt = "%Y_%m_%d %H:%I:%S"
-FileName = "Log/%s.txt" % time.strftime("%Y_%m_%d", time.gmtime())
+Format = "%(asctime)s|%(levelname)s: %(message)s"
+DateFmt = "%Y-%m-%d %H:%I:%S"
+FileName = "Log/%s.txt" % time.strftime("%Y-%m-%d", time.gmtime())
 FileMode = "a"
 
 logging.basicConfig(format = Format, datefmt = DateFmt, filename = FileName, filemode = FileMode, level = logging.DEBUG)
