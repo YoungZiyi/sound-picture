@@ -1030,7 +1030,7 @@ p, li { white-space: pre-wrap; }
      <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai0_STATUS_AVAILABLE">
+   <widget class="QPushButton" name="jiebotai0_RES_STATUS_AVAILABLE">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -1043,7 +1043,7 @@ p, li { white-space: pre-wrap; }
      <string>空闲/准备好接板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai0_STATUS_GETITEM_FINISHED">
+   <widget class="QPushButton" name="jiebotai0_RES_STATUS_GETITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -1056,7 +1056,7 @@ p, li { white-space: pre-wrap; }
      <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai0_STATUS_TESTING">
+   <widget class="QPushButton" name="jiebotai0_RES_STATUS_TESTING">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -1069,7 +1069,7 @@ p, li { white-space: pre-wrap; }
      <string>测试中</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai0_STATUS_BROKEN">
+   <widget class="QPushButton" name="jiebotai0_RES_STATUS_BROKEN">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -1082,7 +1082,7 @@ p, li { white-space: pre-wrap; }
      <string>故障报警</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai0_STATUS_READYFOR_SENDITEM">
+   <widget class="QPushButton" name="jiebotai0_RES_STATUS_READYFOR_SENDITEM">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -1095,7 +1095,7 @@ p, li { white-space: pre-wrap; }
      <string>准备好了送板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai0_STATUS_SENDITEM_FINISHED">
+   <widget class="QPushButton" name="jiebotai0_RES_STATUS_SENDITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -1108,7 +1108,7 @@ p, li { white-space: pre-wrap; }
      <string>送板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai0_STATUS_BUSY">
+   <widget class="QPushButton" name="jiebotai0_RES_STATUS_BUSY">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -1121,7 +1121,7 @@ p, li { white-space: pre-wrap; }
      <string>忙碌</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ICT_STATUS_BUSY">
+   <widget class="QPushButton" name="ICT_RES_STATUS_BUSY">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -1134,7 +1134,7 @@ p, li { white-space: pre-wrap; }
      <string>忙碌</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ICT_STATUS_TESTING">
+   <widget class="QPushButton" name="ICT_RES_STATUS_TESTING">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -1147,7 +1147,7 @@ p, li { white-space: pre-wrap; }
      <string>测试中</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ICT_STATUS_SENDITEM_FINISHED">
+   <widget class="QPushButton" name="ICT_RES_STATUS_SENDITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>190</x>
@@ -1160,7 +1160,7 @@ p, li { white-space: pre-wrap; }
      <string>送板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ICT_STATUS_BROKEN">
+   <widget class="QPushButton" name="ICT_RES_STATUS_BROKEN">
     <property name="geometry">
      <rect>
       <x>190</x>
@@ -1173,7 +1173,7 @@ p, li { white-space: pre-wrap; }
      <string>故障报警</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ICT_STATUS_AVAILABLE">
+   <widget class="QPushButton" name="ICT_RES_STATUS_AVAILABLE">
     <property name="geometry">
      <rect>
       <x>220</x>
@@ -1186,7 +1186,7 @@ p, li { white-space: pre-wrap; }
      <string>空闲/准备好接板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ICT_STATUS_READYFOR_SENDITEM">
+   <widget class="QPushButton" name="ICT_RES_STATUS_READYFOR_SENDITEM">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -1199,7 +1199,7 @@ p, li { white-space: pre-wrap; }
      <string>准备好了送板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ICT_STATUS_GETITEM_FINISHED">
+   <widget class="QPushButton" name="ICT_RES_STATUS_GETITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>190</x>
@@ -1212,7 +1212,7 @@ p, li { white-space: pre-wrap; }
      <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="huancunji_STATUS_BUSY">
+   <widget class="QPushButton" name="huancunji_RES_STATUS_BUSY">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -1225,7 +1225,7 @@ p, li { white-space: pre-wrap; }
      <string>忙碌</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="huancunji_STATUS_TESTING">
+   <widget class="QPushButton" name="huancunji_RES_STATUS_TESTING">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -1238,7 +1238,7 @@ p, li { white-space: pre-wrap; }
      <string>测试中</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="huancunji_STATUS_SENDITEM_FINISHED">
+   <widget class="QPushButton" name="huancunji_RES_STATUS_SENDITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -1251,7 +1251,7 @@ p, li { white-space: pre-wrap; }
      <string>送板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="huancunji_STATUS_BROKEN">
+   <widget class="QPushButton" name="huancunji_RES_STATUS_BROKEN">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -1264,7 +1264,7 @@ p, li { white-space: pre-wrap; }
      <string>故障报警</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="huancunji_STATUS_AVAILABLE">
+   <widget class="QPushButton" name="huancunji_RES_STATUS_AVAILABLE">
     <property name="geometry">
      <rect>
       <x>410</x>
@@ -1277,7 +1277,7 @@ p, li { white-space: pre-wrap; }
      <string>空闲/准备好接板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="huancunji_STATUS_READYFOR_SENDITEM">
+   <widget class="QPushButton" name="huancunji_RES_STATUS_READYFOR_SENDITEM">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -1290,7 +1290,7 @@ p, li { white-space: pre-wrap; }
      <string>准备好了送板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="huancunji_STATUS_GETITEM_FINISHED">
+   <widget class="QPushButton" name="huancunji_RES_STATUS_GETITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -1303,7 +1303,7 @@ p, li { white-space: pre-wrap; }
      <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai1_STATUS_BROKEN">
+   <widget class="QPushButton" name="jiebotai1_RES_STATUS_BROKEN">
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -1316,7 +1316,7 @@ p, li { white-space: pre-wrap; }
      <string>故障报警</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai1_STATUS_READYFOR_SENDITEM">
+   <widget class="QPushButton" name="jiebotai1_RES_STATUS_READYFOR_SENDITEM">
     <property name="geometry">
      <rect>
       <x>650</x>
@@ -1329,7 +1329,7 @@ p, li { white-space: pre-wrap; }
      <string>准备好了送板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai1_STATUS_AVAILABLE">
+   <widget class="QPushButton" name="jiebotai1_RES_STATUS_AVAILABLE">
     <property name="geometry">
      <rect>
       <x>600</x>
@@ -1342,7 +1342,7 @@ p, li { white-space: pre-wrap; }
      <string>空闲/准备好接板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai1_STATUS_SENDITEM_FINISHED">
+   <widget class="QPushButton" name="jiebotai1_RES_STATUS_SENDITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -1355,7 +1355,7 @@ p, li { white-space: pre-wrap; }
      <string>送板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai1_STATUS_BUSY">
+   <widget class="QPushButton" name="jiebotai1_RES_STATUS_BUSY">
     <property name="geometry">
      <rect>
       <x>650</x>
@@ -1368,7 +1368,7 @@ p, li { white-space: pre-wrap; }
      <string>忙碌</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai1_STATUS_TESTING">
+   <widget class="QPushButton" name="jiebotai1_RES_STATUS_TESTING">
     <property name="geometry">
      <rect>
       <x>650</x>
@@ -1381,7 +1381,7 @@ p, li { white-space: pre-wrap; }
      <string>测试中</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="jiebotai1_STATUS_GETITEM_FINISHED">
+   <widget class="QPushButton" name="jiebotai1_RES_STATUS_GETITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -1394,7 +1394,7 @@ p, li { white-space: pre-wrap; }
      <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT_STATUS_BROKEN">
+   <widget class="QPushButton" name="FT_RES_STATUS_BROKEN">
     <property name="geometry">
      <rect>
       <x>760</x>
@@ -1407,7 +1407,7 @@ p, li { white-space: pre-wrap; }
      <string>故障报警</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT_STATUS_READYFOR_SENDITEM">
+   <widget class="QPushButton" name="FT_RES_STATUS_READYFOR_SENDITEM">
     <property name="geometry">
      <rect>
       <x>840</x>
@@ -1420,7 +1420,7 @@ p, li { white-space: pre-wrap; }
      <string>准备好了送板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT_STATUS_AVAILABLE">
+   <widget class="QPushButton" name="FT_RES_STATUS_AVAILABLE">
     <property name="geometry">
      <rect>
       <x>790</x>
@@ -1433,7 +1433,7 @@ p, li { white-space: pre-wrap; }
      <string>空闲/准备好接板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT_STATUS_SENDITEM_FINISHED">
+   <widget class="QPushButton" name="FT_RES_STATUS_SENDITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>760</x>
@@ -1446,7 +1446,7 @@ p, li { white-space: pre-wrap; }
      <string>送板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT_STATUS_BUSY">
+   <widget class="QPushButton" name="FT_RES_STATUS_BUSY">
     <property name="geometry">
      <rect>
       <x>840</x>
@@ -1459,7 +1459,7 @@ p, li { white-space: pre-wrap; }
      <string>忙碌</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT_STATUS_TESTING">
+   <widget class="QPushButton" name="FT_RES_STATUS_TESTING">
     <property name="geometry">
      <rect>
       <x>840</x>
@@ -1472,7 +1472,7 @@ p, li { white-space: pre-wrap; }
      <string>测试中</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FT_STATUS_GETITEM_FINISHED">
+   <widget class="QPushButton" name="FT_RES_STATUS_GETITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>760</x>
@@ -1485,7 +1485,7 @@ p, li { white-space: pre-wrap; }
      <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="YIZAI_STATUS_BROKEN">
+   <widget class="QPushButton" name="YIZAI_RES_STATUS_BROKEN">
     <property name="geometry">
      <rect>
       <x>940</x>
@@ -1498,7 +1498,7 @@ p, li { white-space: pre-wrap; }
      <string>故障报警</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="YIZAI_STATUS_READYFOR_SENDITEM">
+   <widget class="QPushButton" name="YIZAI_RES_STATUS_READYFOR_SENDITEM">
     <property name="geometry">
      <rect>
       <x>1020</x>
@@ -1511,7 +1511,7 @@ p, li { white-space: pre-wrap; }
      <string>准备好了送板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="YIZAI_STATUS_AVAILABLE">
+   <widget class="QPushButton" name="YIZAI_RES_STATUS_AVAILABLE">
     <property name="geometry">
      <rect>
       <x>970</x>
@@ -1524,7 +1524,7 @@ p, li { white-space: pre-wrap; }
      <string>空闲/准备好接板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="YIZAI_STATUS_SENDITEM_FINISHED">
+   <widget class="QPushButton" name="YIZAI_RES_STATUS_SENDITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>940</x>
@@ -1537,7 +1537,7 @@ p, li { white-space: pre-wrap; }
      <string>送板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="YIZAI_STATUS_BUSY">
+   <widget class="QPushButton" name="YIZAI_RES_STATUS_BUSY">
     <property name="geometry">
      <rect>
       <x>1020</x>
@@ -1550,7 +1550,7 @@ p, li { white-space: pre-wrap; }
      <string>忙碌</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="YIZAI_STATUS_TESTING">
+   <widget class="QPushButton" name="YIZAI_RES_STATUS_TESTING">
     <property name="geometry">
      <rect>
       <x>1020</x>
@@ -1563,7 +1563,7 @@ p, li { white-space: pre-wrap; }
      <string>测试中</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="YIZAI_STATUS_GETITEM_FINISHED">
+   <widget class="QPushButton" name="YIZAI_RES_STATUS_GETITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>940</x>
@@ -1576,7 +1576,7 @@ p, li { white-space: pre-wrap; }
      <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="OKshouban_STATUS_BROKEN">
+   <widget class="QPushButton" name="OKshouban_RES_STATUS_BROKEN">
     <property name="geometry">
      <rect>
       <x>1130</x>
@@ -1589,7 +1589,7 @@ p, li { white-space: pre-wrap; }
      <string>故障报警</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="OKshouban_STATUS_READYFOR_SENDITEM">
+   <widget class="QPushButton" name="OKshouban_RES_STATUS_READYFOR_SENDITEM">
     <property name="geometry">
      <rect>
       <x>1210</x>
@@ -1602,7 +1602,7 @@ p, li { white-space: pre-wrap; }
      <string>准备好了送板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="OKshouban_STATUS_AVAILABLE">
+   <widget class="QPushButton" name="OKshouban_RES_STATUS_AVAILABLE">
     <property name="geometry">
      <rect>
       <x>1160</x>
@@ -1615,7 +1615,7 @@ p, li { white-space: pre-wrap; }
      <string>空闲/准备好接板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="OKshouban_STATUS_SENDITEM_FINISHED">
+   <widget class="QPushButton" name="OKshouban_RES_STATUS_SENDITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>1130</x>
@@ -1628,7 +1628,7 @@ p, li { white-space: pre-wrap; }
      <string>送板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="OKshouban_STATUS_BUSY">
+   <widget class="QPushButton" name="OKshouban_RES_STATUS_BUSY">
     <property name="geometry">
      <rect>
       <x>1210</x>
@@ -1641,7 +1641,7 @@ p, li { white-space: pre-wrap; }
      <string>忙碌</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="OKshouban_STATUS_TESTING">
+   <widget class="QPushButton" name="OKshouban_RES_STATUS_TESTING">
     <property name="geometry">
      <rect>
       <x>1210</x>
@@ -1654,7 +1654,7 @@ p, li { white-space: pre-wrap; }
      <string>测试中</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="OKshouban_STATUS_GETITEM_FINISHED">
+   <widget class="QPushButton" name="OKshouban_RES_STATUS_GETITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>1130</x>
@@ -1667,7 +1667,7 @@ p, li { white-space: pre-wrap; }
      <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="NGshouban_STATUS_BROKEN">
+   <widget class="QPushButton" name="NGshouban_RES_STATUS_BROKEN">
     <property name="geometry">
      <rect>
       <x>1120</x>
@@ -1680,7 +1680,7 @@ p, li { white-space: pre-wrap; }
      <string>故障报警</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="NGshouban_STATUS_GETITEM_FINISHED">
+   <widget class="QPushButton" name="NGshouban_RES_STATUS_GETITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>1120</x>
@@ -1693,7 +1693,7 @@ p, li { white-space: pre-wrap; }
      <string>接板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="NGshouban_STATUS_SENDITEM_FINISHED">
+   <widget class="QPushButton" name="NGshouban_RES_STATUS_SENDITEM_FINISHED">
     <property name="geometry">
      <rect>
       <x>1120</x>
@@ -1706,7 +1706,7 @@ p, li { white-space: pre-wrap; }
      <string>送板完成</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="NGshouban_STATUS_TESTING">
+   <widget class="QPushButton" name="NGshouban_RES_STATUS_TESTING">
     <property name="geometry">
      <rect>
       <x>1200</x>
@@ -1719,7 +1719,7 @@ p, li { white-space: pre-wrap; }
      <string>测试中</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="NGshouban_STATUS_READYFOR_SENDITEM">
+   <widget class="QPushButton" name="NGshouban_RES_STATUS_READYFOR_SENDITEM">
     <property name="geometry">
      <rect>
       <x>1200</x>
@@ -1732,7 +1732,7 @@ p, li { white-space: pre-wrap; }
      <string>准备好了送板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="NGshouban_STATUS_AVAILABLE">
+   <widget class="QPushButton" name="NGshouban_RES_STATUS_AVAILABLE">
     <property name="geometry">
      <rect>
       <x>1150</x>
@@ -1745,7 +1745,7 @@ p, li { white-space: pre-wrap; }
      <string>空闲/准备好接板</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="NGshouban_STATUS_BUSY">
+   <widget class="QPushButton" name="NGshouban_RES_STATUS_BUSY">
     <property name="geometry">
      <rect>
       <x>1200</x>
@@ -1792,7 +1792,7 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>657</x>
+     <x>800</x>
      <y>265</y>
     </hint>
     <hint type="destinationlabel">
@@ -1808,7 +1808,7 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>662</x>
+     <x>800</x>
      <y>295</y>
     </hint>
     <hint type="destinationlabel">
@@ -1824,7 +1824,7 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>660</x>
+     <x>800</x>
      <y>325</y>
     </hint>
     <hint type="destinationlabel">
@@ -1840,7 +1840,7 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>661</x>
+     <x>800</x>
      <y>355</y>
     </hint>
     <hint type="destinationlabel">
@@ -1856,7 +1856,7 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>791</x>
+     <x>980</x>
      <y>265</y>
     </hint>
     <hint type="destinationlabel">
@@ -1872,7 +1872,7 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>781</x>
+     <x>980</x>
      <y>295</y>
     </hint>
     <hint type="destinationlabel">
@@ -1888,8 +1888,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>788</x>
-     <y>323</y>
+     <x>191</x>
+     <y>593</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -1952,8 +1952,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>12</x>
-     <y>535</y>
+     <x>20</x>
+     <y>593</y>
     </hint>
     <hint type="destinationlabel">
      <x>105</x>
@@ -1968,8 +1968,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>204</x>
-     <y>248</y>
+     <x>230</x>
+     <y>265</y>
     </hint>
     <hint type="destinationlabel">
      <x>189</x>
@@ -1984,8 +1984,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>207</x>
-     <y>276</y>
+     <x>230</x>
+     <y>303</y>
     </hint>
     <hint type="destinationlabel">
      <x>190</x>
@@ -2000,8 +2000,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>164</x>
-     <y>337</y>
+     <x>190</x>
+     <y>363</y>
     </hint>
     <hint type="destinationlabel">
      <x>148</x>
@@ -2017,7 +2017,7 @@ p, li { white-space: pre-wrap; }
    <hints>
     <hint type="sourcelabel">
      <x>307</x>
-     <y>336</y>
+     <y>363</y>
     </hint>
     <hint type="destinationlabel">
      <x>326</x>
@@ -2032,8 +2032,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>355</x>
-     <y>249</y>
+     <x>420</x>
+     <y>265</y>
     </hint>
     <hint type="destinationlabel">
      <x>338</x>
@@ -2048,8 +2048,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>355</x>
-     <y>277</y>
+     <x>420</x>
+     <y>295</y>
     </hint>
     <hint type="destinationlabel">
      <x>338</x>
@@ -2064,8 +2064,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>355</x>
-     <y>369</y>
+     <x>420</x>
+     <y>453</y>
     </hint>
     <hint type="destinationlabel">
      <x>336</x>
@@ -2080,8 +2080,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>897</x>
-     <y>119</y>
+     <x>1160</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
      <x>877</x>
@@ -2096,8 +2096,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>898</x>
-     <y>147</y>
+     <x>1200</x>
+     <y>165</y>
     </hint>
     <hint type="destinationlabel">
      <x>879</x>
@@ -2112,8 +2112,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>934</x>
-     <y>248</y>
+     <x>1160</x>
+     <y>265</y>
     </hint>
     <hint type="destinationlabel">
      <x>917</x>
@@ -2128,8 +2128,8 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>203</x>
-     <y>307</y>
+     <x>230</x>
+     <y>295</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -2144,12 +2144,1372 @@ p, li { white-space: pre-wrap; }
    <slot>send_msg_to_server()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>938</x>
-     <y>369</y>
+     <x>1160</x>
+     <y>325</y>
     </hint>
     <hint type="destinationlabel">
      <x>917</x>
      <y>337</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai0_EVENT_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>314</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>14</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai0_EVENT_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>342</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>18</x>
+     <y>341</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai0_EVENT_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>69</x>
+     <y>375</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>10</x>
+     <y>389</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ICT_EVENT_READYFOR_SENDITEM</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>224</x>
+     <y>401</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>399</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ICT_EVENT_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>244</x>
+     <y>432</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>220</x>
+     <y>433</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ICT_EVENT_DEVICE_WARNING_1</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>459</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>459</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_EVENT_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>431</x>
+     <y>315</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>401</x>
+     <y>317</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_EVENT_READYFOR_GETITEM_OK</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>382</x>
+     <y>350</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>360</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_EVENT_READYFOR_GETITEM_NG</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>525</x>
+     <y>341</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>551</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_EVENT_HUANCUNJI_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>372</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>377</x>
+     <y>371</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_EVENT_HUANCUNJI_NOTREADY</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>401</x>
+     <y>403</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>374</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_EVENT_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>430</x>
+     <y>433</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>397</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_EVENT_SHAKEHANDS_RES</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>628</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>584</x>
+     <y>251</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_EVENT_SETWIDTH_RES</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>649</x>
+     <y>283</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>592</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_EVENT_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>619</x>
+     <y>311</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>592</x>
+     <y>312</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_EVENT_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>624</x>
+     <y>353</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_EVENT_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>626</x>
+     <y>376</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>596</x>
+     <y>374</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_EVENT_DEVICE_WARNING_1</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>629</x>
+     <y>405</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>574</x>
+     <y>402</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_EVENT_READYFOR_SENDITEM_OK</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>826</x>
+     <y>380</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>733</x>
+     <y>373</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_EVENT_READYFOR_SENDITEM_NG</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>874</x>
+     <y>378</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>927</x>
+     <y>372</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_EVENT_READYFOR_SENDITEM</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>823</x>
+     <y>403</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>769</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_EVENT_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>823</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>787</x>
+     <y>432</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_EVENT_DEVICE_WARNING_1</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>824</x>
+     <y>467</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>460</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_EVENT_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1013</x>
+     <y>316</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>960</x>
+     <y>315</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_EVENT_READYFOR_GETITEM_RIGHT</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1007</x>
+     <y>344</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>940</x>
+     <y>346</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_EVENT_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1057</x>
+     <y>381</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1077</x>
+     <y>370</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_EVENT_DEVICE_WARNING_1</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1019</x>
+     <y>401</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>969</x>
+     <y>395</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OKshouban_EVENT_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1214</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1134</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NGshouban_EVENT_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1142</x>
+     <y>162</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1107</x>
+     <y>158</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai0_RES_STATUS_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>21</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai0_RES_STATUS_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>7</x>
+     <y>88</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai0_RES_STATUS_TESTING</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>173</x>
+     <y>86</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai0_RES_STATUS_BROKEN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai0_RES_STATUS_READYFOR_SENDITEM</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>159</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>176</x>
+     <y>117</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai0_RES_STATUS_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>22</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai0_RES_STATUS_BUSY</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>175</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ICT_RES_STATUS_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>202</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>185</x>
+     <y>94</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ICT_RES_STATUS_BROKEN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>201</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>188</x>
+     <y>137</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ICT_RES_STATUS_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>218</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>193</x>
+     <y>173</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ICT_RES_STATUS_BUSY</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>334</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>335</x>
+     <y>170</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ICT_RES_STATUS_READYFOR_SENDITEM</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>348</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ICT_RES_STATUS_TESTING</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ICT_RES_STATUS_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>307</x>
+     <y>58</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>205</x>
+     <y>58</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_RES_STATUS_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>430</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>445</x>
+     <y>41</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_RES_STATUS_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>391</x>
+     <y>101</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>385</x>
+     <y>67</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_RES_STATUS_TESTING</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>522</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>540</x>
+     <y>81</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_RES_STATUS_BROKEN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>410</x>
+     <y>130</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>370</x>
+     <y>109</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_RES_STATUS_READYFOR_SENDITEM</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>537</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>551</x>
+     <y>115</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_RES_STATUS_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>384</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>359</x>
+     <y>148</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>huancunji_RES_STATUS_BUSY</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>519</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>542</x>
+     <y>147</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_RES_STATUS_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>634</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>634</x>
+     <y>35</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_RES_STATUS_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>584</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>564</x>
+     <y>91</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_RES_STATUS_BROKEN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>584</x>
+     <y>126</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>567</x>
+     <y>60</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_RES_STATUS_TESTING</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>709</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>728</x>
+     <y>41</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_RES_STATUS_READYFOR_SENDITEM</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>729</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>740</x>
+     <y>74</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_RES_STATUS_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>601</x>
+     <y>161</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>559</x>
+     <y>162</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jiebotai1_RES_STATUS_BUSY</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>711</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>748</x>
+     <y>129</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_RES_STATUS_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>806</x>
+     <y>57</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>767</x>
+     <y>51</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_RES_STATUS_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>781</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>752</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_RES_STATUS_BROKEN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>813</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>743</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_RES_STATUS_TESTING</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>903</x>
+     <y>96</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>905</x>
+     <y>48</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_RES_STATUS_READYFOR_SENDITEM</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>917</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>927</x>
+     <y>72</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_RES_STATUS_BUSY</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>893</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>929</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FT_RES_STATUS_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>783</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>745</x>
+     <y>161</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_RES_STATUS_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>991</x>
+     <y>462</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>931</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_RES_STATUS_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>947</x>
+     <y>491</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>895</x>
+     <y>444</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_RES_STATUS_BROKEN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>965</x>
+     <y>526</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>911</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_RES_STATUS_TESTING</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1061</x>
+     <y>490</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>954</x>
+     <y>436</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_RES_STATUS_READYFOR_SENDITEM</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1079</x>
+     <y>520</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>932</x>
+     <y>461</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_RES_STATUS_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>987</x>
+     <y>554</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>892</x>
+     <y>477</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YIZAI_RES_STATUS_BUSY</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1043</x>
+     <y>555</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>915</x>
+     <y>492</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NGshouban_RES_STATUS_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1159</x>
+     <y>377</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1078</x>
+     <y>302</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NGshouban_RES_STATUS_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1222</x>
+     <y>346</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1107</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NGshouban_RES_STATUS_TESTING</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1261</x>
+     <y>371</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1106</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NGshouban_RES_STATUS_BROKEN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1128</x>
+     <y>398</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1098</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NGshouban_RES_STATUS_READYFOR_SENDITEM</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1239</x>
+     <y>402</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1132</x>
+     <y>327</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NGshouban_RES_STATUS_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1172</x>
+     <y>435</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1073</x>
+     <y>409</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NGshouban_RES_STATUS_BUSY</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1209</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1100</x>
+     <y>424</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OKshouban_RES_STATUS_AVAILABLE</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1208</x>
+     <y>467</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1079</x>
+     <y>445</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OKshouban_RES_STATUS_GETITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1143</x>
+     <y>489</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1094</x>
+     <y>458</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OKshouban_RES_STATUS_TESTING</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1255</x>
+     <y>499</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1114</x>
+     <y>468</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OKshouban_RES_STATUS_BROKEN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1168</x>
+     <y>520</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1113</x>
+     <y>509</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OKshouban_RES_STATUS_READYFOR_SENDITEM</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1231</x>
+     <y>521</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1130</x>
+     <y>475</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OKshouban_RES_STATUS_SENDITEM_FINISHED</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1175</x>
+     <y>552</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1104</x>
+     <y>544</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OKshouban_RES_STATUS_BUSY</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send_msg_to_server()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1272</x>
+     <y>554</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1122</x>
+     <y>553</y>
     </hint>
    </hints>
   </connection>

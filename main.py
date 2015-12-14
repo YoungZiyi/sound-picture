@@ -15,13 +15,17 @@ import socket
 import time
 from bxtcommon import *
 
+from Message import *
+from Device import *
+
 class ExampleApp(QtGui.QMainWindow, Ui_MainWindow):
 	def __init__(self, parent=None):
 		super(ExampleApp, self).__init__(parent)
 		self.setupUi(self)
 
 	def send_msg_to_server(self):
-		objectName = self.sender().objectName()
+		objectName = str(self.sender().objectName())
+		'''
 		if objectName in ['jiebotai0_Ready', 'ICT_Ready', 'huancunji_Ready', 'jiebotai1_Ready', 'NGshouban_Ready', 'OKshouban_Ready']:
 			# 空闲（准备好接板）
 			order = '52c40117'
@@ -53,6 +57,10 @@ class ExampleApp(QtGui.QMainWindow, Ui_MainWindow):
 		else:
 			order = str(objectName)
 		sendToPeer(SERVER_HOST, SERVER_PORT, order)
+		'''
+		device = objectName.split('_', 1)[0]
+		msg = objectName.split('_', 1)[1]
+		print objectName
 
 def thread_recv_msg_from_server(qlabel):
 	print "communication thread is up"
