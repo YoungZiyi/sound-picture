@@ -78,10 +78,15 @@ def main():
 						exceptionlist.append(newsock)
 						print "Accept socket for device ", current_device.name
 				else:
+					print "msg from client"
 					#业务socket发送的消息
 					current_device = getDeviceBySocket(sock)
 					if(not current_device):
-						raise ExceptionMessageFromUnknonwSource(sock.getpeername())
+						print "unknown msg from unknown source"
+						readlist.remove(sock)
+						exceptionlist.remove(sock)
+						sock.close()
+						continue
 					recv_buff = sock.recv(8)
 					if recv_buff == "":
 						print "Client %s closed the connection" % (current_device.name)
@@ -106,7 +111,8 @@ def main():
 					
 					#真正的业务处理在这里
 					handle_msg(current_device, hex_msg)
-			except BxtException:
+			except BxtException, e:
+				print e
 				continue
 
 		for sock in sexc:
