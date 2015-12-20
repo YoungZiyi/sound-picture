@@ -13,11 +13,75 @@ import sys
 from threading import *
 import socket
 import time
-from bxtcommon import *
+from struct import pack, unpack
+import signal
+import binascii
+import string
+import select
+
 
 from Message import *
 from Device import *
+from BxtLogger import *
+from BxtException import *
+from RunningMode import *
 
+
+
+device_socket_map = {}
+readlist = []
+exceptionlist = []
+	
+def getDeviceNameBySocket(sock):
+	for name in device_socket_map.keys():
+		if(device_socket_map[name]) == sock:
+			return name
+	return None
+	
+def getSocketByDeviceName(name):
+	if(name in device_socket_map):
+		return device_socket_map[name]
+	return None
+	
+
+def InitSockets():
+	ADDR = (SERVER_HOST, SERVER_PORT)
+	BUFSIZ = 16
+
+	for deviceName in ["JBT0","ICT", "HCJ", "FT", "YZ", "SBJOK", "SBJNG" ]:
+		print deviceName, " connecting..."
+		tcpCliSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		tcpCliSock.connect(ADDR)
+		print "Recving..."
+		recved = tcpCliSock.recv(BUFSIZ)
+		print "Recv ", recved.strip()
+		
+		data = getIPByDeviceName(deviceName)
+		ip_in_str = socket.inet_aton(data)
+		ip_in_int = unpack("!I", ip_in_str)[0];
+		ip_in_binary_str = pack("!i",ip_in_int)
+
+		msg = ip_in_binary_str + binascii.unhexlify(RemoveBlankInMiddle(EVENT_AVAILABLE))
+		print "Msg is ", binascii.hexlify(msg)
+		tcpCliSock.send(msg)
+		device_socket_map[deviceName] = tcpCliSock
+		#select监听这个socket
+		readlist.append(tcpCliSock)
+		exceptionlist.append(tcpCliSock)		
+		
+def ListenFromServer(x):
+	print x;
+	while 1:
+		(sread, swrite, sexc) =  select.select(readlist, [], exceptionlist, 1); 
+		for sock in sread:
+			recv_buff = sock.recv(4)
+			deviceName = getDeviceNameBySocket(sock)
+			if(not verifyPacket(recv_buff)):
+				print "WARN: Invalid Packet to [%s]" % (deviceName)
+				continue
+			hex_msg = ' '.join(x.encode('hex') for x in recv_buff)
+			print "[%s] sent to [%s] "% (hex_msg, deviceName)
+		
 class ExampleApp(QtGui.QMainWindow, Ui_MainWindow):
 	def __init__(self, parent=None):
 		super(ExampleApp, self).__init__(parent)
@@ -25,49 +89,25 @@ class ExampleApp(QtGui.QMainWindow, Ui_MainWindow):
 
 	def send_msg_to_server(self):
 		objectName = str(self.sender().objectName())
-		'''
-		if objectName in ['jiebotai0_Ready', 'ICT_Ready', 'huancunji_Ready', 'jiebotai1_Ready', 'NGshouban_Ready', 'OKshouban_Ready']:
-			# 空闲（准备好接板）
-			order = '52c40117'
-		elif objectName in ['jiebotai0_GetItemFinish', 'ICT_GetItemFinish', 'huancunji_GetItemFinish', 'jiebotai1_GetItemFinish']:
-			# 接板完成
-			order = '52c40218'
-		elif objectName in ['ICT_Testing']:
-			# 测试中
-			order = '52c40319'
-		elif objectName in ['ICT_Warning', 'huancunji_Warning', 'OKshouban_Warning', 'NGshouban_Warning']:
-			# 故障报警
-			order = '52c4041a'
-		elif objectName in ['jiebotai0_ReadyToSendItem', 'ICT_ReadyToSendItem', 'huancunji_ReadyToSendItem', 'jiebotai1_ReadyToSendItem']:
-			# （测试完成）准备好了送板
-			order = '52c4051b'
-		elif objectName in ['jiebotai0_SendItemFinish', 'ICT_SendItemFinish', 'huancunji_SendItemFinish', 'jiebotai1_SendItemFinish', 'OKshouban_SendItemFinish', 'NGshouban_SendItemFinish']:
-			# 接板完成
-			order = '52c4061c'
-		elif objectName in ['jiebotai0_Busy', 'ICT_Busy', 'huancunji_Busy', 'jiebotai1_Busy', 'OKshouban_Busy', 'NGshouban_Busy']:
-			# 忙碌
-			order = '52c4071d'
 
-		elif objectName == 'all_ShakeHands':
-			# 握手（反馈）
-			order = '52c00012'
-		elif objectName == 'SetWidthBack':
-			# 调宽反馈
-			order = '520xxxcrc'
-		else:
-			order = str(objectName)
-		sendToPeer(SERVER_HOST, SERVER_PORT, order)
-		'''
-		device = objectName.split('_', 1)[0]
-		msg = objectName.split('_', 1)[1]
-		print objectName
+		deviceNameInStr = objectName.split('_', 1)[0]
+		variableNameInStr = objectName.split('_', 1)[1]
+		
+		msg = globals()[variableNameInStr]
+		print deviceNameInStr, "#", msg
+		
+		ip = deviceName_IP_Map[deviceNameInStr]
+		ip2 = socket.inet_aton(ip)
+		ip_in_int = unpack("!I", ip2)[0];
+		ip_in_binary_str = pack("!i",ip_in_int)
+		
+		msg = ip_in_binary_str + binascii.unhexlify(RemoveBlankInMiddle(msg))
+		
+		sock = getSocketByDeviceName(deviceNameInStr)
+		sock.send(msg)
 
 def thread_recv_msg_from_server(qlabel):
 	print "communication thread is up"
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.bind((CLIENT_HOST, CLIENT_PORT))
-	s.listen(1)
-	print 'Waiting...'
 
 	while 1:
 		try:
@@ -82,12 +122,12 @@ def thread_recv_msg_from_server(qlabel):
 			print e
 
 if __name__ == "__main__":
-    app = QtGui.QApplication(sys.argv)
-    form = ExampleApp()
-    form.show()
+	app = QtGui.QApplication(sys.argv)
+	form = ExampleApp()
+	form.show()
+	InitSockets()
+	t = Thread(target=ListenFromServer, args = (form.log, ))
+	t.daemon = True
+	t.start()
 
-    t = Thread(target=thread_recv_msg_from_server, args = (form.instruction,))
-    t.daemon = True
-    t.start()
-
-    app.exec_()
+	app.exec_()

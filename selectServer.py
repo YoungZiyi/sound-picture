@@ -27,7 +27,7 @@ def main():
 	readlist = [listenSock]
 	exceptionlist = [listenSock]
 	while not RunningMode.flag_exit:
-		(sread, swrite, sexc) =  select.select(readlist, [], [], RunningMode.checkInterval); 
+		(sread, swrite, sexc) =  select.select(readlist, [], exceptionlist, RunningMode.checkInterval); 
 		#TODO 此处可以加上定时任务.
 		checkTime = time.time()
 		for device in IP_Device_Map.values():

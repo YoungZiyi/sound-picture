@@ -2,7 +2,6 @@
 from socket import *
 import string
 from struct import pack, unpack
-import socket
 import signal
 from Message import *
 import binascii

@@ -12,6 +12,18 @@ YZ_IP = "10.0.0.105"
 SBJNG_IP = "10.0.0.106"
 SBJOK_IP = "10.0.0.107"
 
+deviceName_IP_Map = {}
+deviceName_IP_Map["JBT0"] = "10.0.0.100"
+deviceName_IP_Map["ICT"] = "10.0.0.101"
+deviceName_IP_Map["HCJ"] = "10.0.0.102"
+deviceName_IP_Map["JBT1"] = "10.0.0.103"
+deviceName_IP_Map["FT"] = "10.0.0.104"
+deviceName_IP_Map["YZ"] = "10.0.0.105"
+deviceName_IP_Map["SBJNG"] = "10.0.0.106"
+deviceName_IP_Map["SBJOK"] = "10.0.0.107"
+
+def getIPByDeviceName(deviceName):
+	return deviceName_IP_Map[deviceName]
 
 class Device:
 	#TODO
@@ -41,8 +53,9 @@ class Device:
 		self.status = status
 		self.status_start_time = time.time()
 		if(self.status == S_READY_TO_RECV_ITEM):
+			#TODO why?
 			self.prepare_count = 0
-
+		
 	# ng is a bool value
 	def ChangeItemStatusTo(self, status):
 		self.item_status = status
@@ -57,7 +70,7 @@ class Device:
 			raise Exception("Please call the Specific SendInstrctionXXX")
 		_SendInstruction(self, instruction)
 	
-	def SendInstructionSendItem(self, instruction):
+	def SendInstructionSendItem(self):
 		cmd = INSTRUCTION_DEVICE_SENDITEM
 		if(self == device_yz):
 			#移栽机的送板指令不一样, 根据板子的状态来的
