@@ -3,7 +3,7 @@ import time
 
 Format = "%(asctime)s|%(levelname)s: %(message)s"
 DateFmt = "%Y-%m-%d %H:%I:%S"
-FileName = "Log/%s.txt" % time.strftime("%Y-%m-%d", time.gmtime())
+FileName = "log/%s.log" % time.strftime("%Y-%m-%d", time.gmtime())
 FileMode = "a"
 
 logging.basicConfig(format = Format, datefmt = DateFmt, filename = FileName, filemode = FileMode, level = logging.DEBUG)
