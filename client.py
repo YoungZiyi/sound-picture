@@ -7,7 +7,7 @@ from Message import *
 import binascii
 import time
 
-socket.setdefaulttimeout(3)
+setdefaulttimeout(3)
 
 exit_flag = False
 def signal_handler(signum, frame):
@@ -20,7 +20,7 @@ BUFSIZ = 16
 ADDR = (SERVER_HOST, SERVER_PORT) 
 
 print "Connecting..."
-tcpCliSock = socket.socket(AF_INET, SOCK_STREAM)
+tcpCliSock = socket(AF_INET, SOCK_STREAM)
 tcpCliSock.connect(ADDR)
 
 
@@ -36,7 +36,7 @@ if not data:
 	exit(-1)
 '''
 data = "10.0.0.100"
-ip_in_str = socket.inet_aton(data)
+ip_in_str = inet_aton(data)
 ip_in_int = unpack("!I", ip_in_str)[0];
 ip_in_binary_str = pack("!i",ip_in_int)
 
