@@ -4,7 +4,7 @@
 checkInterval	=	1
 timeoutTime		=	15
 
-recv_buff_size = 8
+recv_buff_size = 4
 
 debugging = False
 

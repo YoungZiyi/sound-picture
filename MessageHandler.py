@@ -37,6 +37,24 @@ def handle_msg(current_device, event):
 			current_device.ChangeStatusTo(S_IDLE)
 		else:
 			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
+	elif (current_device == device_ict):
+		#TODO ICT
+		if (event == EVENT_AVAILABLE):
+			current_device.ChangeStatusTo(S_IDLE)
+			# 只要ICT处于空闲状态，以及接驳台处于准备好送板状态，就给接驳台发送板指令
+			if (previous_device.status == S_READY_TO_SEND_ITEM):
+				previous_device.SendInstructionSendItem()
+		if (event == EVENT_GETITEM_FINISHED):
+			# 只要ICT收板完成，就把ICT状态设为准备好送板
+			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+		if (event EVENT_SENDITEM_FINISHED):
+			# 刘工说ICT送板完成后会发空闲消息
+			current_device.ChangeStatusTo(S_IDLE)
+			if (previous_device.status == S_READY_TO_SEND_ITEM):
+				previous_device.SendInstructionSendItem()
+
+
+		
 	elif (current_device in [device_ict, device_ft]):
 		if (event == EVENT_ASK_FOR_ITEM):
 			#测试机自己有Cache, 可能在任何一个状态中, 主动问板子
