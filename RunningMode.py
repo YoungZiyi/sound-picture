@@ -6,7 +6,7 @@ timeoutTime		=	15
 
 recv_buff_size = 8
 
-debugging = True
+debugging = False
 
 flag_exit = False
 def signal_handler(signum, frame):

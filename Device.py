@@ -3,24 +3,24 @@
 import time
 from Message import *
 
-JBT0_IP = "10.0.0.100"
-ICT_IP = "10.0.0.101"
-HCJ_IP = "10.0.0.102"
+JBT0_IP = "192.168.0.101"
+ICT_IP = "192.168.0.102"
+HCJ_IP = "192.168.0.103"
 JBT1_IP = "10.0.0.103"
-FT_IP = "10.0.0.104"
-YZ_IP = "10.0.0.105"
-SBJNG_IP = "10.0.0.106"
-SBJOK_IP = "10.0.0.107"
+FT_IP = "192.168.0.104"
+YZ_IP = "192.168.0.105"
+SBJNG_IP = "192.168.0.106"
+SBJOK_IP = "192.168.0.107"
 
 deviceName_IP_Map = {}
-deviceName_IP_Map["JBT0"] = "10.0.0.100"
-deviceName_IP_Map["ICT"] = "10.0.0.101"
-deviceName_IP_Map["HCJ"] = "10.0.0.102"
+deviceName_IP_Map["JBT0"] = "192.168.0.101"
+deviceName_IP_Map["ICT"] = "192.168.0.102"
+deviceName_IP_Map["HCJ"] = "192.168.0.103"
 deviceName_IP_Map["JBT1"] = "10.0.0.103"
-deviceName_IP_Map["FT"] = "10.0.0.104"
-deviceName_IP_Map["YZ"] = "10.0.0.105"
-deviceName_IP_Map["SBJNG"] = "10.0.0.106"
-deviceName_IP_Map["SBJOK"] = "10.0.0.107"
+deviceName_IP_Map["FT"] = "192.168.0.104"
+deviceName_IP_Map["YZ"] = "192.168.0.105"
+deviceName_IP_Map["SBJNG"] = "192.168.0.106"
+deviceName_IP_Map["SBJOK"] = "192.168.0.107"
 
 def getIPByDeviceName(deviceName):
 	return deviceName_IP_Map[deviceName]

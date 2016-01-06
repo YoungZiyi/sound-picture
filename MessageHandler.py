@@ -25,28 +25,18 @@ def handle_msg(current_device, event):
 	if (current_device == device_jbt0):
 		# Handle message sent from Jiebotai0
 		if (event == EVENT_AVAILABLE):
-			writeInfo("[%s]EVENT->EVENT_AVAILABLE"%current_device.name)
+			#writeInfo("[%s]EVENT->EVENT_AVAILABLE"%current_device.name)
 			current_device.ChangeStatusTo(S_IDLE)
-			writeInfo("[%s]STATUS->S_IDLE"%current_device.name)
 		elif (event == EVENT_GETITEM_FINISHED):
-			writeInfo("[%s]EVENT->EVENT_GETITEM_FINISHED"%current_device.name)
 			current_device.ChangeStatusTo(S_WITH_ITEM)
-			writeInfo("[%s]STATUS->S_WITH_ITEM"%current_device.name)
 		elif (event == EVENT_READYFOR_SENDITEM):
-			writeInfo("[%s]EVENT->EVENT_READYFOR_SENDITEM"%current_device.name)
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
-			writeInfo("[%s]STATUS->S_READY_TO_SEND_ITEM"%current_device.name)
-			if (next_device.status == S_IDLE):
-				writeInfo("[%s]STATUS->S_IDLE"%next_device.name)
+			if (next_device.status in [S_IDLE, S_READY_TO_RECV_ITEM]):
 				current_device.SendInstructionSendItem()
-				writeInfo("[%s]INSTRUCTION->SendInstructionSendItem"%current_device.name)
 		elif (event == EVENT_SENDITEM_FINISHED):
-			writeInfo("[%s]EVENT->EVENT_SENDITEM_FINISHED"%current_device.name)
 			current_device.ChangeStatusTo(S_IDLE)
-			writeInfo("[%s]STATUS->S_IDLE"%current_device.name)
 		else:
-			#print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
-			writeInfo("Event [%s] is not recognized for device [%s]" % (event, current_device.name))
+			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
 	elif (current_device in [device_ict, device_ft]):
 		if (event == EVENT_ASK_FOR_ITEM):
 			#测试机自己有Cache, 可能在任何一个状态中, 主动问板子
@@ -97,34 +87,29 @@ def handle_msg(current_device, event):
 		else:
 			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
 	elif (current_device == device_hcj):
-		#TODO  缓存机的流程没有验证
-		if (event in [EVENT_AVAILABLE, RES_STATUS_AVAILABLE, EVENT_SENDITEM_FINISHED]):
-			# 空闲, 这里检查上位机的状态是否为等待送板中
+		if (event == EVENT_AVAILABLE):
+			# 空闲，将缓存机状态设为空闲，并检查前一个设备是否处于准备好送板状态
 			current_device.ChangeStatusTo(S_IDLE)
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
-		elif (event == EVENT_READYFOR_GETITEM_OK):
-			# 准备好接OK板
+		elif (event == EVENT_READYFOR_GETITEM):
+			# 准备好接板，将缓存机状态设为准备好接板，并检查前一个设备是否处于准备好送板状态
 			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
-			previous_device.SendInstructionSendItem()
-			#current_device.item_status == ITEM_STATUS_OK
-			#current_device.ChangeStatusTo(S_RECVING)
-		elif (event == EVENT_READYFOR_GETITEM_NG):
-			# 准备好接NG板
-			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
-			previous_device.SendInstructionSendItem()
-		elif (event == EVENT_HUANCUNJI_GETITEM_FINISHED):
-			# 接板完成
-			current_device.ChangeStatusTo(S_WITH_ITEM)
-			if (current_device.item_status == ITEM_STATUS_OK):
-				# 如果是OK板
-				current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
-				if (next_device.status in [S_IDLE, S_READY_TO_RECV_ITEM]):
-					# 如果下一个设备初处于空闲或准备收板
-					current_device.SendInstructionSendItem()
-			elif (current_device.item_status == ITEM_STATUS_NG):
-				# 如果是NG板
-				current_device.ChangeStatusTo(S_IDLE)
+			if (previous_device.status == S_READY_TO_SEND_ITEM):
+				previous_device.SendInstructionSendItem()
+		elif (event == EVENT_READYFOR_SENDITEM):
+			# 准备送板，将缓存机状态设为准备好送板，并检查下一个设备是否处于准备好接板或空闲状态
+			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			if (next_device.status in [S_IDLE, S_READY_TO_RECV_ITEM]):
+				current_device.SendInstructionSendItem()
+		elif (event == EVENT_SENDITEM_FINISHED):
+			# 送板完成，将缓存机状态设为空闲，并检查前一个设备是否处于准备好送板状态
+			current_device.ChangeStatusTo(S_IDLE)
+			if (previous_device.status == S_READY_TO_SEND_ITEM):
+				previous_device.SendInstructionSendItem()
+		elif (event == EVENT_DEVICE_WARNING_2):
+			# TODO 设备紧急停止
+			print "device stoped!"
 		else:
 			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
 	elif (current_device == device_yz):
