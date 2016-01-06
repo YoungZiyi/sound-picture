@@ -47,6 +47,12 @@ def handle_msg(current_device, event):
 		if (event == EVENT_GETITEM_FINISHED):
 			# 只要ICT收板完成，就把ICT状态设为准备好送板
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+		if (event == EVENT_READYFOR_SENDITEM_OK):
+			# TODO
+			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+		if (event == EVENT_READYFOR_SENDITEM_NG):
+			# TODO
+			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 		if (event EVENT_SENDITEM_FINISHED):
 			# 刘工说ICT送板完成后会发空闲消息
 			current_device.ChangeStatusTo(S_IDLE)
