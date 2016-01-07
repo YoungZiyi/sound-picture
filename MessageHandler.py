@@ -52,15 +52,15 @@ def handle_msg(current_device, event):
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 			item_status = ITEM_STATUS_OK
 			current_device.changItemStatusTo(item_status)
-			next_device.SendInstructionPrepareToRecvItem()# SendInstructionPrepareToRecvItem方法根据item_status自动判断发 缓存机向后接OK板 指令
+			next_device.SendInstructionPrepareToRecvItem()
 		elif (event == EVENT_READYFOR_SENDITEM_NG):
 			# ICT测试板子NG，给缓存机发准备送NG板
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 			item_status = ITEM_STATUS_NG
 			current_device.changItemStatusTo(item_status)
-			next_device.SendInstructionPrepareToRecvItem()# SendInstructionPrepareToRecvItem方法根据item_status自动判断发 缓存机向后接NG板 指令
+			next_device.SendInstructionPrepareToRecvItem()
 		elif (event == EVENT_SENDITEM_FINISHED):
-			# TODO
+			# TODO ICT送板完成
 			current_device.ChangeStatusTo(S_IDLE)
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
@@ -93,43 +93,45 @@ def handle_msg(current_device, event):
 		else:
 			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
 	elif (current_device == device_ft):
-		#TODO FT
+		# FT flow
 		if (event == EVENT_AVAILABLE):
 			current_device.ChangeStatusTo(S_IDLE)
-			# 只要ICT处于空闲状态，以及接驳台处于准备好送板状态，就给接驳台发送板指令
+			# 只要FT处于空闲状态，以及缓存机处于准备好送板状态，就给缓存机发送板指令
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
 		elif (event == EVENT_GETITEM_FINISHED):
-			# 只要ICT收板完成，就把ICT状态设为准备好送板
-			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			# 只要FT收板完成，就把FT状态设为有板状态
+			current_device.ChangeStatusTo(S_WITH_ITEM)
 		elif (event == EVENT_READYFOR_SENDITEM_OK):
-			# TODO
+			# FT测试板子OK，给移载机发 到中间向后接板指令
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 			item_status = ITEM_STATUS_OK
 			current_device.changItemStatusTo(item_status)
 			next_device.SendInstructionPrepareToRecvItem()
 		elif (event == EVENT_READYFOR_SENDITEM_NG):
-			# TODO
+			# FT测试板子NG，给移载机发 到中间向后接板指令
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 			item_status = ITEM_STATUS_NG
 			current_device.changItemStatusTo(item_status)
 			next_device.SendInstructionPrepareToRecvItem()
 		elif (event == EVENT_SENDITEM_FINISHED):
-			# 刘工说ICT送板完成后会发空闲消息
+			# TODO FT送板完成
 			current_device.ChangeStatusTo(S_IDLE)
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
 		else:
 			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
 	elif (current_device == device_yz):
-		#移栽机的流程
+		# YZ flow
 		if (event in [EVENT_AVAILABLE, RES_STATUS_AVAILABLE]):
-			#EVENT_AVAILABLE只在启动的时候发送
-			current_device.ChangeStatusTo(S_IDLE)				
-		elif(event == EVENT_READYFOR_GETITEM_RIGHT):
-			#移栽机报告已经到达右边
+			# 空闲，将移载机状态设为空闲，并检查前一个设备是否处于准备好送板状态
+			current_device.ChangeStatusTo(S_IDLE)
+			if (previous_device.status == S_READY_TO_SEND_ITEM):
+				previous_device.SendInstructionSendItem()
+		elif(event == EVENT_READYFOR_GETITEM_LEFT):
+			# 移栽机报告已经到达中间
 			if(current_device.status != S_PREPARING_TO_RECV):
-					print "WARN: yz [%s] report EVENT_READYFOR_GETITEM_RIGHT from status [%d]" % (current_device.name, current_device.status)
+				print "WARN: yz [%s] report EVENT_READYFOR_GETITEM_RIGHT from status [%d]" % (current_device.name, current_device.status)
 			if(current_device.prepare_count == 1):
 				#第一次到达算HALF_READY, 第二次才算READY
 				current_device.ChangeStatusTo(S_HALF_READY_TO_RECV_ITEM)
@@ -145,6 +147,7 @@ def handle_msg(current_device, event):
 				else:
 					#让后面的机器送板
 					previous_device.SendInstructionSendItem()
+					current_device.SendInstructionSendItem()
 		elif(event==EVENT_GETITEM_FINISHED):
 			#移栽机收到板子, 默认送去NG收板机
 			#TODO 此处要判断前面的对应板子状态的接板机是否空闲

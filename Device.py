@@ -89,7 +89,7 @@ class Device:
 		
 	def SendInstructionPrepareToRecvItem(self):
 		if(self == device_yz):
-			_SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM)
+			_SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
 		elif(self == device_hcj):
 			cmd = INSTRUCTION_HCJ_RECV_ITEM_NG
 			if(self.previous.item_status == ITEM_STATUS_OK):
