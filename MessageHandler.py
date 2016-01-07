@@ -26,42 +26,53 @@ def handle_msg(current_device, event):
 		# Handle message sent from Jiebotai0
 		if (event == EVENT_AVAILABLE):
 			#writeInfo("[%s]EVENT->EVENT_AVAILABLE"%current_device.name)
+			# 空闲
 			current_device.ChangeStatusTo(S_IDLE)
 		elif (event == EVENT_GETITEM_FINISHED):
+			# 板子碰到接驳台左端感应器发“接板完成”消息，并设为有板状态
 			current_device.ChangeStatusTo(S_WITH_ITEM)
 		elif (event == EVENT_READYFOR_SENDITEM):
+			# 板子碰到接驳台左端感应器发“准备好送板”消息，并设为准备好送板状态
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			# 如果下一个设备的状态为空闲或准备好接板，则给接驳台发送板指令
 			if (next_device.status in [S_IDLE, S_READY_TO_RECV_ITEM]):
 				current_device.SendInstructionSendItem()
 		elif (event == EVENT_SENDITEM_FINISHED):
+			# 当板子离开接驳台右端感应器时发“送板完成”消息，并设为空闲状态
 			current_device.ChangeStatusTo(S_IDLE)
 		else:
 			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
 	elif (current_device == device_ict):
 		#TODO ICT
 		if (event == EVENT_AVAILABLE):
+			# 空闲消息
 			current_device.ChangeStatusTo(S_IDLE)
 			# 只要ICT处于空闲状态，以及接驳台处于准备好送板状态，就给接驳台发送板指令
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
 		elif (event == EVENT_GETITEM_FINISHED):
-			# 只要ICT收板完成，就把ICT状态设为有板状态
+			# 板子离开ICT接驳台左端感应器发“接板完成”消息，并把ICT状态设为有板状态
 			current_device.ChangeStatusTo(S_WITH_ITEM)
 		elif (event == EVENT_READYFOR_SENDITEM_OK):
-			# ICT测试板子OK，给缓存机发准备送OK板
+			# ICT测试板子OK发“测试OK 准备送板”消息
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			# 设板子状态为ITEM_STATUS_OK
 			item_status = ITEM_STATUS_OK
 			current_device.changItemStatusTo(item_status)
+			# 给缓存机发“缓存机向后接OK板”指令
 			next_device.SendInstructionPrepareToRecvItem()
 		elif (event == EVENT_READYFOR_SENDITEM_NG):
-			# ICT测试板子NG，给缓存机发准备送NG板
+			# ICT测试板子NG发“测试NG 准备送板”消息
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			# 设板子状态为ITEM_STATUS_NG
 			item_status = ITEM_STATUS_NG
 			current_device.changItemStatusTo(item_status)
+			# 给缓存机发“缓存机向后接NG板”指令
 			next_device.SendInstructionPrepareToRecvItem()
 		elif (event == EVENT_SENDITEM_FINISHED):
-			# TODO ICT送板完成
+			# 板子离开ICT测试机箱右端感应器发“送板完成”消息，设状态为空闲
 			current_device.ChangeStatusTo(S_IDLE)
+			# 机器空闲时检查前一个设备的状态是否为“准备好送板”，如果是，则给前一个设备发“送板指令”
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
 		else:
@@ -73,18 +84,22 @@ def handle_msg(current_device, event):
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
 		elif (event == EVENT_READYFOR_GETITEM):
-			# 准备好接板，将缓存机状态设为准备好接板，并检查前一个设备是否处于准备好送板状态
+			# ICT给缓存机发“缓存机向后OK/NG板”，缓存机回复准备好接板，将缓存机状态设为准备好接板
 			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
+			# 检查前一个设备是否处于准备好送板状态，如果是，给它发送板指令
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
 		elif (event == EVENT_READYFOR_SENDITEM):
-			# 准备送板，将缓存机状态设为准备好送板，并检查下一个设备是否处于准备好接板或空闲状态
+			# TODO 如果是NG板，缓存完毕后没有任何消息给出，如何修改缓存机状态？
+			# 板子走到缓存接驳台右端感应器发“准备送板”消息，将缓存机状态设为准备好送板
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			# 检查下一个设备是否处于准备好接板或空闲状态，if so，给缓存机发送板指令
 			if (next_device.status in [S_IDLE, S_READY_TO_RECV_ITEM]):
 				current_device.SendInstructionSendItem()
 		elif (event == EVENT_SENDITEM_FINISHED):
-			# 送板完成，将缓存机状态设为空闲，并检查前一个设备是否处于准备好送板状态
+			# 板子离开缓存接驳台右端感应器发“送板完成”消息，将缓存机状态设为空闲
 			current_device.ChangeStatusTo(S_IDLE)
+			# 检查前一个设备是否处于准备好送板状态
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
 		elif (event == EVENT_DEVICE_WARNING_2):
@@ -95,28 +110,34 @@ def handle_msg(current_device, event):
 	elif (current_device == device_ft):
 		# FT flow
 		if (event == EVENT_AVAILABLE):
+			# 空闲
 			current_device.ChangeStatusTo(S_IDLE)
 			# 只要FT处于空闲状态，以及缓存机处于准备好送板状态，就给缓存机发送板指令
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
 		elif (event == EVENT_GETITEM_FINISHED):
-			# 只要FT收板完成，就把FT状态设为有板状态
+			# 板子离开FT接驳台左端感应器发“接板完成”消息，并把FT状态设为有板状态
 			current_device.ChangeStatusTo(S_WITH_ITEM)
 		elif (event == EVENT_READYFOR_SENDITEM_OK):
-			# FT测试板子OK，给移载机发 到中间向后接板指令
+			# FT测试板子OK发“测试OK 准备送板”消息
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			# 设板子状态为ITEM_STATUS_OK
 			item_status = ITEM_STATUS_OK
 			current_device.changItemStatusTo(item_status)
+			# 给移载机发 到中间向后接板指令
 			next_device.SendInstructionPrepareToRecvItem()
 		elif (event == EVENT_READYFOR_SENDITEM_NG):
 			# FT测试板子NG，给移载机发 到中间向后接板指令
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			# 设板子状态为ITEM_STATUS_NG
 			item_status = ITEM_STATUS_NG
 			current_device.changItemStatusTo(item_status)
+			# 给移载机发 到中间向后接板指令
 			next_device.SendInstructionPrepareToRecvItem()
 		elif (event == EVENT_SENDITEM_FINISHED):
-			# TODO FT送板完成
+			# 板子离开FT测试机箱右端感应器发“送板完成”消息，设状态为空闲
 			current_device.ChangeStatusTo(S_IDLE)
+			# 机器空闲时检查前一个设备的状态是否为“准备好送板”，如果是，则给前一个设备发“送板指令”
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
 		else:

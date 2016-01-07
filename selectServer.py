@@ -13,6 +13,7 @@ from BxtException import *
 from MessageHandler import *
 import RunningMode
 import binascii
+from BxtLogger import *
 
 
 
