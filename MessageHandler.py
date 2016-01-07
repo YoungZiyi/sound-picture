@@ -44,70 +44,26 @@ def handle_msg(current_device, event):
 			# 只要ICT处于空闲状态，以及接驳台处于准备好送板状态，就给接驳台发送板指令
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
-		if (event == EVENT_GETITEM_FINISHED):
-			# 只要ICT收板完成，就把ICT状态设为准备好送板
+		elif (event == EVENT_GETITEM_FINISHED):
+			# 只要ICT收板完成，就把ICT状态设为有板状态
+			current_device.ChangeStatusTo(S_WITH_ITEM)
+		elif (event == EVENT_READYFOR_SENDITEM_OK):
+			# ICT测试板子OK，给缓存机发准备送OK板
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
-		if (event == EVENT_READYFOR_SENDITEM_OK):
-			# TODO
-			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
-		if (event == EVENT_READYFOR_SENDITEM_NG):
-			# TODO
-			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
-		if (event EVENT_SENDITEM_FINISHED):
-			# 刘工说ICT送板完成后会发空闲消息
-			current_device.ChangeStatusTo(S_IDLE)
-			if (previous_device.status == S_READY_TO_SEND_ITEM):
-				previous_device.SendInstructionSendItem()
-
-
-		
-	elif (current_device in [device_ict, device_ft]):
-		if (event == EVENT_ASK_FOR_ITEM):
-			#测试机自己有Cache, 可能在任何一个状态中, 主动问板子
-			if (previous_device.status == S_READY_TO_SEND_ITEM):
-				#备份当前设备的状态
-				current_status = current_device.status
-				current_item_status = current_device.item_status
-				#这个函数会改变当前设备的状态
-				previous_device.SendInstructionSendItem()
-				#恢复原先的状态
-				current_device.ChangeStatusTo(current_status)
-				current_device.ChangeItemStatusTo(current_item_status)
-		elif (event in [EVENT_AVAILABLE, EVENT_SENDITEM_FINISHED, RES_STATUS_AVAILABLE, RES_STATUS_SENDITEM_FINISHED]):
-			current_device.ChangeStatusTo(S_IDLE)
-			if (previous_device.status == S_READY_TO_SEND_ITEM):
-				previous_device.SendInstructionSendItem()
-		elif (event in [EVENT_GETITEM_FINISHED, EVENT_TESTING]):
-			current_device.ChangeStatusTo(S_TESTING)
-		elif (event in [EVENT_READYFOR_SENDITEM_OK, EVENT_READYFOR_SENDITEM_NG]):
-			# 测试机器已经测试完毕一块板子
-			if(current_device.status == S_READY_TO_SEND_ITEM):
-				#上一块板子还没送出去
-				print "WARN: One more item testing finished when the last item has not been sent in device [%s]" % current_device.name
+			item_status = ITEM_STATUS_OK
+			current_device.changItemStatusTo(item_status)
+			next_device.SendInstructionPrepareToRecvItem()# SendInstructionPrepareToRecvItem方法根据item_status自动判断发 缓存机向后接OK板 指令
+		elif (event == EVENT_READYFOR_SENDITEM_NG):
+			# ICT测试板子NG，给缓存机发准备送NG板
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 			item_status = ITEM_STATUS_NG
-			if(event == EVENT_READYFOR_SENDITEM_OK):
-				item_status = ITEM_STATUS_OK
 			current_device.changItemStatusTo(item_status)
-			if (next_device.status in [S_IDLE, S_PREPARING_TO_RECV, S_HALF_READY_TO_RECV_ITEM]):
-				if(next_device.status == S_PREPARING_TO_RECV):
-					print "WARN: YZ is preparing right now"
-				# 移栽机空闲之后会处于S_HALF_READY_TO_RECV_ITEM状态, 以节省时间.
-				# 此处我们暂不实现在缓存机的优化
-				next_device.SendInstructionPrepareToRecvItem()
-			elif (next_device.status == S_READY_TO_RECV_ITEM):
-				'''
-					测试机刚刚测试好, 还没发指令让下一个机器准备, 下一个机器就已经准备好了, 那就直接送板吧.
-					这种情况可能发生在如下场景:
-					1. 前面的移栽机/缓存机正在准备接板, 
-					2. 测试机上的板子被人手工拿走了,
-					3. 测试机给服务器发送一个"送板完成"的消息, 
-					4. 服务器指挥测试机继续测试,
-					5. 移栽机/缓存机准备完毕, 
-					6. 测试机测试完毕, 发现前面的移栽机/缓存级已经准备好了
-					TODO 需要确认该场景的可能性, 以及item_status在传递的时候能否保持正确.
-				'''
-				current_device.SendInstructionSendItem()
+			next_device.SendInstructionPrepareToRecvItem()# SendInstructionPrepareToRecvItem方法根据item_status自动判断发 缓存机向后接NG板 指令
+		elif (event == EVENT_SENDITEM_FINISHED):
+			# TODO
+			current_device.ChangeStatusTo(S_IDLE)
+			if (previous_device.status == S_READY_TO_SEND_ITEM):
+				previous_device.SendInstructionSendItem()
 		else:
 			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
 	elif (current_device == device_hcj):
@@ -134,6 +90,35 @@ def handle_msg(current_device, event):
 		elif (event == EVENT_DEVICE_WARNING_2):
 			# TODO 设备紧急停止
 			print "device stoped!"
+		else:
+			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
+	elif (current_device == device_ft):
+		#TODO FT
+		if (event == EVENT_AVAILABLE):
+			current_device.ChangeStatusTo(S_IDLE)
+			# 只要ICT处于空闲状态，以及接驳台处于准备好送板状态，就给接驳台发送板指令
+			if (previous_device.status == S_READY_TO_SEND_ITEM):
+				previous_device.SendInstructionSendItem()
+		elif (event == EVENT_GETITEM_FINISHED):
+			# 只要ICT收板完成，就把ICT状态设为准备好送板
+			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+		elif (event == EVENT_READYFOR_SENDITEM_OK):
+			# TODO
+			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			item_status = ITEM_STATUS_OK
+			current_device.changItemStatusTo(item_status)
+			next_device.SendInstructionPrepareToRecvItem()
+		elif (event == EVENT_READYFOR_SENDITEM_NG):
+			# TODO
+			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			item_status = ITEM_STATUS_NG
+			current_device.changItemStatusTo(item_status)
+			next_device.SendInstructionPrepareToRecvItem()
+		elif (event == EVENT_SENDITEM_FINISHED):
+			# 刘工说ICT送板完成后会发空闲消息
+			current_device.ChangeStatusTo(S_IDLE)
+			if (previous_device.status == S_READY_TO_SEND_ITEM):
+				previous_device.SendInstructionSendItem()
 		else:
 			print "Event [%s] is not recognized for device [%s]" % (event, current_device.name)
 	elif (current_device == device_yz):
