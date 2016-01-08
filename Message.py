@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python 
 
-import string 
+import string
+from BxtLogger import *
 
 SERVER_HOST = '127.0.0.1'
 SERVER_PORT = 6001
@@ -58,7 +59,7 @@ EVENT_HUANCUNJI_GETITEM_FINISHED = "52 c2 00 14"
 EVENT_ASK_FOR_ITEM = "52 c3 08 1d"
 #EVENT_HUANCUNJI_BUSY = "52 c3 06 1b"
 #EVENT_HUANCUNJI_GETITEM_ERROR = "52 c3 07 1c"
-EVENT_READYFOR_GETITEM = "52 C2 04 18"
+EVENT_READYFOR_GETITEM = "52 c2 04 18"
 EVENT_READYFOR_GETITEM_MIDDLE = "52 c2 01 15"
 EVENT_READYFOR_GETITEM_LEFT = "52 c2 02 16"
 EVENT_READYFOR_GETITEM_RIGHT = "52 c2 03 17"
@@ -95,8 +96,14 @@ def RemoveBlankInMiddle(s):
 def verifyPacket(buff):
 	if(len(buff) != 4):
 		hex_msg = ' '.join(x.encode('hex') for x in buff)
-		print "Invalid Packet [%s]" % hex_msg
+		print "WARNING: INVALID PACKET [%s]" % hex_msg
+		writeWarning("INVALID PACKET [%s]" % hex_msg)
 		return False
 	return True
 	#TODO 实现校验位检查	
-	
+def covert2Hex(msg):
+	msg_list = string.split(msg, ' ')
+	send_msg = ''
+	for x in msg_list:
+		send_msg += x.decode('hex')
+	return send_msg

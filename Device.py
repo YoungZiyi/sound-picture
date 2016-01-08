@@ -63,12 +63,12 @@ class Device:
 	def _SendInstruction(self, instruction):
 		if(not self.sock):
 			raise ExceptionCommunication(self.name+" No sock")
-		self.sock.send(instruction)
+		self.sock.send(covert2Hex(instruction))
 
 	def SendInstruction(self, instruction):
 		if(instruction in [INSTRUCTION_DEVICE_SENDITEM, INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM, INSTRUCTION_HCJ_RECV_ITEM_OK, INSTRUCTION_HCJ_RECV_ITEM_NG]):
 			raise Exception("Please call the Specific SendInstrctionXXX")
-		_SendInstruction(self, instruction)
+		self._SendInstruction(instruction)
 	
 	def SendInstructionSendItem(self):
 		cmd = INSTRUCTION_DEVICE_SENDITEM
@@ -83,18 +83,19 @@ class Device:
 			self.next.ChangeStatusTo(S_RECVING)
 		self.ChangeStatusTo(S_SENDING)
 		#TODO 这个时候就开始传递Item的状态, 是不是太早了?
-		if(self.next):
+		if(self.item_status):
 			self.next.ChangeItemStatusTo(self.item_status)
 		self.ChangeItemStatusTo(ITEM_STATUS_UNKNOWN)
+		self._SendInstruction(cmd)
 		
 	def SendInstructionPrepareToRecvItem(self):
 		if(self == device_yz):
-			_SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
+			self._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
 		elif(self == device_hcj):
 			cmd = INSTRUCTION_HCJ_RECV_ITEM_NG
 			if(self.previous.item_status == ITEM_STATUS_OK):
 				cmd = INSTRUCTION_HCJ_RECV_ITEM_OK
-			_SendInstruction(cmd)
+			self._SendInstruction(cmd)
 		#注意对于移栽机来说, 可能连续两次调用本函数分别达到S_HALF_READY_TO_RECV_ITEM, S_READY_TO_RECV_ITEM状态
 		self.status = S_PREPARING_TO_RECV
 		self.prepare_count = self.prepare_count +1
