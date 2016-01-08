@@ -63,6 +63,8 @@ class Device:
 	def _SendInstruction(self, instruction):
 		if(not self.sock):
 			raise ExceptionCommunication(self.name+" No sock")
+			writeWarning("SERVER SENT TO [%s]: [%s] FAILURE" % (self.name, instruction))
+		writeInfo("SERVER SENT TO [%s]: [%s]" % (self.name, instruction))
 		self.sock.send(covert2Hex(instruction))
 
 	def SendInstruction(self, instruction):
