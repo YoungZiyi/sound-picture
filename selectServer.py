@@ -29,7 +29,7 @@ def main():
 	exceptionlist = [listenSock]
 	while not RunningMode.flag_exit:
 		(sread, swrite, sexc) =  select.select(readlist, [], exceptionlist, RunningMode.checkInterval); 
-		#TODO 此处可以加上定时任务.
+		# 此处可以加上定时任务.
 		checkTime = time.time()
 		for device in IP_Device_Map.values():
 			if(checkTime - device.status_start_time > RunningMode.timeoutTime):
@@ -47,7 +47,7 @@ def main():
 					print "INFO: ACCEPT A CONNECTION FROM ", address
 					client_ip = address[0]
 					client_port = address[1]
-					writeInfo("INFO: ACCEPT A CONNECTION FROM IP:[%s] PORT:[%s]" % (client_ip, client_port))
+					writeInfo("ACCEPT A CONNECTION FROM IP:[%s] PORT:[%s]" % (client_ip, client_port))
 					#马上发送一个复位指令
 					newsock.send(covert2Hex(INSTRUCTION_DEVICE_RESET))
 					
@@ -73,7 +73,7 @@ def main():
 					current_device = getDeviceByIP(client_ip)
 					if(not current_device):
 						print "WARNING: INVALID DEVICE TO THIS ADDRESS [%s]" % client_ip
-						writeWarning("WARNING: INVALID DEVICE TO THIS ADDRESS [%s]" % client_ip)
+						writeWarning("INVALID DEVICE TO THIS ADDRESS [%s]" % client_ip)
 						newsock.close()
 						continue
 					else:
