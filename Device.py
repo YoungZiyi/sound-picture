@@ -63,8 +63,15 @@ class Device:
 	def _SendInstruction(self, instruction):
 		if(not self.sock):
 			raise ExceptionCommunication(self.name+" No sock")
+			print "WARNING: SERVER SENT TO [%s]: [%s] FAILURE" % (self.name, instruction)
 			writeWarning("SERVER SENT TO [%s]: [%s] FAILURE" % (self.name, instruction))
-		writeInfo("SERVER SENT TO [%s]: [%s]" % (self.name, instruction))
+		if (instruction not in [INSTRUCTION_DEVICE_RESET]):
+			print "INFO: SERVER SENT TO [%s]: [%s]" % (self.name, instruction)
+			writeInfo("SERVER SENT TO [%s]: [%s]" % (self.name, instruction))
+		else:
+			if (instruction == INSTRUCTION_DEVICE_RESET):
+				print "WARNING: TIMEOUT, RESET [%s] " % self.name
+				writeWarning("TIMEOUT, RESET [%s] " % self.name)
 		self.sock.send(covert2Hex(instruction))
 
 	def SendInstruction(self, instruction):

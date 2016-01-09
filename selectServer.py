@@ -6,13 +6,13 @@ import select
 from struct import pack, unpack
 import signal
 import pdb
+import binascii
 
 from Message import *
 from Device import *
 from BxtException import *
 from MessageHandler import *
 import RunningMode
-import binascii
 from BxtLogger import *
 
 
@@ -35,9 +35,6 @@ def main():
 			if(checkTime - device.status_start_time > RunningMode.timeoutTime):
 				#该设备维持接板状态超过了15s
 				if(device.status in [S_RECVING]):
-					print "WARNING: RESET [%s] " % device.name
-					writeWarning("WARNING: RESET [%s] " % device.name)
-					#print device
 					device.SendInstruction(INSTRUCTION_DEVICE_RESET)
 					device.Reset()
 		

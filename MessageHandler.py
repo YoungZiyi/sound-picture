@@ -13,18 +13,18 @@ def handle_msg(current_device, event):
 	next_device = current_device.next
 	
 	# log all event
-	writeInfo("CLIENT [%s] SENT: [%s]" % (current_device.name, event))
+	writeInfo("CLIENT: [%s] SENT: [%s]" % (current_device.name, event))
 
 	# RES_STATUS_BUSY
 	if (event == RES_STATUS_BUSY):
 		if(current_device not in [device_sbjok, device_sbjng]):
-			#RES_STATUS_BUSY is discarded 
+			# RES_STATUS_BUSY is discarded except sbj
 			return
 	# EVENT_AVAILABLE, RES_STATUS_AVAILABLE
 	if (event in [EVENT_AVAILABLE, RES_STATUS_AVAILABLE]):
 		# 无论哪个设备发的首先都把它设为空闲状态
 		current_device.ChangeStatusTo(S_IDLE)
-		# 如果这个设备不是接驳台或收板机，则需要判断上一个设备是否处于准备好送板状态，如果是，给上一个设备发送板指令
+		# jbt and shj dont need to check previous device's status
 		if (current_device not in [device_jbt0, device_sbjng,device_sbjok]):
 			if (previous_device.status == S_READY_TO_SEND_ITEM):
 				previous_device.SendInstructionSendItem()
@@ -58,6 +58,7 @@ def handle_msg(current_device, event):
 		current_device.ChangeStatusTo(S_BROKEN)
 		print "WARNING: [%s] STOPED SUDDENLY" % current_device.name
 		writeWarning("[%s] STOPED SUDDENLY" % current_device.name)
+		return
 
 	if (current_device == device_jbt0):
 		# Handle unknow message sent from Jiebotai0
@@ -72,7 +73,6 @@ def handle_msg(current_device, event):
 			item_status = ITEM_STATUS_OK
 			current_device.ChangeItemStatusTo(item_status)
 			# 给缓存机发“缓存机向后接OK板”指令
-			print "INFO: SERVER SENT TO [%s] -> INSTRUCTION_HCJ_RECV_ITEM_OK" % next_device.name
 			next_device.SendInstructionPrepareToRecvItem()
 		elif (event == EVENT_READYFOR_SENDITEM_NG):
 			# ICT测试板子NG发“测试NG 准备送板”消息
@@ -81,7 +81,6 @@ def handle_msg(current_device, event):
 			item_status = ITEM_STATUS_NG
 			current_device.ChangeItemStatusTo(item_status)
 			# 给缓存机发“缓存机向后接NG板”指令
-			print "INFO: SERVER SENT TO [%s]: INSTRUCTION_HCJ_RECV_ITEM_NG" % next_device.name
 			next_device.SendInstructionPrepareToRecvItem()
 		else:
 			print "WARNING: EVENT [%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name)
@@ -126,8 +125,7 @@ def handle_msg(current_device, event):
 					previous_device.SendInstructionSendItem()
 					current_device.SendInstructionSendItem()
 		elif(event==EVENT_GETITEM_FINISHED):
-			#移栽机收到板子, 默认送去NG收板机
-			#TODO 此处要判断前面的对应板子状态的接板机是否空闲
+			# 此处要判断板子状态的接板机是否空闲
 			ok_idle = (current_device.item_status == ITEM_STATUS_OK and device_sbjok.status == S_IDLE)
 			ng_idle = (current_device.item_status == ITEM_STATUS_NG and device_sbjng.status == S_IDLE)
 			if(ok_idle or ng_idle):
@@ -142,9 +140,10 @@ def handle_msg(current_device, event):
 	elif (current_device in [device_sbjok, device_sbjng]):
 		writeInfo("CLIENT [%s] SENT: [%s]" % (current_device.name, event))
 		if(event == RES_STATUS_BUSY):
-			#TODO 收板机最好不要只给BUSY指令, 而是给一个开始收板指令
+			# 碰到移载机左端感应器就会回忙，表示开始接板
 			current_device.ChangeStatusTo(S_WITH_ITEM)
 		elif(event == EVENT_AVAILABLE):
+			# 离开移载机右端感应器就会发空闲，表示收板完成
 			current_device.ChangeStatusTo(S_IDLE)
 		else:
 			print "WARNING: EVENT [%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name)
