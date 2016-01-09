@@ -88,7 +88,6 @@ def handle_msg(current_device, event):
 	elif (current_device == device_hcj):
 		# hcj flow
 		if (event == EVENT_READYFOR_GETITEM):
-			# TODO 如果是NG板，缓存完毕后没有任何消息给出，如何修改缓存机状态？刘工说，给缓存机发“缓存机准备好接OK/NG板”指令后，如果缓存机没有准备好就不会发任何消息，直到缓存机准备好才会发准备好接板消息，所以，如果缓存机接的是NG板，给前一个设备发送板指令后，板子接板完成后直接将缓存机状态改为空闲即可
 			# ICT给缓存机发“缓存机向后OK/NG板”，缓存机回复准备好接板，将缓存机状态设为准备好接板
 			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
 			# 检查前一个设备是否处于准备好送板状态，如果是，给它发送板指令
@@ -121,9 +120,9 @@ def handle_msg(current_device, event):
 					#TODO 确认下如果后面的机器没有READY_TO_SEND, 怎么处理?
 					print "WARNNING: YZ IS READY TO RECV ITEM, BUT THE FT IS NOT READY TO SEND ITEM. ANYBODY STEAL THE ITEM?"
 				else:
-					#让后面的机器送板
+					#让FT送板
 					previous_device.SendInstructionSendItem()
-					current_device.SendInstructionSendItem()
+					#current_device.SendInstructionSendItem()
 		elif(event==EVENT_GETITEM_FINISHED):
 			# 此处要判断板子状态的接板机是否空闲
 			ok_idle = (current_device.item_status == ITEM_STATUS_OK and device_sbjok.status == S_IDLE)

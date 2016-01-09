@@ -36,7 +36,9 @@ def main():
 				#该设备维持接板状态超过了15s
 				if(device.status in [S_RECVING]):
 					device.SendInstruction(INSTRUCTION_DEVICE_RESET)
-					device.Reset()
+					#device.Reset()
+					# 这时reset不要重置上下设备
+					device.ParitialReset()
 		
 		for sock in sread:
 			try:
@@ -155,8 +157,3 @@ if __name__ == "__main__":
 	
 	signal.signal(signal.SIGINT, RunningMode.signal_handler)
 	main()
-
-
-
-
-	

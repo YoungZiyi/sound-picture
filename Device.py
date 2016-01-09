@@ -2,6 +2,7 @@
 #!/usr/bin/env python 
 import time
 from Message import *
+from BxtException import *
 
 JBT0_IP = "192.168.0.101"
 ICT_IP = "192.168.0.102"
@@ -47,7 +48,16 @@ class Device:
 		self.status = S_RESETTING		#TODO 什么时候才能让Device可用? 还是一开始就可用?
 		self.status_start_time = time.time()
 		self.item_status = ITEM_STATUS_UNKNOWN
-		self.prepare_count = 0	
+		self.prepare_count = 0
+
+	def ParitialReset(self):
+		self.sock = None
+		#self.previous = None
+		#self.next = None
+		self.status = S_RESETTING		#TODO 什么时候才能让Device可用? 还是一开始就可用?
+		self.status_start_time = time.time()
+		self.item_status = ITEM_STATUS_UNKNOWN
+		self.prepare_count = 0
 		
 	def ChangeStatusTo(self, status):
 		self.status = status
@@ -85,16 +95,17 @@ class Device:
 			#移栽机的送板指令不一样, 根据板子的状态来的
 			if(self.item_status == ITEM_STATUS_OK):
 				cmd = INSTRUCTION_YZ_MOVE_RIGHT_AND_SEND_ITEM
+				self.next.next.ChangeStatusTo(S_RECVING)
 			else:
 				cmd = INSTRUCTION_YZ_MOVE_LEFT_AND_SEND_ITEM
-		if(self.next):
+				self.next.ChangeStatusTo(S_RECVING)
+		#if(self.next):
 			#如果当前设备不是最后一个机器(此处为移栽机), 则需要设置接板机的状态
-			self.next.ChangeStatusTo(S_RECVING)
 		self.ChangeStatusTo(S_SENDING)
 		#TODO 这个时候就开始传递Item的状态, 是不是太早了?
-		if(self.item_status):
+		if(self == device_ft):
 			self.next.ChangeItemStatusTo(self.item_status)
-		self.ChangeItemStatusTo(ITEM_STATUS_UNKNOWN)
+		#self.ChangeItemStatusTo(ITEM_STATUS_UNKNOWN)
 		self._SendInstruction(cmd)
 		
 	def SendInstructionPrepareToRecvItem(self):
@@ -139,7 +150,9 @@ Connect(device_jbt0, device_ict)
 Connect(device_ict, device_hcj)
 Connect(device_hcj, device_ft)
 Connect(device_ft, device_yz)
-Connect(device_yz, None)
+Connect(device_yz, device_sbjng)
+Connect(device_sbjng, device_sbjok)
+Connect(device_sbjok, None)
 #由于有两个接板机, 此处把移栽机的下位机设置为None, 避免混淆
 #此处结束定义所有机器
 
