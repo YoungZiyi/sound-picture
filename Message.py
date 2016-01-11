@@ -101,7 +101,7 @@ def verifyPacket(buff):
 		return False
 	return True
 	#TODO 实现校验位检查	
-def covert2Hex(msg):
+def convert2Hex(msg):
 	msg_list = string.split(msg, ' ')
 	send_msg = ''
 	for x in msg_list:

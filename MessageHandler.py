@@ -30,9 +30,9 @@ def handle_msg(current_device, event):
 				previous_device.SendInstructionSendItem()
 		return
 	# EVENT_GETITEM_FINISHED
-	if (event == EVENT_GETITEM_FINISHED):
-		if (current_device not in [device_yz, device_sbjng,device_sbjok]):
-			return
+	#if (event == EVENT_GETITEM_FINISHED):
+	#	if (current_device not in [device_yz, device_sbjng,device_sbjok]):
+	#		return
 	# EVENT_READYFOR_SENDITEM
 	if (event == EVENT_READYFOR_SENDITEM):
 		if (current_device in [device_jbt0, device_hcj]):
@@ -66,7 +66,9 @@ def handle_msg(current_device, event):
 		writeWarning("[%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name))
 	elif (current_device in [device_ict, device_ft]):
 		# ICT/FT flow
-		if (event == EVENT_READYFOR_SENDITEM_OK):
+		if (event == EVENT_GETITEM_FINISHED):
+			current_device.ChangeStatusTo(S_WITH_ITEM)
+		elif (event == EVENT_READYFOR_SENDITEM_OK):
 			# ICT测试板子OK发“测试OK 准备送板”消息
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 			# 设板子状态为ITEM_STATUS_OK
@@ -125,6 +127,7 @@ def handle_msg(current_device, event):
 					#current_device.SendInstructionSendItem()
 		elif(event==EVENT_GETITEM_FINISHED):
 			# 此处要判断板子状态的接板机是否空闲
+			print current_device.item_status, "DDDDDDDDDDDDDDDDDD"
 			ok_idle = (current_device.item_status == ITEM_STATUS_OK and device_sbjok.status == S_IDLE)
 			ng_idle = (current_device.item_status == ITEM_STATUS_NG and device_sbjng.status == S_IDLE)
 			if(ok_idle or ng_idle):

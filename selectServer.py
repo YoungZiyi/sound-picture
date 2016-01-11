@@ -23,21 +23,19 @@ def main():
 	listenSock.bind(("", SERVER_PORT))
 	listenSock.listen(15)
 	listenSock.setblocking(1)
-	#TODO  此处要设置默认socket超时时间
 
 	readlist = [listenSock]
 	exceptionlist = [listenSock]
+
 	while not RunningMode.flag_exit:
 		(sread, swrite, sexc) =  select.select(readlist, [], exceptionlist, RunningMode.checkInterval); 
-		# 此处可以加上定时任务.
 		checkTime = time.time()
+		# check status remains time
 		for device in IP_Device_Map.values():
 			if(checkTime - device.status_start_time > RunningMode.timeoutTime):
-				#该设备维持接板状态超过了15s
 				if(device.status in [S_RECVING]):
 					device.SendInstruction(INSTRUCTION_DEVICE_RESET)
-					#device.Reset()
-					# 这时reset不要重置上下设备
+					# use ParitialReset so that won't reset the previous and next device
 					device.ParitialReset()
 		
 		for sock in sread:
@@ -45,14 +43,15 @@ def main():
 				if sock == listenSock:
 					#收到一个新的TCP连接请求
 					(newsock, address) = listenSock.accept()
-					newsock.setblocking(1)
-					print "INFO: ACCEPT A CONNECTION FROM ", address
 					client_ip = address[0]
 					client_port = address[1]
+					print "INFO: ACCEPT A CONNECTION FROM ", address
 					writeInfo("ACCEPT A CONNECTION FROM IP:[%s] PORT:[%s]" % (client_ip, client_port))
+					newsock.setblocking(1)
 					#马上发送一个复位指令
-					newsock.send(covert2Hex(INSTRUCTION_DEVICE_RESET))
-					
+					newsock.send(convert2Hex(INSTRUCTION_DEVICE_RESET))
+					print "INFO: SERVER SENT TO [%s]: [%s]" % (getDeviceByIP(client_ip).name, INSTRUCTION_DEVICE_RESET)
+					writeInfo("SERVER SENT TO [%s]: [%s]" % (getDeviceByIP(client_ip).name, INSTRUCTION_DEVICE_RESET))
 					#此处假定一次能收到整个包, 基本是成立的
 					recv_buff = newsock.recv(RunningMode.recv_buff_size)
 	
@@ -63,7 +62,7 @@ def main():
 						print "DEBUG: NOW CLIENT IP IS ", client_ip, " AND RECV BUFF IS ", ' '.join(x.encode('hex') for x in recv_buff)
 						writeDebug("NOW CLIENT IP IS ", client_ip, " AND RECV BUFF IS ", ' '.join(x.encode('hex') for x in recv_buff))
 					
-					# 如果包大于8个字节，扔弃前4个字节，直接取后4个字节
+					# 如果包=8个字节，扔弃前4个字节，直接取后4个字节
 					if(len(recv_buff) == 8):
 						recv_buff = recv_buff[4:]
 
@@ -90,7 +89,9 @@ def main():
 				else:
 					#print "msg from client"
 					#业务socket发送的消息
-					current_device = getDeviceBySocket(sock)
+					#current_device = getDeviceBySocket(sock)
+					# 通过IP地址判断设备
+					current_device = getIPBySocket(sock)
 					if(not current_device):
 						print "WARNING: UNKNOW SOURCE"
 						writeWarning("UNKNOW SOURCE")
@@ -98,7 +99,10 @@ def main():
 						exceptionlist.remove(sock)
 						sock.close()
 						continue
-					recv_buff = sock.recv(8)
+					try:
+						recv_buff = sock.recv(8)
+					except:
+						continue
 					if recv_buff == "":
 						print "WARNING: CLIENT [%s] HAS BEEN DISCONNECTED" % (current_device.name)
 						writeWarning("CLIENT [%s] HAS BEEN DISCONNECTED" % (current_device.name))
@@ -113,7 +117,7 @@ def main():
 						client_ip = socket.inet_ntoa(recv_buff[:4])
 						recv_buff = recv_buff[4:]
 						
-					# 如果包大于8个字节，扔弃前4个字节，直接取后4个字节
+					# 如果包等于8个字节，扔弃前4个字节，直接取后4个字节
 					if(len(recv_buff) == 8):
 						recv_buff = recv_buff[4:]
 

@@ -47,7 +47,7 @@ class Device:
 		self.next = None
 		self.status = S_RESETTING		#TODO 什么时候才能让Device可用? 还是一开始就可用?
 		self.status_start_time = time.time()
-		self.item_status = ITEM_STATUS_UNKNOWN
+		self.item_status = ITEM_STATUS_NG
 		self.prepare_count = 0
 
 	def ParitialReset(self):
@@ -56,7 +56,7 @@ class Device:
 		#self.next = None
 		self.status = S_RESETTING		#TODO 什么时候才能让Device可用? 还是一开始就可用?
 		self.status_start_time = time.time()
-		self.item_status = ITEM_STATUS_UNKNOWN
+		self.item_status = ITEM_STATUS_NG
 		self.prepare_count = 0
 		
 	def ChangeStatusTo(self, status):
@@ -82,7 +82,7 @@ class Device:
 			if (instruction == INSTRUCTION_DEVICE_RESET):
 				print "WARNING: TIMEOUT, RESET [%s] " % self.name
 				writeWarning("TIMEOUT, RESET [%s] " % self.name)
-		self.sock.send(covert2Hex(instruction))
+		self.sock.send(convert2Hex(instruction))
 
 	def SendInstruction(self, instruction):
 		if(instruction in [INSTRUCTION_DEVICE_SENDITEM, INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM, INSTRUCTION_HCJ_RECV_ITEM_OK, INSTRUCTION_HCJ_RECV_ITEM_NG]):
@@ -111,14 +111,15 @@ class Device:
 	def SendInstructionPrepareToRecvItem(self):
 		if(self == device_yz):
 			self._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
+			#注意对于移栽机来说, 可能连续两次调用本函数分别达到S_HALF_READY_TO_RECV_ITEM, S_READY_TO_RECV_ITEM状态
+			self.status = S_PREPARING_TO_RECV
+			self.prepare_count = self.prepare_count +1
 		elif(self == device_hcj):
 			cmd = INSTRUCTION_HCJ_RECV_ITEM_NG
 			if(self.previous.item_status == ITEM_STATUS_OK):
 				cmd = INSTRUCTION_HCJ_RECV_ITEM_OK
 			self._SendInstruction(cmd)
-		#注意对于移栽机来说, 可能连续两次调用本函数分别达到S_HALF_READY_TO_RECV_ITEM, S_READY_TO_RECV_ITEM状态
-		self.status = S_PREPARING_TO_RECV
-		self.prepare_count = self.prepare_count +1
+
 		
 		
 def Connect(first, second):
@@ -167,4 +168,9 @@ def getDeviceBySocket(sock):
 			return device
 	return None
 
+def getIPBySocket(sock):
+	for device in IP_Device_Map.values():
+		if(device.ip == sock.getpeername()[0]):
+			return device
+	return None
 
