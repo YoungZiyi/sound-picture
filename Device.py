@@ -90,6 +90,7 @@ class Device:
 		self._SendInstruction(instruction)
 	
 	def SendInstructionSendItem(self):
+		self.ChangeStatusTo(S_SENDING)
 		cmd = INSTRUCTION_DEVICE_SENDITEM
 		if(self == device_yz):
 			#移栽机的送板指令不一样, 根据板子的状态来的
@@ -99,9 +100,6 @@ class Device:
 			else:
 				cmd = INSTRUCTION_YZ_MOVE_LEFT_AND_SEND_ITEM
 				self.next.ChangeStatusTo(S_RECVING)
-		#if(self.next):
-			#如果当前设备不是最后一个机器(此处为移栽机), 则需要设置接板机的状态
-		self.ChangeStatusTo(S_SENDING)
 		#TODO 这个时候就开始传递Item的状态, 是不是太早了?
 		if(self == device_ft):
 			self.next.ChangeItemStatusTo(self.item_status)
@@ -111,9 +109,8 @@ class Device:
 	def SendInstructionPrepareToRecvItem(self):
 		if(self == device_yz):
 			self._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
-			#注意对于移栽机来说, 可能连续两次调用本函数分别达到S_HALF_READY_TO_RECV_ITEM, S_READY_TO_RECV_ITEM状态
 			self.status = S_PREPARING_TO_RECV
-			self.prepare_count = self.prepare_count +1
+			self.prepare_count = self.prepare_count + 1
 		elif(self == device_hcj):
 			cmd = INSTRUCTION_HCJ_RECV_ITEM_NG
 			if(self.previous.item_status == ITEM_STATUS_OK):
