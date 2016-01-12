@@ -12,8 +12,8 @@ def handle_msg(current_device, event):
 	previous_device = current_device.previous
 	next_device = current_device.next
 	
-	if (current_device in [device_hcj]):
-		print "DDDDDDDDDD--", current_device.name, "--event:", event, "--status:", current_device.status, "--otem_status:", current_device.item_status, "--prepare_count:", current_device.prepare_count
+	
+	print "DDDDDDDDDD--", current_device.name, "--event:", event, "--status:", current_device.status, "--otem_status:", current_device.item_status, "--prepare_count:", current_device.prepare_count
 
 	# log all event
 	writeInfo("CLIENT: [%s] SENT: [%s]" % (current_device.name, event))
@@ -93,7 +93,6 @@ def handle_msg(current_device, event):
 	elif (current_device == device_hcj):
 		# hcj flow
 		if (event == EVENT_GETITEM_FINISHED):
-			print "HCJ GET ITEM FINISHED"
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 		if (event == EVENT_READYFOR_GETITEM):
 			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
@@ -128,6 +127,9 @@ def handle_msg(current_device, event):
 			ok_idle = (current_device.item_status == ITEM_STATUS_OK and device_sbjok.status == S_IDLE)
 			ng_idle = (current_device.item_status in [ITEM_STATUS_NG, ITEM_STATUS_UNKNOWN] and device_sbjng.status == S_IDLE)
 			if(ok_idle or ng_idle):
+				current_device.SendInstructionSendItem()
+			else:
+				current_device.item_status == ITEM_STATUS_NG
 				current_device.SendInstructionSendItem()
 		elif(event==EVENT_SENDITEM_FINISHED):
 			if(current_device.status != S_SENDING):
