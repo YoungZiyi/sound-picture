@@ -79,6 +79,7 @@ def handle_msg(current_device, event):
 	elif (current_device in [device_ict, device_ft]):
 		# ICT/FT flow
 		if (event == EVENT_GETITEM_FINISHED):
+			# TODO 是否应该将状态改成S_READY_TO_SEND_ITEM？
 			current_device.ChangeStatusTo(S_WITH_ITEM)
 		elif (event == EVENT_READYFOR_SENDITEM_OK):
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)		# set device status
