@@ -12,6 +12,9 @@ def handle_msg(current_device, event):
 	previous_device = current_device.previous
 	next_device = current_device.next
 	
+	if (current_device in [device_hcj]):
+		print "DDDDDDDDDD--", current_device.name, "--event:", event, "--status:", current_device.status, "--otem_status:", current_device.item_status, "--prepare_count:", current_device.prepare_count
+
 	# log all event
 	writeInfo("CLIENT: [%s] SENT: [%s]" % (current_device.name, event))
 
@@ -55,20 +58,23 @@ def handle_msg(current_device, event):
 				return
 			if (current_device not in [device_yz]):
 				if (previous_device.status == S_READY_TO_SEND_ITEM):
-					#previous_device.SendInstructionSendItem()
-					current_device.SendInstructionPrepareToRecvItem()
+					if (current_device == device_hcj):
+						if (previous_device.status == S_READY_TO_SEND_ITEM):
+							current_device.SendInstructionPrepareToRecvItem()
+					if (current_device in [device_ft, device_ict]):
+						# ft送板完成后需要检查hcj是否可送板
+						if (previous_device.status == S_READY_TO_SEND_ITEM):
+							previous_device.SendInstructionSendItem()
 				return
 	# EVENT_DEVICE_WARNING_2
 	if (event == EVENT_DEVICE_WARNING_2):
 		# 这时急停报警按钮
 		current_device.ChangeStatusTo(S_BROKEN)
-		print "WARNING: [%s] STOPED SUDDENLY" % current_device.name
 		writeWarning("[%s] STOPED SUDDENLY" % current_device.name)
 		return
 
 	if (current_device == device_jbt0):
 		# jbt flow
-		print "WARNING: [%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name)
 		writeWarning("[%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name))
 	elif (current_device in [device_ict, device_ft]):
 		# ICT/FT flow
@@ -83,17 +89,18 @@ def handle_msg(current_device, event):
 			current_device.ChangeItemStatusTo(ITEM_STATUS_NG)
 			next_device.SendInstructionPrepareToRecvItem()
 		else:
-			print "WARNING: EVENT [%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name)
 			writeWarning("[%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name))
 	elif (current_device == device_hcj):
 		# hcj flow
+		if (event == EVENT_GETITEM_FINISHED):
+			print "HCJ GET ITEM FINISHED"
+			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 		if (event == EVENT_READYFOR_GETITEM):
 			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
-			if (previous_device.status == S_READY_TO_SEND_ITEM):
-				previous_device.SendInstructionSendItem()
-				current_device.ChangeStatusTo(S_IDLE)
+			#if (previous_device.status == S_READY_TO_SEND_ITEM):
+			previous_device.SendInstructionSendItem()
+			current_device.ChangeStatusTo(S_IDLE)
 		else:
-			print "WARNING: EVENT [%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name)
 			writeWarning("[%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name))
 	
 	
@@ -103,7 +110,7 @@ def handle_msg(current_device, event):
 		if(event == EVENT_READYFOR_GETITEM_LEFT):
 			# YZ ready for get item. (in left side)
 			if(current_device.status != S_PREPARING_TO_RECV):
-				print "WARNING: [%s] REPORT EVENT_READYFOR_GETITEM_LEFT FROM STATUS [%d]" % (current_device.name, current_device.status)
+				pass
 			if(current_device.prepare_count == 1):
 				current_device.ChangeStatusTo(S_HALF_READY_TO_RECV_ITEM)
 				if(previous_device.status == S_READY_TO_SEND_ITEM):
@@ -118,19 +125,18 @@ def handle_msg(current_device, event):
 		elif(event==EVENT_GETITEM_FINISHED):
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 			# 此处要判断板子状态的接板机是否空闲
-			print "DDDDDDDDDDDDDDD", current_device.item_status, current_device.item_status
 			ok_idle = (current_device.item_status == ITEM_STATUS_OK and device_sbjok.status == S_IDLE)
 			ng_idle = (current_device.item_status in [ITEM_STATUS_NG, ITEM_STATUS_UNKNOWN] and device_sbjng.status == S_IDLE)
 			if(ok_idle or ng_idle):
 				current_device.SendInstructionSendItem()
 		elif(event==EVENT_SENDITEM_FINISHED):
 			if(current_device.status != S_SENDING):
-				print "WARN: [%s]'s STATUS JUMPED FROM [%d] TO S_IDLE" %(current_device.name, current_device.status)
+				pass
 			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
 			#移栽机把板子送走了, 应该让它马上准备接板, 以优化效率
 			current_device.SendInstructionPrepareToRecvItem()
 		else:
-			print "WARNING: EVENT [%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name)
+			pass
 	elif (current_device in [device_sbjok, device_sbjng]):
 		writeInfo("CLIENT [%s] SENT: [%s]" % (current_device.name, event))
 		if(event == RES_STATUS_BUSY):
@@ -139,6 +145,12 @@ def handle_msg(current_device, event):
 		elif(event == EVENT_AVAILABLE):
 			# 离开移载机右端感应器就会发空闲，表示收板完成
 			current_device.ChangeStatusTo(S_IDLE)
+			if (current_device == device_sbjng):
+				if (previous_device.status == S_READY_TO_SEND_ITEM):
+					previous_device.SendInstructionSendItem()
+			if (current_device == device_sbjok):
+				if (previous_device.previous.status == S_READY_TO_SEND_ITEM):
+					previous_device.previous.SendInstructionSendItem()
 		else:
 			print "WARNING: EVENT [%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name)
 	else:

@@ -45,12 +45,10 @@ def main():
 					(newsock, address) = listenSock.accept()
 					client_ip = address[0]
 					client_port = address[1]
-					print "INFO: ACCEPT A CONNECTION FROM ", address
 					writeInfo("ACCEPT A CONNECTION FROM IP:[%s] PORT:[%s]" % (client_ip, client_port))
 					newsock.setblocking(1)
 					#马上发送一个复位指令
 					newsock.send(convert2Hex(INSTRUCTION_DEVICE_RESET))
-					print "INFO: SERVER SENT TO [%s]: [%s]" % (getDeviceByIP(client_ip).name, INSTRUCTION_DEVICE_RESET)
 					writeInfo("SERVER SENT TO [%s]: [%s]" % (getDeviceByIP(client_ip).name, INSTRUCTION_DEVICE_RESET))
 					#此处假定一次能收到整个包, 基本是成立的
 					recv_buff = newsock.recv(RunningMode.recv_buff_size)
@@ -59,7 +57,6 @@ def main():
 					if(RunningMode.debugging):
 						client_ip = socket.inet_ntoa(recv_buff[:4])
 						recv_buff = recv_buff[4:]
-						print "DEBUG: NOW CLIENT IP IS ", client_ip, " AND RECV BUFF IS ", ' '.join(x.encode('hex') for x in recv_buff)
 						writeDebug("NOW CLIENT IP IS ", client_ip, " AND RECV BUFF IS ", ' '.join(x.encode('hex') for x in recv_buff))
 					
 					# 如果包=8个字节，扔弃前4个字节，直接取后4个字节
@@ -68,12 +65,10 @@ def main():
 
 					#包不合法, 扔弃, 但是不断开TCP连接
 					if(not verifyPacket(recv_buff)):
-						print "WARNING: INVALID PACKET FROM IP:[%s]" % (client_ip)
 						writeWarning("INVALID PACKET FROM IP:[%s]" % (client_ip))
 						continue
 					current_device = getDeviceByIP(client_ip)
 					if(not current_device):
-						print "WARNING: INVALID DEVICE TO THIS ADDRESS [%s]" % client_ip
 						writeWarning("INVALID DEVICE TO THIS ADDRESS [%s]" % client_ip)
 						newsock.close()
 						continue
@@ -84,7 +79,6 @@ def main():
 						#select监听这个socket
 						readlist.append(newsock)
 						exceptionlist.append(newsock)
-						print "INFO: ACCEPT SOCKET FOR DEVICE ", current_device.name
 						writeInfo("ACCEPT SOCKET FOR DEVICE [%s]" % current_device.name)
 				else:
 					#print "msg from client"
@@ -93,7 +87,6 @@ def main():
 					# 通过IP地址判断设备
 					current_device = getIPBySocket(sock)
 					if(not current_device):
-						print "WARNING: UNKNOW SOURCE"
 						writeWarning("UNKNOW SOURCE")
 						readlist.remove(sock)
 						exceptionlist.remove(sock)
@@ -104,7 +97,6 @@ def main():
 					except:
 						continue
 					if recv_buff == "":
-						print "WARNING: CLIENT [%s] HAS BEEN DISCONNECTED" % (current_device.name)
 						writeWarning("CLIENT [%s] HAS BEEN DISCONNECTED" % (current_device.name))
 						current_device.sock = None
 						readlist.remove(sock)
@@ -123,12 +115,10 @@ def main():
 
 					#包不合法, 扔弃, 但是不断开TCP连接
 					if(not verifyPacket(recv_buff)):
-						print "WARNING: INVALID PACKET FROM DEVICE:[%s] IP:[%s]" % (current_device.name, client_ip)
 						writeWarning("INVALID PACKET FROM DEVICE:[%s] IP:[%s]" % (current_device.name, client_ip))
 						continue
 					
 					hex_msg = ' '.join(x.encode('hex') for x in recv_buff)
-					print "INFO: CLIENT [%s] SENT: [%s] "% (current_device.name, hex_msg)
 					#writeInfo("CLIENT [%s] SENT: [%s] "% (current_device.name, hex_msg))
 					
 					#真正的业务处理在这里
@@ -141,12 +131,10 @@ def main():
 			try:
 				if sock == listenSock:
 					#TODO 此处应该把详细的error code打印出来以便日后debug
-					print "WARNING: TOO BAD, THE LISTEN SOCKET IS BROKEN"
 					writeWarning("TOO BAD, THE LISTEN SOCKET IS BROKEN")
 					RunningMode.flag_exit = True
 				else:
 					#TODO 此处应该把详细的error code打印出来以便日后debug
-					print "DEBUG: SOCKET [", sock, "] IS BROKEN"
 					writeDebug("SOCKET [", sock, "] IS BROKEN")
 					sock.close()
 					readlist.remove(sock)

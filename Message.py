@@ -96,7 +96,6 @@ def RemoveBlankInMiddle(s):
 def verifyPacket(buff):
 	if(len(buff) != 4):
 		hex_msg = ' '.join(x.encode('hex') for x in buff)
-		print "WARNING: INVALID PACKET [%s]" % hex_msg
 		writeWarning("INVALID PACKET [%s]" % hex_msg)
 		return False
 	return True
