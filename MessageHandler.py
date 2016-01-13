@@ -118,8 +118,8 @@ def handle_msg(current_device, event):
 			elif(current_device.prepare_count == 2):
 				current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
 				# you better do not check the previous device's status, it may changed by another item
-				#if(previous_device.status == S_READY_TO_SEND_ITEM):
-				previous_device.SendInstructionSendItem()
+				if(previous_device.status == S_READY_TO_SEND_ITEM):
+					previous_device.SendInstructionSendItem()
 				#else:
 				#	print "WARNNING: YZ IS READY TO RECV ITEM, BUT THE FT IS NOT READY TO SEND ITEM. ANYBODY STEAL THE ITEM?"
 		elif(event==EVENT_GETITEM_FINISHED):

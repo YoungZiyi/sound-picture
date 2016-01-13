@@ -62,7 +62,7 @@ class Device:
 	def ChangeStatusTo(self, status):
 		self.status = status
 		self.status_start_time = time.time()
-		if(self.status == S_READY_TO_RECV_ITEM):
+		if(self.status in [S_READY_TO_RECV_ITEM, S_IDLE]):
 			#TODO why?
 			self.prepare_count = 0
 		

@@ -14,15 +14,27 @@ listenSock.bind(("", 6001))
 listenSock.listen(15)
 
 (newsock, address) = listenSock.accept()
-newsock.setblocking(1)
+newsock.setblocking(0)
 print "ACCEPT a connection from ", address
 client_ip = address[0]
 client_port = address[1]
-#马上发送一个复位指令
-send_msg = covert2Hex(INSTRUCTION_DEVICE_RESET)
-newsock.send(send_msg)
 
-recv_buff = newsock.recv(4)
+
+while 1:
+	msg = raw_input(">")
+	if(msg == "reset"):
+		cmd = INSTRUCTION_DEVICE_RESET
+	elif(msg == ""):
+		continue
+	try:
+		newsock.send(covert2Hex(cmd))
+		recv_buff = newsock.recv(1024)
+		hex_msg = ' '.join(x.encode('hex') for x in recv_buff)
+		print hex_msg
+	except:
+		continue
+	
+
 
 print recv_buff
 for x in recv_buff:
