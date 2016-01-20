@@ -45,6 +45,7 @@ def handle_msg(current_device, event):
 	if (event == EVENT_READYFOR_SENDITEM):
 		if (current_device in [device_jbt0, device_hcj]):
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
+			next_device.ChangeStatusTo(S_WITH_ITEM)
 			# 如果下一个设备的状态为空闲或准备好接板，则给当前设备发送板指令
 			if (next_device.status in [S_IDLE, S_READY_TO_RECV_ITEM]):
 				current_device.SendInstructionSendItem()
