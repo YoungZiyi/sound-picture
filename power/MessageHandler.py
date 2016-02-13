@@ -10,10 +10,10 @@ from BxtLogger import *
 
 def handle_msg(current_device, event):
 
-	print "DDDDDDDDDD--", current_device.name, "--event:", event, "--status:", current_device.status, "--otem_status:", current_device.item_status, "--prepare_count:", current_device.prepare_count
+	#print "DDDDDDDDDD--", current_device.name, "--event:", event, "--status:", current_device.status, "--otem_status:", current_device.item_status, "--prepare_count:", current_device.prepare_count
 
 	# log all event
-	writeInfo("CLIENT: [%s] SENT: [%s]" % (current_device.name, event))
+	writeInfo("DEVICE: [%s] EVENT: [%s] DEVICE_STATUS: [%d] ITEM_STATUS: [%d] PREPARE_COUNT: [%d] " % (current_device.name, event, current_device.status, current_device.item_status, current_device.prepare_count))
 
 	# RES_STATUS_BUSY
 	if (event == RES_STATUS_BUSY and (current_device not in [device_sbjng])):	
