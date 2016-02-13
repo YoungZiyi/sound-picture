@@ -5,11 +5,11 @@ from Message import *
 from BxtException import *
 
 ICT_IP = "192.168.0.102"
-YZ1_IP = "192.168.0.104"
-FT1_IP = "192.168.0.103"
-FT2_IP = "192.168.0.104"
-YZ2_IP = "192.168.0.105"
-SBJNG_IP = "192.168.0.106"
+YZ1_IP = "192.168.0.103"
+FT1_IP = "192.168.0.106"
+FT2_IP = "192.168.0.107"
+YZ2_IP = "192.168.0.108"
+SBJNG_IP = "192.168.0.109"
 
 deviceName_IP_Map = {}
 
@@ -43,7 +43,6 @@ class Device:
 		self.status = S_RESETTING		#TODO 什么时候才能让Device可用? 还是一开始就可用?
 		self.status_start_time = time.time()
 		self.item_status = ITEM_STATUS_NG
-		self.prepare_count = 0
 		self.direction = DIRECTION_UNKNOWN
 		
 	def ParitialReset(self):
@@ -51,14 +50,12 @@ class Device:
 		self.status = S_RESETTING		#TODO 什么时候才能让Device可用? 还是一开始就可用?
 		self.status_start_time = time.time()
 		self.item_status = ITEM_STATUS_NG
-		self.prepare_count = 0
 		self.direction = DIRECTION_UNKNOWN
 		
 	def ChangeStatusTo(self, status):
 		self.status = status
 		self.status_start_time = time.time()
 		if(self.status in [S_READY_TO_RECV_ITEM, S_IDLE]):
-			self.prepare_count = 0
 			self.item_status = ITEM_STATUS_UNKNOWN
 			self.direction = DIRECTION_UNKNOWN
 		

@@ -4,7 +4,7 @@
 import string
 from BxtLogger import *
 
-SERVER_HOST = '127.0.0.1'
+SERVER_HOST = '198.168.0.11'
 SERVER_PORT = 6001
 
 #最低8bit标识设备的状态
