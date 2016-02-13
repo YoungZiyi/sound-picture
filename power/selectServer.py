@@ -23,7 +23,7 @@ def main():
 	listenSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	listenSock.bind(("", SERVER_PORT))
 	listenSock.listen(15)
-	listenSock.setblocking(1)
+	listenSock.setblocking(0)
 
 	readlist = [listenSock]
 	exceptionlist = [listenSock]
@@ -109,19 +109,22 @@ def main():
 					if(RunningMode.debugging):
 						client_ip = socket.inet_ntoa(recv_buff[:4])
 						recv_buff = recv_buff[4:]
-						
-					# 如果包等于8个字节，扔弃前4个字节，直接取后4个字节
-					if(len(recv_buff) == 8):
-						recv_buff = recv_buff[4:]
-
-					#包不合法, 扔弃, 但是不断开TCP连接
-					if(not verifyPacket(recv_buff)):
-						writeWarning("INVALID PACKET FROM DEVICE:[%s] IP:[%s]" % (current_device.name, client_ip))
-						continue
-					hex_msg = ' '.join(x.encode('hex') for x in recv_buff)
-
-					#真正的业务处理在这里
-					handle_msg(current_device, hex_msg)
+					
+					total_hex_msg = ' '.join(x.encode('hex') for x in recv_buff)
+					writeWarning("Total Msg [%s] from [%s]"%(total_hex_msg, current_device.name))
+					
+					recv_buff_len = len(recv_buff)
+					if( recv_buff_len % 4 == 0):
+						msg_count = recv_buff_len/4
+						for i in range(0, msg_count):
+							msg_buff = recv_buff[4*i:4*i+4]
+							hex_msg = ' '.join(x.encode('hex') for x in msg_buff)
+							writeWarning("Msg[%d] [%s] from [%s]"%(i, hex_msg, current_device.name))
+							#真正的业务处理在这里
+							handle_msg(current_device, hex_msg)
+					else:
+						hex_msg = ' '.join(x.encode('hex') for x in recv_buff)
+						writeWarning("msg length is invalid [%s]" % (hex_msg))
 			except BxtException, e:
 				print e
 				continue

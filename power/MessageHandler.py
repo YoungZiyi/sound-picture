@@ -10,7 +10,11 @@ from BxtLogger import *
 
 def handle_msg(current_device, event):
 	#messages beginning with 52 d3 are messages for device debugging. Just ignore them.
-	if(not event[:5] =="52 d3"):
+	if(event[:5] =="52 d3"):
+		return
+	if(event_name_map.has_key(event)):
+		writeInfo("DEVICE: [%s] EVENT: [%s] DEVICE_STATUS: [%d] ITEM_STATUS: [%d] " % (current_device.name, event_name_map[event], current_device.status, current_device.item_status))
+	else:
 		writeInfo("DEVICE: [%s] EVENT: [%s] DEVICE_STATUS: [%d] ITEM_STATUS: [%d] " % (current_device.name, event, current_device.status, current_device.item_status))
 
 	#Messages beginningwith 52 c3 are warn messages
@@ -44,7 +48,7 @@ def handle_msg(current_device, event):
 			#Prepare to recv item in advance
 			current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM)
 			current_device.status = S_PREPARING_TO_RECV
-		if(event in [EVENT_READYFOR_GETITEM_RIGHT]):
+		elif(event in [EVENT_READYFOR_GETITEM_RIGHT]):
 			if(current_device.status not in [S_PREPARING_TO_RECV]):
 				writeWarning("[%s] send event EVENT_READYFOR_GETITEM_LEFT while its status is [%d]" % (current_device.name, current_device.status))
 			else:

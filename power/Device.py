@@ -68,7 +68,7 @@ class Device:
 			raise ExceptionCommunication(self.name+" No sock")
 			writeWarning("SERVER SENT TO [%s]: [%s] FAILURE" % (self.name, instruction))
 		if (instruction not in [INSTRUCTION_DEVICE_RESET]):
-			writeInfo("SERVER SENT TO [%s]: [%s]" % (self.name, instruction))
+			writeInfo("SERVER SENT TO [%s]: [%s]" % (self.name, instruction_name_map[instruction]))
 		else:
 			if (instruction == INSTRUCTION_DEVICE_RESET):
 				writeWarning("TIMEOUT, RESET [%s] " % self.name)
