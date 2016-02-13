@@ -47,46 +47,26 @@ def main():
 					client_ip = address[0]
 					client_port = address[1]
 					writeInfo("ACCEPT A CONNECTION FROM IP:[%s] PORT:[%s]" % (client_ip, client_port))
-					newsock.setblocking(1)
-					#马上发送一个复位指令
-					newsock.send(convert2Hex(INSTRUCTION_DEVICE_RESET))
-					writeInfo("SERVER send to [%s]: INSTRUCTION_DEVICE_RESET" % (getDeviceByIP(client_ip).name))
-					#此处假定一次能收到整个包, 基本是成立的
-					recv_buff = newsock.recv(RunningMode.recv_buff_size)
-	
-					#如果处于debugging模式，则socket客户端头部会发送一个IP地址， 以替换127.0.0.1
-					if(RunningMode.debugging):
-						client_ip = socket.inet_ntoa(recv_buff[:4])
-						recv_buff = recv_buff[4:]
-						writeDebug("NOW CLIENT IP IS ", client_ip, " AND RECV BUFF IS ", ' '.join(x.encode('hex') for x in recv_buff))
+					newsock.setblocking(0)
 					
-					# 如果包=8个字节，扔弃前4个字节，直接取后4个字节
-					if(len(recv_buff) == 8):
-						recv_buff = recv_buff[4:]
-
-					#包不合法, 扔弃, 但是不断开TCP连接
-					if(not verifyPacket(recv_buff)):
-						writeWarning("INVALID PACKET FROM IP:[%s]" % (client_ip))
-						continue
 					current_device = getDeviceByIP(client_ip)
 					if(not current_device):
 						writeWarning("INVALID DEVICE TO THIS ADDRESS [%s]" % client_ip)
 						newsock.close()
 						continue
-					else:
-						#手工处理初始化状态
-						current_device.sock = newsock
-						current_device.ChangeStatusTo(S_IDLE)
-						#select监听这个socket
-						readlist.append(newsock)
-						exceptionlist.append(newsock)
-						writeInfo("ACCEPT SOCKET FOR DEVICE [%s]" % current_device.name)
+
+					#马上发送一个复位指令
+					newsock.send(convert2Hex(INSTRUCTION_DEVICE_RESET))
+					writeInfo("SERVER sent INSTRUCTION_DEVICE_RESET to [%s]" % (current_device.name))
+					current_device.sock = newsock
+					current_device.ChangeStatusTo(S_IDLE)
+					#select监听这个socket
+					readlist.append(newsock)
+					exceptionlist.append(newsock)
+					writeInfo("ACCEPT SOCKET FOR DEVICE [%s]" % current_device.name)
 				else:
-					#print "msg from client"
-					#业务socket发送的消息
-					#current_device = getDeviceBySocket(sock)
-					# 通过IP地址判断设备
-					current_device = getIPBySocket(sock)
+					# 通过socket IP地址判断设备
+					current_device = getDeviceBySocket(sock)
 					if(not current_device):
 						writeWarning("UNKNOW SOURCE")
 						readlist.remove(sock)
@@ -126,7 +106,10 @@ def main():
 						hex_msg = ' '.join(x.encode('hex') for x in recv_buff)
 						writeWarning("msg length is invalid [%s]" % (hex_msg))
 			except BxtException, e:
-				print e
+				writeWarning(e)
+				continue
+			except Exception, e:
+				writeWarning(e)
 				continue
 
 		for sock in sexc:
