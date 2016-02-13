@@ -7,6 +7,7 @@ from struct import pack, unpack
 import signal
 import pdb
 import binascii
+import sys
 
 from Message import *
 from Device import *
@@ -14,7 +15,9 @@ from BxtException import *
 from MessageHandler import *
 import RunningMode
 from BxtLogger import *
-
+from PyQt4 import Qt
+from PyQt4 import *
+from greenBlank import *
 
 
 
@@ -142,10 +145,21 @@ def main():
 			except BxtException:
 				continue
 
-				
+class UI(QtGui.QMainWindow, Ui_MainWindow):
+	def __init__(self, parent=None):
+		super(UI, self).__init__(parent)
+		self.setupUi(self)
+
+	def reset():
+		print "hello"
 
 	
 if __name__ == "__main__":
 	
+	app = QtGui.QApplication(sys.argv)
+	form = UI()
+	form.show()
+	app.exec_()
+
 	signal.signal(signal.SIGINT, RunningMode.signal_handler)
 	main()
