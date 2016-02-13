@@ -70,7 +70,7 @@ def handle_msg(current_device, event):
 			if(ft1.status == S_IDLE):
 				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_SEND_ITEM)
 				current_device.ChangeStatusTo(S_SENDING)
-			elif(ft2.status == S_IDLE)
+			elif(ft2.status == S_IDLE):
 				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_SEND_ITEM)
 				current_device.ChangeStatusTo(S_SENDING)
 			else:
