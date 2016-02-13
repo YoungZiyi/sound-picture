@@ -60,6 +60,7 @@ class Device:
 		if(self.status in [S_READY_TO_RECV_ITEM, S_IDLE]):
 			self.prepare_count = 0
 			self.item_status = ITEM_STATUS_UNKNOWN
+			self.direction = DIRECTION_UNKNOWN
 		
 	# ng is a bool value
 	def ChangeItemStatusTo(self, status):

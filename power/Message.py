@@ -10,7 +10,7 @@ SERVER_PORT = 6001
 #最低8bit标识设备的状态
 S_IDLE							=	0x0000	# 空闲
 S_PREPARING_TO_RECV				=	0x0001	# 移栽机在移动中
-S_HALF_READY_TO_RECV_ITEM		=	0x0002	# 移栽机已经到达接板位置, 但是需要再次确认其准备好了
+#S_HALF_READY_TO_RECV_ITEM		=	0x0002	# 移栽机已经到达接板位置, 但是需要再次确认其准备好了
 S_READY_TO_RECV_ITEM 			=	0x0003 	# 准备好接板
 S_RECVING						=	0x0004	# 接板中
 S_WITH_ITEM						=	0x0005	# 设备上有板子    

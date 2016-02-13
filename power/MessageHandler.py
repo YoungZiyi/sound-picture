@@ -10,10 +10,8 @@ from BxtLogger import *
 
 def handle_msg(current_device, event):
 
-	#print "DDDDDDDDDD--", current_device.name, "--event:", event, "--status:", current_device.status, "--otem_status:", current_device.item_status, "--prepare_count:", current_device.prepare_count
-
 	# log all event
-	writeInfo("DEVICE: [%s] EVENT: [%s] DEVICE_STATUS: [%d] ITEM_STATUS: [%d] PREPARE_COUNT: [%d] " % (current_device.name, event, current_device.status, current_device.item_status, current_device.prepare_count))
+	writeInfo("DEVICE: [%s] EVENT: [%s] DEVICE_STATUS: [%d] ITEM_STATUS: [%d] " % (current_device.name, event, current_device.status, current_device.item_status))
 
 	# RES_STATUS_BUSY
 	if (event == RES_STATUS_BUSY and (current_device not in [device_sbjng])):	
@@ -21,7 +19,7 @@ def handle_msg(current_device, event):
 		return
 
 	if (event == EVENT_DEVICE_WARNING_2):
-		# 这时急停报警按钮
+		# 这是急停报警按钮
 		current_device.ChangeStatusTo(S_BROKEN)
 		writeWarning("[%s] STOPED SUDDENLY" % current_device.name)
 		return
@@ -30,14 +28,14 @@ def handle_msg(current_device, event):
 		if (event in [EVENT_READYFOR_SENDITEM_OK, EVENT_READYFOR_SENDITEM_NG, EVENT_READYFOR_SENDITEM]):
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 			#If the next device is available, then send ask it to rece item.
-			if(device_yz1.status in [S_IDLE, S_HALF_READY_TO_RECV_ITEM]):
+			if(device_yz1.status in [S_IDLE, S_PREPARING_TO_RECV]):
 				device_yz1._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
-				device_yz1.prepare_count = device_yz1.prepare_count + 1
 			elif(device_yz1.status in [S_READY_TO_RECV_ITEM]):
 				device_ict._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
 				device_ict.ChangeStatusTo(S_SENDING)
 		elif (event == EVENT_SENDITEM_FINISHED):
-			current_device.ChangeStatusTo(S_IDLE)
+			device_yz1.ChangeItemStatusTo(current_device.item_status)
+			current_device.ChangeStatusTo(S_IDLE)	
 		else:
 			writeWarning("[%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name))
 	elif (current_device == device_yz1):
@@ -45,34 +43,28 @@ def handle_msg(current_device, event):
 			#Prepare to recv item in advance
 			current_device._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
 			current_device.status = S_PREPARING_TO_RECV
-			current_device.prepare_count = 1
 		if(event in [EVENT_READYFOR_GETITEM_LEFT]):
-			if(current_device.status not in [S_PREPARING_TO_RECV, S_HALF_READY_TO_RECV_ITEM]):
-				writeWarning("[%s] send event [%s] while its satus is [%d]" % (current_device.name, event, current_device.status))
+			if(current_device.status not in [S_PREPARING_TO_RECV]):
+				writeWarning("[%s] send event EVENT_READYFOR_GETITEM_LEFT while its status is [%d]" % (current_device.name, current_device.status))
 				return
-			if(current_device.prepare_count == 1):
-				current_device.ChangeStatusTo(S_HALF_READY_TO_RECV_ITEM)
-				if(device_ict.status == S_READY_TO_SEND_ITEM):
-					current_device._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
-					current_device.prepare_count = 2
-				else:
-					#Wait here and not to proceed until the ICT device is ready to send item.
-					pass
-			elif(current_device.prepare_count == 2):
-				current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
-				if(device_ict.status == S_READY_TO_SEND_ITEM):
-					device_ict._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
-					device_ict.ChangeStatusTo(S_SENDING)
-				else:
-					writeWarning("WARNNING: YZ1 IS READY TO RECV ITEM, BUT THE FT IS NOT READY TO SEND ITEM. ANYBODY STEAL THE ITEM?")
+			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
+			if(device_ict.status == S_READY_TO_SEND_ITEM):
+				device_ict._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
+				device_ict.ChangeStatusTo(S_SENDING)
+				device_yz1.ChangeStatusTo(S_RECVING)
+			else:
+				writeInfo("YZ1 is ready to recv, but [%s] is of status [%d]."%(device_ict.name, device_ict.status))
+				device_yz1.ChangeStatusTo(S_IDLE)
 		elif(event==EVENT_GETITEM_FINISHED):
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
-			if(ft1.status == S_IDLE):
+			if(device_ft1.status == S_IDLE):
 				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_SEND_ITEM)
 				current_device.ChangeStatusTo(S_SENDING)
-			elif(ft2.status == S_IDLE):
+				device_ft1.ChangeStatusTo(S_RECVING)
+			elif(device_ft2.status == S_IDLE):
 				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_SEND_ITEM)
 				current_device.ChangeStatusTo(S_SENDING)
+				device_ft2.ChangeStatusTo(S_RECVING)
 			else:
 				writeInfo("%s is waiting for an available FT" % (current_device.name))
 		else:
@@ -82,6 +74,14 @@ def handle_msg(current_device, event):
 			if(event in [EVENT_SENDITEM_FINISHED]):
 				device_yz2.ChangeItemStatusTo(current_device.item_status)
 			current_device.ChangeStatusTo(S_IDLE)
+			#Check if the previous device is waiting for this device
+			if(device_yz1.status == S_READY_TO_SEND_ITEM):
+				if(current_device == device_ft1):
+					device_yz1._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_SEND_ITEM)
+				else:
+					device_yz1._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_SEND_ITEM)
+				device_yz1.ChangeStatusTo(S_SENDING)
+				current_device.ChangeStatusTo(S_RECVING)
 		elif(event == EVENT_GETITEM_FINISHED):
 			current_device.ChangeStatusTo(S_WITH_ITEM)
 		elif(event in [EVENT_READYFOR_SENDITEM_NG, EVENT_READYFOR_SENDITEM_OK]):
@@ -91,76 +91,69 @@ def handle_msg(current_device, event):
 			else:
 				current_device.ChangeItemStatusTo(ITEM_STATUS_NG)
 			if(current_device == device_ft1):
-				if(device_yz2.status in [S_IDLE] or (device_yz2.status == S_HALF_READY_TO_RECV_ITEM and device_yz2.direction == DIRECTION_LEFT)):
+				if(device_yz2.status in [S_IDLE]):
 					device_yz2._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
-					device_yz2.prepare_count = device_yz2.prepare_count + 1
 				elif(device_yz2.status in [S_READY_TO_RECV_ITEM]):
 					current_device._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
 					current_device.ChangeStatusTo(S_SENDING)
+					device_yz2.ChangeStatusTo(S_RECVING)
 				else:
 					writeInfo("%s is waiting for yz2 to be available" % (current_device.name))
-			elif(current_device == device_ft2):
-				if(device_yz2.status in [S_IDLE] or (device_yz2.status == S_HALF_READY_TO_RECV_ITEM and device_yz2.direction == DIRECTION_RIGHT)):
+			else:
+				if(device_yz2.status in [S_IDLE]):
 					device_yz2._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM)
-					device_yz2.prepare_count = device_yz2.prepare_count + 1
 				elif(device_yz2.status in [S_READY_TO_RECV_ITEM]):
 					current_device._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
 					current_device.ChangeStatusTo(S_SENDING)
+					device_yz2.ChangeStatusTo(S_RECVING)
 				else:
 					writeInfo("%s is waiting for yz2 to be available" % (current_device.name))
 		else:
 			writeWarning("[%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name))
 	elif (current_device in [device_yz2]):
 		if (event in [EVENT_AVAILABLE, RES_STATUS_AVAILABLE, EVENT_SENDITEM_FINISHED]):
-			current_device.ChangeStatusTo(S_IDLE)
-		elif(event in [EVENT_READYFOR_GETITEM_LEFT, EVENT_READYFOR_GETITEM_RIGHT]):
-			#TODO do some asserting
-			if(current_device.direction == DIRECTION_LEFT):
-				if(current_device.prepare_count == 1):
-					current_device.ChangeStatusTo(S_HALF_READY_TO_RECV_ITEM)
-					current_device._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
-					current_device.prepare_count = current_device.prepare_count + 1
-				elif(current_device.prepare_count == 2):
-					current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
-					if(device_ft1.status == S_READY_TO_SEND_ITEM):
-						device_ft1._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
-						device_ft1.ChangeStatusTo(S_SENDING)
-					else:
-						writeWarning("YZ2 IS READY TO RECV ITEM, BUT THE [%s] IS of status [%d]."%(device_ft1.name, device_ft1.satus))
-						#Change it status to idel so the other FT device can use the YZ device if they need.
-						current_device.ChangeStatusTo(S_IDLE)
-				else:
-					writeWarning("[%s] IS with a prepare_count of [%d]" % (current_device.name, current_device.prepare_count))
-			elif(current_device.direction == DIRECTION_RIGHT):
-				if(current_device.prepare_count == 1):
-					current_device.ChangeStatusTo(S_HALF_READY_TO_RECV_ITEM)
-					current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM)
-					current_device.prepare_count = current_device.prepare_count + 1
-				elif(current_device.prepare_count == 2):
-					current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
-					if(device_ft2.status == S_READY_TO_SEND_ITEM):
-						device_ft2._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
-						device_ft2.ChangeStatusTo(S_SENDING)
-					else:
-						writeWarning("YZ2 IS READY TO RECV ITEM, BUT THE [%s] IS of status [%d]."%(device_ft2.name, device_ft2.satus))
-						#Change it status to idel so the other FT device can use the YZ device if they need.
-						current_device.ChangeStatusTo(S_IDLE)
-				else:
-					writeWarning("[%s] IS with a prepare_count of [%d]" % (current_device.name, current_device.prepare_count))				
+			if(device_ft1.status == S_READY_TO_SEND_ITEM):
+				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
+				current_device.ChangeStatusTo(S_PREPARING_TO_RECV)
+				current_device.direction = DIRECTION_LEFT				
+			elif(device_ft2.status == S_READY_TO_SEND_ITEM):
+				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM)
+				current_device.ChangeStatusTo(S_PREPARING_TO_RECV)
+				current_device.direction = DIRECTION_RIGHT				
 			else:
-				writeWarning("[%s] reported [%d] but with a bad direction [%d]" % (current_device.name, event, current_device.direction))
+				current_device.ChangeStatusTo(S_IDLE)
+		elif(event in [EVENT_READYFOR_GETITEM_LEFT, EVENT_READYFOR_GETITEM_RIGHT]):
+			if(current_device.direction == DIRECTION_LEFT):
+				if(device_ft1.status == S_READY_TO_SEND_ITEM):
+					device_ft1._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
+					device_ft1.ChangeStatusTo(S_SENDING)
+					current_device.ChangeStatusTo(S_RECVING)
+				else:
+					writeWarning("YZ2 IS READY TO RECV ITEM, BUT THE [%s] IS of status [%d]."%(device_ft1.name, device_ft1.status))
+					#Change it status to idle so the other FT device can use the YZ device if they need.
+					current_device.ChangeStatusTo(S_IDLE)	#TODO 此处应该给触发对上位机的检查
+			elif(current_device.direction == DIRECTION_RIGHT):
+				if(device_ft2.status == S_READY_TO_SEND_ITEM):
+					device_ft2._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
+					device_ft2.ChangeStatusTo(S_SENDING)
+					current_device.ChangeStatusTo(S_RECVING)
+				else:
+					writeWarning("YZ2 IS READY TO RECV ITEM, BUT THE [%s] IS of status [%d]."%(device_ft2.name, device_ft2.status))
+					#Change it status to idel so the other FT device can use the YZ device if they need.
+					current_device.ChangeStatusTo(S_IDLE)	#TODO 此处应该给触发对上位机的检查
+			else:
+				writeWarning("[%s] reported [%s] but with a bad direction [%d]" % (current_device.name, event, current_device.direction))
 		elif(event == EVENT_GETITEM_FINISHED):
-			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 			if(current_device.item_status == ITEM_STATUS_OK):
 				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_SEND_ITEM)
 				current_device.ChangeStatusTo(S_SENDING)
+			elif(device_sbjng.status == S_IDLE):
+				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_SEND_ITEM)
+				current_device.ChangeStatusTo(S_SENDING)
+				device_sbjng.ChangeStatusTo(S_RECVING)
 			else:
-				if(device_sbjng.status == S_IDLE):
-					current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_SEND_ITEM)
-					current_device.ChangeStatusTo(S_SENDING)
-				else:
-					#Do nothing but wait.
-					pass
+				#Do nothing but wait. device_sbjng will check the status 
+				current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 		else:
 			writeWarning("[%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name))
 	elif (current_device in [device_sbjng]):
@@ -171,6 +164,7 @@ def handle_msg(current_device, event):
 			if (device_yz2.status == S_READY_TO_SEND_ITEM):
 				device_yz2._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_SEND_ITEM)
 				current_device.ChangeStatusTo(S_SENDING)
+				device_sbjng.ChangeStatusTo(S_RECVING)
 		else:
 			print "WARNING: EVENT [%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name)
 	else:
