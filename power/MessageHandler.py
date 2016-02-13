@@ -9,25 +9,26 @@ from BxtException import *
 from BxtLogger import *
 
 def handle_msg(current_device, event):
+	#messages beginning with 52 d3 are messages for device debugging. Just ignore them.
+	if(not event[:5] =="52 d3"):
+		writeInfo("DEVICE: [%s] EVENT: [%s] DEVICE_STATUS: [%d] ITEM_STATUS: [%d] " % (current_device.name, event, current_device.status, current_device.item_status))
 
-	# log all event
-	writeInfo("DEVICE: [%s] EVENT: [%s] DEVICE_STATUS: [%d] ITEM_STATUS: [%d] " % (current_device.name, event, current_device.status, current_device.item_status))
+	#Messages beginningwith 52 c3 are warn messages
+	if(event[:5] == "53 c3"):
+		#TODO. More attention should be paid to this status
+		current_device.ChangeStatusTo(S_BROKEN)
+		writeWarning("[%s] reported warn [%s]" % current_device.name, event)
+		return
 
 	# RES_STATUS_BUSY
 	if (event == RES_STATUS_BUSY and (current_device not in [device_sbjng])):	
 		#Ignore this event for every device except device_sbjng
 		return
 
-	if (event == EVENT_DEVICE_WARNING_2):
-		# 这是急停报警按钮
-		current_device.ChangeStatusTo(S_BROKEN)
-		writeWarning("[%s] STOPED SUDDENLY" % current_device.name)
-		return
-		
-	if (current_device in [device_ict]):
+	if(current_device in [device_ict]):
 		if (event in [EVENT_READYFOR_SENDITEM_OK, EVENT_READYFOR_SENDITEM_NG, EVENT_READYFOR_SENDITEM]):
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
-			#If the next device is available, then send ask it to rece item.
+			#If the next device is available, then instruct it to recv item.
 			if(device_yz1.status in [S_IDLE, S_PREPARING_TO_RECV]):
 				device_yz1._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM)
 			elif(device_yz1.status in [S_READY_TO_RECV_ITEM]):
@@ -38,12 +39,12 @@ def handle_msg(current_device, event):
 			current_device.ChangeStatusTo(S_IDLE)	
 		else:
 			writeWarning("[%s] IS NOT RECOGNIZED FOR DEVICE [%s]" % (event, current_device.name))
-	elif (current_device == device_yz1):
-		if (event in [EVENT_AVAILABLE, RES_STATUS_AVAILABLE, EVENT_SENDITEM_FINISHED]):
+	elif(current_device == device_yz1):
+		if(event in [EVENT_AVAILABLE, RES_STATUS_AVAILABLE, EVENT_SENDITEM_FINISHED]):
 			#Prepare to recv item in advance
 			current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM)
 			current_device.status = S_PREPARING_TO_RECV
-		if(event in [EVENT_READYFOR_GETITEM_LEFT]):
+		if(event in [EVENT_READYFOR_GETITEM_RIGHT]):
 			if(current_device.status not in [S_PREPARING_TO_RECV]):
 				writeWarning("[%s] send event EVENT_READYFOR_GETITEM_LEFT while its status is [%d]" % (current_device.name, current_device.status))
 			else:

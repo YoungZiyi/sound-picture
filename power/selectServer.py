@@ -19,6 +19,7 @@ from BxtLogger import *
 
 
 def main():
+	writeInfo("The server is starting");
 	listenSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	listenSock.bind(("", SERVER_PORT))
 	listenSock.listen(15)
@@ -49,7 +50,7 @@ def main():
 					newsock.setblocking(1)
 					#马上发送一个复位指令
 					newsock.send(convert2Hex(INSTRUCTION_DEVICE_RESET))
-					writeInfo("SERVER SENT TO [%s]: [%s]" % (getDeviceByIP(client_ip).name, INSTRUCTION_DEVICE_RESET))
+					writeInfo("SERVER send to [%s]: INSTRUCTION_DEVICE_RESET" % (getDeviceByIP(client_ip).name))
 					#此处假定一次能收到整个包, 基本是成立的
 					recv_buff = newsock.recv(RunningMode.recv_buff_size)
 	
@@ -117,10 +118,8 @@ def main():
 					if(not verifyPacket(recv_buff)):
 						writeWarning("INVALID PACKET FROM DEVICE:[%s] IP:[%s]" % (current_device.name, client_ip))
 						continue
-					
 					hex_msg = ' '.join(x.encode('hex') for x in recv_buff)
-					#writeInfo("CLIENT [%s] SENT: [%s] "% (current_device.name, hex_msg))
-					
+
 					#真正的业务处理在这里
 					handle_msg(current_device, hex_msg)
 			except BxtException, e:
