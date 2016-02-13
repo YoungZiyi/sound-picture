@@ -46,15 +46,15 @@ def handle_msg(current_device, event):
 		if(event in [EVENT_READYFOR_GETITEM_LEFT]):
 			if(current_device.status not in [S_PREPARING_TO_RECV]):
 				writeWarning("[%s] send event EVENT_READYFOR_GETITEM_LEFT while its status is [%d]" % (current_device.name, current_device.status))
-				return
-			current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
-			if(device_ict.status == S_READY_TO_SEND_ITEM):
-				device_ict._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
-				device_ict.ChangeStatusTo(S_SENDING)
-				device_yz1.ChangeStatusTo(S_RECVING)
 			else:
-				writeInfo("YZ1 is ready to recv, but [%s] is of status [%d]."%(device_ict.name, device_ict.status))
-				device_yz1.ChangeStatusTo(S_IDLE)
+				current_device.ChangeStatusTo(S_READY_TO_RECV_ITEM)
+				if(device_ict.status == S_READY_TO_SEND_ITEM):
+					device_ict._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
+					device_ict.ChangeStatusTo(S_SENDING)
+					device_yz1.ChangeStatusTo(S_RECVING)
+				else:
+					writeInfo("YZ1 is ready to recv, but [%s] is of status [%d]."%(device_ict.name, device_ict.status))
+					device_yz1.ChangeStatusTo(S_IDLE)
 		elif(event==EVENT_GETITEM_FINISHED):
 			current_device.ChangeStatusTo(S_READY_TO_SEND_ITEM)
 			if(device_ft1.status == S_IDLE):
@@ -123,6 +123,7 @@ def handle_msg(current_device, event):
 			else:
 				current_device.ChangeStatusTo(S_IDLE)
 		elif(event in [EVENT_READYFOR_GETITEM_LEFT, EVENT_READYFOR_GETITEM_RIGHT]):
+			#TODO There should be some status assertion
 			if(current_device.direction == DIRECTION_LEFT):
 				if(device_ft1.status == S_READY_TO_SEND_ITEM):
 					device_ft1._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
