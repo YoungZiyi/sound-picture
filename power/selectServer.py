@@ -36,7 +36,7 @@ def main():
 		# check status remains time
 		for device in IP_Device_Map.values():
 			if(checkTime - device.status_start_time > RunningMode.timeoutTime):
-				if(device.status in [S_RECVING]):
+				if(device.status in [S_RECVING, S_SENDING]):
 					writeWarning("[%s] [%d] [%s] [%s] Stays in the status for too long. reset it"%(device.name, device.status, "","INSTRUCTION_DEVICE_RESET"))
 					device.SendInstruction(INSTRUCTION_DEVICE_RESET)
 					device.Reset()
