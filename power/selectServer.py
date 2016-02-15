@@ -19,7 +19,9 @@ from BxtLogger import *
 
 
 def main():
+	writeInfo("##########################################################");
 	writeInfo("The server is starting");
+	writeInfo("##########################################################");
 	listenSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	listenSock.bind(("", SERVER_PORT))
 	listenSock.listen(15)
@@ -35,10 +37,10 @@ def main():
 		for device in IP_Device_Map.values():
 			if(checkTime - device.status_start_time > RunningMode.timeoutTime):
 				if(device.status in [S_RECVING]):
+					writeWarning("[%s] [%d] [%s] [%s] Stays in the status for too long. reset it"%(device.name, device.status, "","INSTRUCTION_DEVICE_RESET"))
 					device.SendInstruction(INSTRUCTION_DEVICE_RESET)
-					# use ParitialReset so that won't reset the previous and next device
-					device.ParitialReset()
-		
+					device.Reset()
+
 		for sock in sread:
 			try:
 				if sock == listenSock:
@@ -59,7 +61,10 @@ def main():
 					newsock.send(convert2Hex(INSTRUCTION_DEVICE_RESET))
 					writeInfo("SERVER sent INSTRUCTION_DEVICE_RESET to [%s]" % (current_device.name))
 					current_device.sock = newsock
-					current_device.ChangeStatusTo(S_IDLE)
+					
+					#You can not assume that the device is available until it says so.
+					#current_device.ChangeStatusTo(S_IDLE)
+					
 					#select监听这个socket
 					readlist.append(newsock)
 					exceptionlist.append(newsock)
@@ -68,7 +73,7 @@ def main():
 					# 通过socket IP地址判断设备
 					current_device = getDeviceBySocket(sock)
 					if(not current_device):
-						writeWarning("UNKNOW SOURCE")
+						writeWarning("Warning socket from unknow peer %s"%(sock))
 						readlist.remove(sock)
 						exceptionlist.remove(sock)
 						sock.close()

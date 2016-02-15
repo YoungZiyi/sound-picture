@@ -98,7 +98,9 @@ def handle_msg(current_device, event):
 			if(current_device == device_ft1):
 				if(device_yz2.status in [S_IDLE]):
 					device_yz2._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM)
-				elif(device_yz2.status in [S_READY_TO_RECV_ITEM]):
+					device_yz2.direction = DIRECTION_RIGHT
+				#TODO 下面这个分支应该不会发生， 因为yz2不会停留在S_READY_TO_RECV_ITEM状态
+				elif(device_yz2.status in [S_READY_TO_RECV_ITEM] and device_yz2.direction == DIRECTION_RIGHT):
 					current_device._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
 					current_device.ChangeStatusTo(S_SENDING)
 					device_yz2.ChangeStatusTo(S_RECVING)
@@ -107,7 +109,9 @@ def handle_msg(current_device, event):
 			else:
 				if(device_yz2.status in [S_IDLE]):
 					device_yz2._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
-				elif(device_yz2.status in [S_READY_TO_RECV_ITEM]):
+					device_yz2.direction = DIRECTION_LEFT
+				#TODO 下面这个分支应该不会发生， 因为yz2不会停留在S_READY_TO_RECV_ITEM状态
+				elif(device_yz2.status in [S_READY_TO_RECV_ITEM] and device_yz2.direction == DIRECTION_LEFT):
 					current_device._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
 					current_device.ChangeStatusTo(S_SENDING)
 					device_yz2.ChangeStatusTo(S_RECVING)
@@ -127,6 +131,7 @@ def handle_msg(current_device, event):
 				current_device.direction = DIRECTION_LEFT
 			else:
 				current_device.ChangeStatusTo(S_IDLE)
+				current_device.direction = DIRECTION_UNKNOWN
 		elif(event in [EVENT_READYFOR_GETITEM_LEFT, EVENT_READYFOR_GETITEM_RIGHT]):
 			#TODO There should be some status assertion
 			if(current_device.direction == DIRECTION_RIGHT):
@@ -137,7 +142,7 @@ def handle_msg(current_device, event):
 				else:
 					writeWarning("YZ2 IS READY TO RECV ITEM, BUT THE [%s] IS of status [%d]."%(device_ft1.name, device_ft1.status))
 					#Change it status to idle so the other FT device can use the YZ device if they need.
-					current_device.ChangeStatusTo(S_IDLE)	#TODO 此处应该给触发对上位机的检查
+					current_device.ChangeStatusTo(S_IDLE)	#TODO 此处应该给触发对另外一个ft机器是否READY_TO_SEND的检查
 			elif(current_device.direction == DIRECTION_LEFT):
 				if(device_ft2.status == S_READY_TO_SEND_ITEM):
 					device_ft2._SendInstruction(INSTRUCTION_DEVICE_SENDITEM)
