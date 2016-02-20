@@ -45,13 +45,6 @@ class Device:
 		self.item_status = ITEM_STATUS_NG
 		self.direction = DIRECTION_UNKNOWN
 		
-	def ParitialReset(self):
-		self.sock = None
-		self.status = S_RESETTING		#TODO 什么时候才能让Device可用? 还是一开始就可用?
-		self.status_start_time = time.time()
-		self.item_status = ITEM_STATUS_NG
-		self.direction = DIRECTION_UNKNOWN
-		
 	def ChangeStatusTo(self, status):
 		self.status = status
 		self.status_start_time = time.time()
@@ -66,12 +59,8 @@ class Device:
 	def _SendInstruction(self, instruction):
 		if(not self.sock):
 			raise ExceptionCommunication(self.name+" No sock")
-			writeWarning("SERVER SENT TO [%s]: [%s] FAILURE" % (self.name, instruction))
-		if (instruction not in [INSTRUCTION_DEVICE_RESET]):
-			writeInfo("SERVER SENT TO [%s]: [%s]" % (self.name, instruction_name_map[instruction]))
-		else:
-			if (instruction == INSTRUCTION_DEVICE_RESET):
-				writeWarning("TIMEOUT, RESET [%s] " % self.name)
+			writeWarning("Server sent to [%s]: [%s] FAILURE" % (self.name, instruction_name_map[instruction]))	
+		writeInfo("Server sent to [%s]: [%s]" % (self.name, instruction_name_map[instruction]))
 		self.sock.send(convert2Hex(instruction))
 
 	def SendInstruction(self, instruction):
@@ -117,3 +106,5 @@ def getIPBySocket(sock):
 			return device
 	return None
 
+def sendmsg():
+	writeInfo("Msg received!")

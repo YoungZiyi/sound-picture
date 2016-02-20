@@ -2,7 +2,7 @@ import logging
 import time
 
 Format = "%(asctime)s|%(levelname)s: %(message)s"
-DateFmt = "%Y-%m-%d %H:%I:%S"
+DateFmt = "%Y-%m-%d %H:%M:%S"
 FileName = "log/%s.log" % time.strftime("%Y-%m-%d", time.gmtime())
 FileMode = "a"
 
