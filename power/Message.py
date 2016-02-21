@@ -23,7 +23,9 @@ S_UNKNOWN						=	0xFFFF	# 未知状态
 
 status_name_map = dict((eval(name), name) for name in ["S_IDLE", "S_PREPARING_TO_RECV", "S_READY_TO_RECV_ITEM", "S_RECVING", "S_WITH_ITEM", "S_TESTING", "S_READY_TO_SEND_ITEM", "S_SENDING", "S_BROKEN", "S_RESETTING", "S_UNKNOWN"])
 status_name_map_in_chinese = {S_IDLE:"空闲", S_PREPARING_TO_RECV:"准备接板中", S_READY_TO_RECV_ITEM:"准备好接板", S_RECVING:"接板中", S_WITH_ITEM:"设备上有板", S_TESTING:"测试中", S_READY_TO_SEND_ITEM:"准备好送板", S_SENDING:"送板中", S_BROKEN:"设备故障", S_RESETTING:"复位中", S_UNKNOWN:"未知状态"}
-status_to_color = {S_IDLE:"green", S_PREPARING_TO_RECV:"green", S_READY_TO_RECV_ITEM:"green", S_RECVING:"yellow", S_WITH_ITEM:"yellow", S_TESTING:"blue", S_READY_TO_SEND_ITEM:"yellow", S_SENDING:"yellow", S_BROKEN:"red", S_RESETTING:"yellow", S_UNKNOWN:"black"}
+
+status_to_color = {S_IDLE:"green", S_PREPARING_TO_RECV:"green", S_READY_TO_RECV_ITEM:"green", S_RECVING:"blue", S_WITH_ITEM:"blue", S_TESTING:"blue", S_READY_TO_SEND_ITEM:"blue", S_SENDING:"blue", S_BROKEN:"red", S_RESETTING:"blue", S_UNKNOWN:"black"}
+
 #所携带的板子的状态
 ITEM_STATUS_OK			=	0
 ITEM_STATUS_NG			=	1
