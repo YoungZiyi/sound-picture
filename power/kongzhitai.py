@@ -15,14 +15,16 @@ def ChooseDeviceToSetRailWidth(device):
 	writeDebug("ChooseDeviceToSetRailWidth(%s)"%(RunningMode.device_to_set_rail_width))
 
 def ToSetRailWidth():
-	width = scale.get()
-	if(RunningMode.device_to_set_rail_width):
-		Device.SetRailWidth(RunningMode.device_to_set_rail_width, width)
+	try:
+		width = scale.get()
 		writeDebug("SetRailWidth(%s %d)"%(RunningMode.device_to_set_rail_width, width))
-		RunningMode.device_to_set_rail_width = None
-	else:
-		writeDebug("SetRailWidth(%s %d)"%(RunningMode.device_to_set_rail_width, width))
-		tkMessageBox.showwarning( "Warn", "请先点选要设置的设备")
+		if(RunningMode.device_to_set_rail_width):
+			Device.SetRailWidth(RunningMode.device_to_set_rail_width, width)
+			RunningMode.device_to_set_rail_width = None
+		else:
+			tkMessageBox.showwarning( "Warn", "请先点选要设置的设备")
+	except BxtExcepton, e:
+		writeError("%s SetRailWidth failed for [%s]"%(eval("device_"+device), e))
 
 top = Tkinter.Tk()
 
