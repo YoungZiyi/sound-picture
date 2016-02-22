@@ -67,7 +67,7 @@ yz2.grid(row=0, column=3, padx=2, pady=2, rowspan=2,sticky='ns')
 yz2.display_name = "移栽机2"
 
 sbjng = Tkinter.Button(top, text = "NG收板机", command=lambda:ChooseDeviceToSetRailWidth("sbjng"))
-sbjng.grid(row=0, column=4, padx=2, pady=2)
+sbjng.grid(row=1, column=4, padx=2, pady=2)
 sbjng.display_name = "NG收板机"
 
 scale_label = Tkinter.Label(text="导轨宽度:")
