@@ -65,28 +65,27 @@ def update_gui():
 
 		status = Device.device_ict.status
 		device = ict
-		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), fg="%s"%(Device.status_to_color[status]))
+		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), bg="%s"%(Device.status_to_color[status]))
 
 		status = Device.device_yz1.status
 		device = yz1
-		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), fg="%s"%(Device.status_to_color[status]))
+		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), bg="%s"%(Device.status_to_color[status]))
 		
 		status = Device.device_ft1.status
 		device =ft1
-		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), fg="%s"%(Device.status_to_color[status]))
+		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), bg="%s"%(Device.status_to_color[status]))
 		
 		status = Device.device_ft2.status
 		device = ft2
-		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), fg="%s"%(Device.status_to_color[status]))
+		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), bg="%s"%(Device.status_to_color[status]))
 		
 		status = Device.device_yz2.status
 		device = yz2
-		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), fg="%s"%(Device.status_to_color[status]))
+		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), bg="%s"%(Device.status_to_color[status]))
 		
-
 		status = Device.device_sbjng.status
 		device = sbjng
-		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), fg="%s"%(Device.status_to_color[status]))
+		device.config(text="%s %s"%(device.display_name, Device.status_name_map_in_chinese[status]), bg="%s"%(Device.status_to_color[status]))
 
 		time.sleep(0.5)
 
