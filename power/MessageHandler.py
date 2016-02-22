@@ -124,7 +124,7 @@ def handle_msg(current_device, event):
 			if(device_ft1.status == S_READY_TO_SEND_ITEM):
 				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_RECV_ITEM)
 				current_device.ChangeStatusTo(S_PREPARING_TO_RECV)
-				current_device.direction = DIRECTION_RIGHT				
+				current_device.direction = DIRECTION_RIGHT
 			elif(device_ft2.status == S_READY_TO_SEND_ITEM):
 				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_RECV_ITEM)
 				current_device.ChangeStatusTo(S_PREPARING_TO_RECV)
@@ -156,10 +156,10 @@ def handle_msg(current_device, event):
 				writeWarning("[%s] reported [%s] but with a bad direction [%d]" % (current_device.name, event, current_device.direction))
 		elif(event == EVENT_GETITEM_FINISHED):
 			if(current_device.item_status == ITEM_STATUS_OK):
-				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_SEND_ITEM)
+				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_SEND_ITEM)
 				current_device.ChangeStatusTo(S_SENDING)
 			elif(device_sbjng.status == S_IDLE):
-				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_LEFT_AND_SEND_ITEM)
+				current_device._SendInstruction(INSTRUCTION_YZ_MOVE_RIGHT_AND_SEND_ITEM)
 				current_device.ChangeStatusTo(S_SENDING)
 				device_sbjng.ChangeStatusTo(S_RECVING)
 			else:

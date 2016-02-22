@@ -15,14 +15,16 @@ def ChooseDeviceToSetRailWidth(device):
 	writeDebug("ChooseDeviceToSetRailWidth(%s)"%(RunningMode.device_to_set_rail_width))
 
 def ToSetRailWidth():
-	width = scale.get()
-	if(RunningMode.device_to_set_rail_width):
-		Device.SetRailWidth(RunningMode.device_to_set_rail_width, width)
+	try:
+		width = scale.get()
 		writeDebug("SetRailWidth(%s %d)"%(RunningMode.device_to_set_rail_width, width))
-		RunningMode.device_to_set_rail_width = None
-	else:
-		writeDebug("SetRailWidth(%s %d)"%(RunningMode.device_to_set_rail_width, width))
-		tkMessageBox.showwarning( "Warn", "请先点选要设置的设备")
+		if(RunningMode.device_to_set_rail_width):
+			Device.SetRailWidth(RunningMode.device_to_set_rail_width, width)
+			RunningMode.device_to_set_rail_width = None
+		else:
+			tkMessageBox.showwarning( "Warn", "请先点选要设置的设备")
+	except BxtExcepton, e:
+		writeError("%s SetRailWidth failed for [%s]"%(eval("device_"+device), e))
 
 top = Tkinter.Tk()
 
@@ -65,7 +67,7 @@ yz2.grid(row=0, column=3, padx=2, pady=2, rowspan=2,sticky='ns')
 yz2.display_name = "移栽机2"
 
 sbjng = Tkinter.Button(top, text = "NG收板机", command=lambda:ChooseDeviceToSetRailWidth("sbjng"))
-sbjng.grid(row=0, column=4, padx=2, pady=2)
+sbjng.grid(row=1, column=4, padx=2, pady=2)
 sbjng.display_name = "NG收板机"
 
 scale_label = Tkinter.Label(text="导轨宽度:")
