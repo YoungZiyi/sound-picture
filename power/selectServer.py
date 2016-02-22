@@ -52,6 +52,8 @@ def main():
 					writeInfo("ACCEPT A CONNECTION FROM IP:[%s] PORT:[%s]" % (client_ip, client_port))
 					newsock.setblocking(0)
 					
+					if(client_ip == "127.0.0.1"):
+						client_ip = "192.168.0.%s"%(int(client_port)-2000)
 					current_device = getDeviceByIP(client_ip)
 					if(not current_device):
 						writeWarning("INVALID DEVICE TO THIS ADDRESS [%s]" % client_ip)
