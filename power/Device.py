@@ -3,6 +3,7 @@
 import time
 from Message import *
 from BxtException import *
+from BxtLogger import *
 
 ICT_IP = "192.168.0.102"
 YZ1_IP = "192.168.0.103"
@@ -108,3 +109,22 @@ def getIPBySocket(sock):
 
 def sendmsg():
 	writeInfo("Msg received!")
+
+def SetRailWidth(device_name, width):
+	device = eval("device_" + device_name)
+	SetWidth = hex(int(width/0.025))[2:]
+	if(len(SetWidth) == 1):
+		checknum = hex(0x51 + eval("0x" + SetWidth))[-2:]
+		instruction = "51 00 0" + SetWidth + " " + checknum
+	elif(len(SetWidth) == 2):
+		checknum = hex(0x51 + eval("0x" + SetWidth))[-2:]
+		instruction = "51 00 " + SetWidth + " " + checknum
+	elif(len(SetWidth) == 3):
+		checknum = hex(0x51 + eval("0x" + SetWidth[0:1]) + eval("0x" + SetWidth[2:]))[-2:]
+		instruction = "51 0" + SetWidth[0:1] + " " + SetWidth[1:] + " " + checknum
+	elif(len(SetWidth) == 4):
+		checknum = hex(0x51 + eval("0x" + SetWidth[0:2]) + eval("0x" + SetWidth[2:]))[-2:]
+		instruction = "51 " + SetWidth[0:2] + " " + SetWidth[2:] + " " + checknum
+	else:
+		writeError("Unable set width to " + width)
+	device._SendInstruction(instruction)
