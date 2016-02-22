@@ -12,3 +12,5 @@ class ExceptionCommunication(BxtException):
 	pass
 class ExceptionMessageFromUnknonwSource(BxtException):
 	pass
+class ExceptionWidthOutOfRange(BxtException):
+	pass

@@ -126,5 +126,6 @@ def SetRailWidth(device_name, width):
 		checknum = hex(0x51 + eval("0x" + SetWidth[0:2]) + eval("0x" + SetWidth[2:]))[-2:]
 		instruction = "51 " + SetWidth[0:2] + " " + SetWidth[2:] + " " + checknum
 	else:
+		raise ExceptionWidthOutOfRange
 		writeError("Unable set width to " + width)
 	device._SendInstruction(instruction)
