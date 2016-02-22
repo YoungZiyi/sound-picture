@@ -128,4 +128,5 @@ def SetRailWidth(device_name, width):
 	else:
 		raise ExceptionWidthOutOfRange
 		writeError("Unable set width to " + width)
+	writeInfo("%s set width to %smm instruction:%s"%(device_name, width, instruction))
 	device._SendInstruction(instruction)
