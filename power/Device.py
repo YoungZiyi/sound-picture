@@ -59,9 +59,9 @@ class Device:
 
 	def _SendInstruction(self, instruction):
 		if(not self.sock):
+			writeWarning("Server sent to [%s]: [%s] FAILURE" % (self.name, GetInstructionName(instruction)))	
 			raise ExceptionCommunication(self.name+" No sock")
-			writeWarning("Server sent to [%s]: [%s] FAILURE" % (self.name, instruction_name_map[instruction]))	
-		writeInfo("Server sent to [%s]: [%s]" % (self.name, instruction_name_map[instruction]))
+		writeInfo("Server sent to [%s]: [%s]" % (self.name, GetInstructionName(instruction)))
 		self.sock.send(convert2Hex(instruction))
 
 	def SendInstruction(self, instruction):
@@ -126,7 +126,7 @@ def SetRailWidth(device_name, width):
 		checknum = hex(0x51 + eval("0x" + SetWidth[0:2]) + eval("0x" + SetWidth[2:]))[-2:]
 		instruction = "51 " + SetWidth[0:2] + " " + SetWidth[2:] + " " + checknum
 	else:
-		raise ExceptionWidthOutOfRange
 		writeError("Unable set width to " + width)
+		raise ExceptionWidthOutOfRange
 	writeInfo("%s set width to %smm instruction:%s"%(device_name, width, instruction))
 	device._SendInstruction(instruction)

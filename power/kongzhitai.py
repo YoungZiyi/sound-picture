@@ -9,6 +9,7 @@ from Tkconstants import *
 import tkMessageBox
 import Device
 import RunningMode
+import BxtException
 
 def ChooseDeviceToSetRailWidth(device):
 	RunningMode.device_to_set_rail_width = device
@@ -20,11 +21,15 @@ def ToSetRailWidth():
 		writeDebug("SetRailWidth(%s %d)"%(RunningMode.device_to_set_rail_width, width))
 		if(RunningMode.device_to_set_rail_width):
 			Device.SetRailWidth(RunningMode.device_to_set_rail_width, width)
-			RunningMode.device_to_set_rail_width = None
 		else:
-			tkMessageBox.showwarning( "Warn", "请先点选要设置的设备")
-	except BxtExcepton, e:
-		writeError("%s SetRailWidth failed for [%s]"%(eval("device_"+device), e))
+			tkMessageBox.showwarning( "告警", "请先点选要设置的设备")
+	except BxtException.ExceptionCommunication, e:
+		writeError("%s SetRailWidth failed for [%s]"%(RunningMode.device_to_set_rail_width, e))
+	except BxtException.BxtException, e:
+		writeError("%s SetRailWidth failed for [%s]"%(RunningMode.device_to_set_rail_width, e))
+		tkMessageBox.showwarning( "告警", "设置设备[%s]导轨宽度失败"%(RunningMode.device_to_set_rail_width))
+	finally:
+		RunningMode.device_to_set_rail_width = None
 
 top = Tkinter.Tk()
 
