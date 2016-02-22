@@ -8,6 +8,8 @@ recv_buff_size = 4
 
 debugging = False
 
+device_to_set_rail_width = None
+
 flag_exit = False
 def signal_handler(signum, frame):
 	global flag_exit
